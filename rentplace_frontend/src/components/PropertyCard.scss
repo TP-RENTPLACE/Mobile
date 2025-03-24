@@ -1,0 +1,96 @@
+$primary-color: #007bff; // Основной цвет (голубой)
+$text-color: #333; // Цвет текста
+$background-color: #fff; // Белый фон
+$border-radius: 20px; // Радиус скругления углов
+
+.property-card {
+  background-color: $background-color;
+  border-radius: $border-radius;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid #c1c1c1;
+  .property-image-container {
+    position: relative;
+    overflow: hidden;
+    // border-radius: $border-radius;
+
+    .property-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .favorite-button {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      img {
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        padding: 5px;
+        box-shadow: 0 0 5px rgba($primary-color, 0.5);
+      }
+
+      &.active img {
+        background-color: $primary-color;
+        color: #fff;
+      }
+    }
+  }
+
+  .property-details {
+    padding: 16px;
+
+    .property-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 8px;
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .property-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .property-address {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      margin-bottom: 8px;
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .property-price {
+      font-size: 16px;
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+}

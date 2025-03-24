@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+.search{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white; /* Серый фон */
+    border-radius: 40px; /* Круглые углы */
+    width: 82%;
+    height: 40px; /* Высота */
+    border: 1px solid #C1C1C1;
+    
+    .search-icon {
+      background-color: white;
+      width: 24px;
+      height: 24px;
+      margin: 0 10px 0 10px;
+    }
+    input {
+      flex: 1; /* Занимает все доступное пространство */
+      background-color: #ffffff; /* Белый фон */
+      border: none; /* Убираем границу */
+      outline: none; /* Убираем выделение при фокусе */
+      font-size: 14px; /* Размер шрифта */
+      border-radius: 40px; /* Круглые углы */
+    }
+    input::placeholder {
+      font-family: "Raleway", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      color: #C1C1C1;
+      background-color: white;
+    }
+  }
+  .filters-icon{
+    border-radius: 50%;
+    border: 1px solid #C1C1C1;
+    width: 40px !important;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px 0 14px;
+  }
+}
