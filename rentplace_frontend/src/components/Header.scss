@@ -1,0 +1,20 @@
+
+  .upper_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    .logo{
+      display: flex;
+      align-items: center;
+      img{
+        width: 172px;
+      }
+    }
+    .profile{
+      height: 55px;
+      img{
+        width: 55px;
+      }
+    }
+  }

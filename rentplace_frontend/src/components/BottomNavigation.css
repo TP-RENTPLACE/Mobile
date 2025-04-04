@@ -1,0 +1,54 @@
+@charset "UTF-8";
+.bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  width: 400px;
+  height: 70px;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border-top: 1px solid var(--Secondary-Gray, #c1c1c1);
+  background: var(--White, #fff);
+  z-index: 1;
+}
+.bottom-navigation .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: var(--Text-Color, #333);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: white;
+  outline: none; /* Убирает внешний ободок фокуса */
+  border: none; /* Убирает границы кнопки */
+}
+.bottom-navigation .nav-item:hover, .bottom-navigation .nav-item.active {
+  color: var(--Main-Color-Blue, #007AFF);
+}
+.bottom-navigation .nav-item:hover span, .bottom-navigation .nav-item.active span {
+  color: var(--Main-Color-Blue, #007AFF);
+}
+.bottom-navigation .nav-item .icon {
+  width: 24px;
+  height: 24px;
+}
+.bottom-navigation .nav-item span {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Small */
+  font-family: Raleway;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 140% */
+}/*# sourceMappingURL=BottomNavigation.css.map */

@@ -1,0 +1,62 @@
+$primary-color: #007AFF; // Основной цвет (голубой)
+$background-color: #f0f0f0; // Фон неактивных категорий
+$text-color: #151515; // Цвет текста
+$active-background: #ffffff; // Фон активной категории
+$scrollbar-thumb: #ccc; // Цвет ползунка скроллбара
+$scrollbar-track: #f0f0f0; // Цвет трека скроллбара
+
+.categories {
+  display: flex;
+  align-items: center;
+  overflow-x: auto; // Горизонтальный скролл
+  white-space: nowrap; // Не переносить строки
+
+  // Скроллбар для Chrome, Safari и Edge
+  &::-webkit-scrollbar {
+    height: 4px; // Высота ползунка
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb; // Цвет ползунка
+    border-radius: 20px; // Круглые углы
+    border: 2px solid $active-background; // Обводка белого цвета
+  }
+
+  // Скроллбар для Firefox
+  scrollbar-width: thin; // Тонкий скроллбар
+  scrollbar-color: $scrollbar-thumb $scrollbar-track; // Цвет ползунка и трека
+
+  .category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white; // Серый фон
+    color: $text-color; // Цвет текста
+    border-radius: 20px; // Круглые углы
+    margin-right: 10px; // Отступ между категориями
+    height: 40px;
+    
+    font-size: 10px; // Размер шрифта
+    font-family: "Raleway", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    cursor: pointer; // Указатель при наведении
+    transition: all 0.3s ease; // Плавный переход
+    border: 1px solid #C1C1C1;
+    .icon {
+      width: 24px;
+      height: 24px;
+      margin-left: 10px; // Отступ между иконкой и текстом
+    }
+    span{
+      display: inline-block;
+      margin: 0 10px;
+    }
+    &.active {
+      background-color: $active-background; // Белый фон для активной категории
+      border: 1px solid $primary-color; // Голубая граница
+      color: $primary-color;
+    }
+  }
+}
