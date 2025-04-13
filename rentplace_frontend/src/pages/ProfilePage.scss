@@ -1,0 +1,126 @@
+/* Основные стили */
+
+// .profile-container {
+//   max-width: 350px;
+//   margin: 20px auto;
+//   background-color: #fff;
+//   border-radius: 8px;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+// }
+
+/* Профиль пользователя */
+* {
+  box-sizing: border-box;
+}
+.profile-container {
+  margin: 20px 20px 0 20px;
+  .profile-section {
+    border-radius: 20px;
+    border: 1px solid var(--Secondary-Gray, #c1c1c1);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100px;
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      img {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+      }
+      .user-details {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        :first-child {
+          display: flex;
+          justify-content: start;
+          color: var(--Main-Color-Dark, #151515);
+          text-align: right;
+          font-variant-numeric: lining-nums proportional-nums;
+
+          /* Rentplace Mobile/Big Bold */
+          font-family: Raleway;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 20px; /* 125% */
+          margin: 0;
+          margin-bottom: 8px;
+        }
+        :last-child {
+          color: var(--Main-Color-Dark, #151515);
+          text-align: right;
+          font-variant-numeric: lining-nums proportional-nums;
+
+          /* Rentplace Mobile/Medium */
+          font-family: Raleway;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 18px; /* 128.571% */
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+.additional-sections {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+  .section-item {
+    display: flex;
+    height: 54px;
+    padding: 0px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--Secondary-Gray, #c1c1c1);
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    width: 100% !important;
+    span {
+      color: var(--Main-Color-Dark, #151515);
+      text-align: right;
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
+  }
+}
+.logout-section {
+  margin-top: 20px;
+  margin-bottom: 90px;
+  display: flex;
+  height: 54px;
+  padding: 0px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  width: 100% !important;
+  span {
+    color: var(--Main-Color-Red, #ff7878);
+    text-align: right;
+    font-variant-numeric: lining-nums proportional-nums;
+
+    /* Rentplace Mobile/Medium */
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 128.571% */
+  }
+}
