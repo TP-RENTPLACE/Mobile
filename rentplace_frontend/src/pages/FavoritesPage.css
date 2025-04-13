@@ -1,6 +1,28 @@
-.favorires-container {
+.favorites-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.favorites-page .cards_container {
   margin: 0 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+}
+.favorites-page .cards_container.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 382px);
+}
+.favorites-page .cards_container p {
+  color: var(--Main-Color-Dark, #151515);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium SemiBold */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px; /* 128.571% */
 }/*# sourceMappingURL=FavoritesPage.css.map */
