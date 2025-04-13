@@ -3,11 +3,12 @@ import { observer } from "mobx-react-lite";
 import favoritesStore from "../store/favoritesStore";
 import { Heart } from "lucide-react";
 import { MapPin } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import "./PropertyCard.css";
 
 const PropertyCard = ({ property }) => {
   const isFavorite = favoritesStore.isFavorite(property.id);
-
+  const location = useLocation();
   const handleToggleFavorite = () => {
     if (isFavorite) {
       favoritesStore.removeFromFavorites(property.id);
@@ -17,7 +18,7 @@ const PropertyCard = ({ property }) => {
   };
 
   return (
-    <div className="property-card">
+    <div className={`property-card ${location.pathname === "/favorites" ? "favorite" : ""}`}>
       <div className="property-image-container">
         <img
           src={property.image}
@@ -44,7 +45,8 @@ const PropertyCard = ({ property }) => {
           </div>
           <div className="property-price">
             <span>
-              <span>{property.price} ₽</span>
+              <span>{property.price} </span>
+              <span>₽</span>
               <span> за сутки</span>
             </span>
           </div>
