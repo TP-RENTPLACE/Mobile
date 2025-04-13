@@ -1,18 +1,27 @@
-import logo from './logo.svg';
-import './null.css';
-import "./components/Header"
-import Header from './components/Header';
-import SearchBar from './components/SearchBar';
-import Categories from './components/Categories';
-import Head from './components/Head';
-import PropertyCard from './components/PropertyCard';
-import PropertiesList from './components/PropertiesList';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import BottomNavigation from "./components/BottomNavigation";
+import HomePage from "./pages/HomePage";
+import FavoritesPage from "./pages/FavoritesPage";
+import BookingsPage from "./pages/BookingsPage";
+import CreatePage from "./pages/CreatePage";
+import ProfilePage from "./pages/ProfilePage";
+
 function App() {
   return (
-    <div className="App">
-      <Head/>
-      <PropertiesList/>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/bookings" element={<BookingsPage />} />
+          <Route path="/create" element={<CreatePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Routes>
+        <BottomNavigation />
+      </div>
+    </Router>
   );
 }
 
