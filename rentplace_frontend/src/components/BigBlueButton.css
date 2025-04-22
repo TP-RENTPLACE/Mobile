@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+.big-blue-button {
+  display: flex;
+  width: 362px;
+  height: 54px;
+  padding: 14px 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: var(--Main-Color-Blue, #007aff);
+  position: fixed;
+  bottom: 90px;
+}
+.big-blue-button span {
+  color: var(--White, #fff);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}/*# sourceMappingURL=BigBlueButton.css.map */
