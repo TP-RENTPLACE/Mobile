@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+.announcement-page{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1 {
+    color: var(--Main-Color-Dark, #151515);
+    font-variant-numeric: lining-nums proportional-nums;
+  
+    /* Rentplace Mobile/Big Bold */
+    font-family: Raleway;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 125% */
+    margin: 0;
+  }
+
+}
+
