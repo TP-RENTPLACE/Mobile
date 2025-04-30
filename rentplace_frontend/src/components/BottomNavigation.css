@@ -19,6 +19,9 @@
   background: var(--White, #fff);
   z-index: 1;
 }
+.bottom-navigation * {
+  text-decoration: none !important;
+}
 .bottom-navigation .nav-item {
   display: flex;
   flex-direction: column;

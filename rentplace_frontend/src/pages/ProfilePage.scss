@@ -12,8 +12,11 @@
 * {
   box-sizing: border-box;
 }
-.profile-container {
+.profile{
   margin: 20px 20px 0 20px;
+}
+.profile-container {
+  margin-top: 20px;
   .profile-section {
     border-radius: 20px;
     border: 1px solid var(--Secondary-Gray, #c1c1c1);

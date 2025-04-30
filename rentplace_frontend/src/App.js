@@ -5,21 +5,38 @@ import BottomNavigation from "./components/BottomNavigation";
 import HomePage from "./pages/HomePage";
 import FavoritesPage from "./pages/FavoritesPage";
 import BookingsPage from "./pages/BookingsPage";
-import CreatePage from "./pages/CreatePage";
+import CreatePage from "./pages/CreatePage"; // Старая страница /create
 import ProfilePage from "./pages/ProfilePage";
 import AnnouncementPage from "./pages/AnnouncementPage";
+import LoadingScreen from "./components/LoadingScreen";
+import EmailInputPage from "./pages/EmailInputPage";
+import AuthFlow from "./pages/AuthFlow";
+
+// Импортируем новый компонент роутинга
+import CreateAdFlow from "./pages/CreateAdFlow";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<AnnouncementPage />} />
+          {/* Существующие роуты */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/loading" element={<LoadingScreen />} />
+          <Route path="/announcement" element={<AnnouncementPage />} />
+          <Route path="/auth/*" element={<AuthFlow />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/bookings" element={<BookingsPage />} />
-          <Route path="/create" element={<CreatePage />} />
           <Route path="/profile" element={<ProfilePage />} />
+
+          {/* Старая страница /create */}
+          <Route path="/create" element={<CreatePage />} />
+
+          {/* Новый роутинг для создания объявления */}
+          <Route path="/create-ad/*" element={<CreateAdFlow />} />
         </Routes>
+
+        {/* Вывод нижней навигации */}
         <BottomNavigation />
       </div>
     </Router>

@@ -1,10 +1,12 @@
-import React from 'react';
-import './BigBlueButton.css';
+import React from "react";
+import "./BigBlueButton.css";
 
-function BigBlueButton({props}) {
+function BigBlueButton({ onClick, props, fix,inverted }) {
   return (
-    <div className='big-blue-button'>
-      <span>{props}</span>
+    <div className={`button-container`}>
+      <button className={`big-blue-button ${fix} ${inverted}`} onClick={onClick} >
+        <span>{props}</span>
+      </button>
     </div>
   );
 }
