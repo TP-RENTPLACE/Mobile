@@ -25,4 +25,15 @@
   line-height: 18px; /* 128.571% */
   margin-top: 20px;
   margin-bottom: 10px;
+}
+.description .showMore {
+  cursor: pointer;
+  color: var(--Main-Color-Blue, #007aff);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
 }/*# sourceMappingURL=Description.css.map */

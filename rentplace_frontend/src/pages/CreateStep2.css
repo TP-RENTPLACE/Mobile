@@ -1,0 +1,38 @@
+.create-ad-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+.create-ad-container form label {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-right: 20px;
+}
+.create-ad-container form span {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  margin-bottom: 20px;
+}
+.create-ad-container form input {
+  box-sizing: border-box;
+  display: flex;
+  width: 362px;
+  height: 54px;
+  padding: 0px 20px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  width: 100%;
+}
+.create-ad-container .last {
+  margin-bottom: 80px;
+}/*# sourceMappingURL=CreateStep2.css.map */
