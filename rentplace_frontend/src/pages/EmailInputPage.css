@@ -1,0 +1,32 @@
+.auth-page {
+  margin: 20px;
+}
+.auth-page .auth-page_body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+}
+.auth-page .auth-page_body h1 {
+  color: var(--Main-Color-Dark, #151515);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}
+.auth-page .auth-page_body input {
+  display: flex;
+  width: 362px;
+  height: 54px;
+  padding: 11px 20px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+}/*# sourceMappingURL=EmailInputPage.css.map */
