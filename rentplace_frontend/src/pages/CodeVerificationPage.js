@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./CodeVerificationPage.css"; // Стили
 import BigBlueButton from "../components/BigBlueButton";
+import { useNavigate } from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
 
 const CodeVerificationPage = () => {
@@ -9,7 +10,7 @@ const CodeVerificationPage = () => {
   const [email, setEmail] = useState("jonsoriginals@gmail.com"); // Пример email
   const [secondsRemaining, setSecondsRemaining] = useState(120); // Таймер
   const [canResend, setCanResend] = useState(false);
-
+  const navigate = useNavigate();
   // Обработчик ввода в инпут
   const handleInputChange = (index, value) => {
     if (!/^\d$/.test(value) && value !== "") return; // Разрешаем только цифры или пустую строку
@@ -48,7 +49,7 @@ const CodeVerificationPage = () => {
   const handleSubmit = () => {
     const fullCode = codeInputs.join("");
     if (fullCode.length === 5) {
-      alert(`Введенный код: ${fullCode}`);
+      navigate("/auth/name");
     } else {
       alert("Пожалуйста, заполните все поля.");
     }
