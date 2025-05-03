@@ -14,6 +14,7 @@ import AuthFlow from "./pages/AuthFlow";
 
 // Импортируем новый компонент роутинга
 import CreateAdFlow from "./pages/CreateAdFlow";
+import BookingForm from "./pages/BookingForm";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
 
           {/* Новый роутинг для создания объявления */}
           <Route path="/create-ad/*" element={<CreateAdFlow />} />
+          {/* Страница бронирования */}
+          <Route path="/booking-form" element={<BookingForm />} />
         </Routes>
 
         {/* Вывод нижней навигации */}

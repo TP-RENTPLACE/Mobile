@@ -5,9 +5,6 @@
 }
 .booking .cards_container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 382px);
 }
 .booking .cards_container p {
   color: var(--Main-Color-Dark, #151515);
