@@ -20,6 +20,10 @@ class ReservationService {
     async delete(reservationId) {
         return await apiClient.delete(`/reservations/${reservationId}`, {authRequired: true});
     }
+
+    async getMy() {
+        return await apiClient.get(`/reservations/my`, {authRequired: true});
+    }
 }
 
 export default new ReservationService();

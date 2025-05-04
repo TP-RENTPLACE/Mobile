@@ -24,6 +24,10 @@ class PropertyService {
     async addImages(propertyId, imageData) {
         return await apiClient.post(`/properties/${propertyId}/images`, imageData, {authRequired: true,});
     }
+
+    async getMy() {
+        return await apiClient.get('/properties/my', { authRequired: true });
+    }
 }
 
 export default new PropertyService();

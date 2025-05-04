@@ -1,94 +1,117 @@
-// pages/CodeVerificationPage.js
 import React, { useState, useEffect } from "react";
-import "./CodeVerificationPage.css"; // Стили
+import "./CodeVerificationPage.css";
 import BigBlueButton from "../components/BigBlueButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
+import authService from "../api/authService";
 
 const CodeVerificationPage = () => {
-  const [codeInputs, setCodeInputs] = useState(["", "", "", "", ""]); // Массив для 5 инпутов
-  const [email, setEmail] = useState("jonsoriginals@gmail.com"); // Пример email
-  const [secondsRemaining, setSecondsRemaining] = useState(120); // Таймер
+  const [codeInputs, setCodeInputs] = useState(["", "", "", "", ""]);
+  const [secondsRemaining, setSecondsRemaining] = useState(120);
   const [canResend, setCanResend] = useState(false);
   const navigate = useNavigate();
-  // Обработчик ввода в инпут
+  const location = useLocation();
+
+  const email = location.state?.email;
+  const authType = location.state?.authType;
+
+  useEffect(() => {
+    if (!email) {
+      navigate("/auth/email");
+    }
+  }, [email, navigate]);
+
+  useEffect(() => {
+    if (secondsRemaining > 0) {
+      const timer = setTimeout(() => setSecondsRemaining(secondsRemaining - 1), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setCanResend(true);
+    }
+  }, [secondsRemaining]);
+
+
+  useEffect(() => {
+    const fullCode = codeInputs.join("");
+    if (fullCode.length === 5) {
+      if (authType === "AUTH_LOGIN") {
+        authService.login(email, fullCode)
+            .then(() => navigate("/profile"))
+            .catch(() => alert("Неверный код или ошибка авторизации"));
+      } else if (authType === "AUTH_REGISTER") {
+        authService.validateCode(email, fullCode)
+            .then(() => {
+              navigate("/auth/name", { state: { email, code: fullCode } });
+            })
+            .catch(() => alert("Неверный код или ошибка проверки"));
+      }
+    }
+  }, [codeInputs]);
+
+
   const handleInputChange = (index, value) => {
-    if (!/^\d$/.test(value) && value !== "") return; // Разрешаем только цифры или пустую строку
+    if (!/^\d$/.test(value) && value !== "") return;
 
     const newCodeInputs = [...codeInputs];
     newCodeInputs[index] = value;
     setCodeInputs(newCodeInputs);
 
-    // Автоматически переходим к следующему инпуту, если введена цифра
     if (value !== "" && index < codeInputs.length - 1) {
       document.getElementById(`input-${index + 1}`).focus();
     }
   };
-  useEffect(() => {
-    if (secondsRemaining > 0) {
-      const timer = setTimeout(
-        () => setSecondsRemaining(secondsRemaining - 1),
-        1000
-      );
-      return () => clearTimeout(timer); // Очищаем таймер при размонтировании компонента
-    } else {
-      setCanResend(true); // Разрешаем повторную отправку кода
+
+  const handleResendCode = async () => {
+    if (!canResend) {
+      alert(`Подождите ещё ${secondsRemaining} секунд`);
+      return;
     }
-  }, [secondsRemaining]);
-  // Обработчик повторной отправки кода
-  const handleResendCode = () => {
-    if (canResend) {
-      alert("Код отправлен повторно!");
-      setSecondsRemaining(120); // Сбрасываем таймер
-      setCanResend(false); // Запрещаем повторную отправку до истечения времени
-    } else {
-      alert("Пожалуйста, подождите еще немного.");
-    }
-  };
-  // Обработчик отправки кода
-  const handleSubmit = () => {
-    const fullCode = codeInputs.join("");
-    if (fullCode.length === 5) {
-      navigate("/auth/name");
-    } else {
-      alert("Пожалуйста, заполните все поля.");
+
+    try {
+      await authService.requestCode(email);
+      setSecondsRemaining(120);
+      setCanResend(false);
+      setCodeInputs(["", "", "", "", ""]);
+      alert("Код отправлен повторно");
+    } catch (error) {
+      alert("Ошибка при повторной отправке кода");
     }
   };
 
   return (
-    <>
       <div className="code-verification-page">
         <HeadWithText props="Вход/Регистрация" />
         <div className="verification_body">
           <h2>Введите код из письма, отправленного на {email}</h2>
+
           <div className="code-inputs">
             {codeInputs.map((value, index) => (
-              <input
-                key={index}
-                id={`input-${index}`}
-                type="text"
-                maxLength={1} // Ограничение на 1 символ
-                value={value}
-                onChange={(e) => handleInputChange(index, e.target.value)}
-                onFocus={(e) => e.target.select()} // Выделяем текст при фокусе
-                className="code-input"
-              />
+                <input
+                    key={index}
+                    id={`input-${index}`}
+                    type="text"
+                    maxLength={1}
+                    value={value}
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                    onFocus={(e) => e.target.select()}
+                    className="code-input"
+                />
             ))}
           </div>
-          <p>
-            {canResend ? (
-              <button onClick={handleResendCode}>Отправить код повторно</button>
-            ) : (
-              `Повторная отправка возможна через ${secondsRemaining} секунд`
-            )}
-          </p>
-          <BigBlueButton onClick={handleSubmit} props="Отправить" />
+
+          <p>Повторная отправка возможна через {secondsRemaining} секунд</p>
+
+          <BigBlueButton
+              onClick={handleResendCode}
+              props="Отправить код повторно"
+              disabled={!canResend}
+          />
+
           <p>
             <a href="/auth/email">Ввести другую почту</a>
           </p>
         </div>
       </div>
-    </>
   );
 };
 
