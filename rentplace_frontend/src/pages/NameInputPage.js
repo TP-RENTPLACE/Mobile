@@ -1,31 +1,43 @@
-// pages/NameInputPage.js
-import React from "react";
-import HeadWithText from "../components/HeadWithText";
+import { useLocation, useNavigate } from "react-router-dom";
+import authService from "../api/authService";
+import {useState} from "react";
 import BigBlueButton from "../components/BigBlueButton";
-import "./NameInputPage.css";
+import HeadWithText from "../components/HeadWithText";
 
 const NameInputPage = () => {
-  const handleComplete = () => {
-    // Здесь можно добавить логику завершения регистрации
-    alert("Регистрация завершена!");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { email, code } = location.state;
+
+  const handleComplete = async () => {
+    if (!name || !surname) {
+      alert("Заполните имя и фамилию");
+      return;
+    }
+
+    try {
+      await authService.register(email, code, name, surname);
+      navigate("/profile");
+    } catch (e) {
+      alert("Ошибка при регистрации");
+    }
   };
 
   return (
-    <>
-      {" "}
       <div className="auth-page">
         <HeadWithText props="Вход/Регистрация" />
         <div className="auth-page_body">
           <h1>Укажите имя и фамилию</h1>
           <span>Имя</span>
-          <input type="email" placeholder="Имя" />
+          <input type="text" placeholder="Имя" value={name} onChange={(e) => setName(e.target.value)} />
           <span>Фамилия</span>
-          <input type="email" placeholder="Фамилия" />
-          <BigBlueButton onClick={handleComplete} props="Далее"/>
-          
+          <input type="text" placeholder="Фамилия" value={surname} onChange={(e) => setSurname(e.target.value)} />
+          <BigBlueButton onClick={handleComplete} props="Далее" />
         </div>
       </div>
-    </>
   );
 };
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
 import BottomNavigation from "./components/BottomNavigation";
 import HomePage from "./pages/HomePage";
 import FavoritesPage from "./pages/FavoritesPage";
@@ -9,21 +8,20 @@ import CreatePage from "./pages/CreatePage"; // Старая страница /c
 import ProfilePage from "./pages/ProfilePage";
 import AnnouncementPage from "./pages/AnnouncementPage";
 import LoadingScreen from "./components/LoadingScreen";
-import EmailInputPage from "./pages/EmailInputPage";
 import AuthFlow from "./pages/AuthFlow";
+
 import CreateAdFlow from "./pages/CreateAdFlow";
 import BookingForm from "./pages/BookingForm";
-import BookingConfirmation from "./pages/BookingConfirmation"; // Импортируем новый компонент
+import BookingConfirmation from "./pages/BookingConfirmation";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          {/* Существующие роуты */}
           <Route path="/" element={<HomePage />} />
           <Route path="/loading" element={<LoadingScreen />} />
-          <Route path="/announcement" element={<AnnouncementPage />} />
+          <Route path="/announcement/:id" element={<AnnouncementPage />} />
           <Route path="/auth/*" element={<AuthFlow />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/bookings" element={<BookingsPage />} />
@@ -34,11 +32,9 @@ function App() {
 
           {/* Новый роутинг для создания объявления */}
           <Route path="/create-ad/*" element={<CreateAdFlow />} />
-          
           {/* Страница бронирования */}
           <Route path="/booking-form" element={<BookingForm />} />
-          
-          {/* Новая страница подтверждения бронирования */}
+
           <Route path="/booking-confirmation" element={<BookingConfirmation />} />
         </Routes>
 
