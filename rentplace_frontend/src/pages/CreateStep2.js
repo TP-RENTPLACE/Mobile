@@ -1,43 +1,33 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
 import "./CreateStep2.css"
-import CategoryTable from "../components/CategoryTable";
+import FacilityTable from "../components/FacilityTable";
 import BigBlueButton from "../components/BigBlueButton";
+import {getAllFacilities} from "../store/allFacilities";
 
 const CreateStep2 = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const previousData = location.state || {};
+
   const [formData, setFormData] = useState({
     title: "",
     address: "",
     area: "",
-    guests: "",
+    maxGuests: "",
     rooms: "",
-    beds: "",
-    amenities: [],
+    bedrooms: "",
+    sleepingPlaces: "",
+    facilities: [],
   });
-  const categories1 = [
-    "Кондиционер",
-    "Холодильник",
-    "Микроволновка",
-    "Стиральная машина",
-    "Утюг",
-    "Телевизор",
-    "Плита",
-    "Посудомоечная машина",
-    "Фен",
-  ];
-  const categories2 = [
-    "Wi-Fi",
-    "Телевидение",
-    
-  ];
-  const categories3 = [
-    "Постельное белье",
-    "Полотенца",
-    "Средства гигиены",
-  ];
 
-  const navigate = useNavigate();
+  const [allFacilities, setAllFacilities] = useState([]);
+
+  useEffect(() => {
+    getAllFacilities().then(setAllFacilities).catch(console.error);
+  }, []);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,24 +37,27 @@ const CreateStep2 = () => {
     }));
   };
 
-  const handleAmenityChange = (amenity) => {
-    setFormData((prevData) => {
-      if (prevData.amenities.includes(amenity)) {
-        return {
-          ...prevData,
-          amenities: prevData.amenities.filter((a) => a !== amenity),
-        };
-      } else {
-        return {
-          ...prevData,
-          amenities: [...prevData.amenities, amenity],
-        };
-      }
-    });
+  const handleFacilityChange = (id) => {
+    setFormData((prev) => ({
+      ...prev,
+      facilities: prev.facilities.includes(id)
+          ? prev.facilities.filter((f) => f !== id)
+          : [...prev.facilities, id],
+    }));
   };
 
+
   const handleNext = () => {
-    navigate("/create-ad/step3"); // Абсолютный путь
+    console.log("ШАГ 2 — Сформированные данные:");
+    console.log(formData);
+
+    const allData = {
+      ...previousData,
+      ...formData
+    };
+
+    // передаём данные дальше (например, через context / store / localStorage)
+    navigate("/create-ad/step3", {state: allData});
   };
 
   return (
@@ -109,9 +102,9 @@ const CreateStep2 = () => {
           
           <input
             type="number"
-            name="area"
+            name="maxGuests"
             placeholder="Выбрать"
-            value={formData.area}
+            value={formData.maxGuests}
             onChange={handleInputChange}
           />
         </label>
@@ -120,9 +113,9 @@ const CreateStep2 = () => {
           
           <input
             type="number"
-            name="area"
+            name="rooms"
             placeholder="Выбрать"
-            value={formData.area}
+            value={formData.rooms}
             onChange={handleInputChange}
           />
         </label>
@@ -131,9 +124,9 @@ const CreateStep2 = () => {
           
           <input
             type="number"
-            name="area"
+            name="bedrooms"
             placeholder="Выбрать"
-            value={formData.area}
+            value={formData.bedrooms}
             onChange={handleInputChange}
           />
         </label>
@@ -142,17 +135,16 @@ const CreateStep2 = () => {
           
           <input
             type="number"
-            name="area"
+            name="sleepingPlaces"
             placeholder="Выбрать"
-            value={formData.area}
+            value={formData.sleepingPlaces}
             onChange={handleInputChange}
           />
         </label>
         
       </form>
-      <CategoryTable categories={categories1} title="Техника"/>
-      <CategoryTable categories={categories2} title="Интернет и ТВ"/>
-      <CategoryTable categories={categories3} title="Комфорт"/>
+      <FacilityTable facilities={allFacilities} title="Техника" selected={formData.facilities} onToggle={handleFacilityChange}/>
+
       <p className="last"></p>
       <BigBlueButton props="Далее" fix="fixed" onClick={handleNext}/>
     </div>

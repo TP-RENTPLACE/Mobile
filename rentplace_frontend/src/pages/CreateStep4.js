@@ -1,83 +1,93 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
-import "./CreateStep4.css"
+import "./CreateStep4.css";
 import BigBlueButton from "../components/BigBlueButton";
 
 const CreateStep4 = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const previousData = location.state || {};
+
+
   const [formData, setFormData] = useState({
     description: "",
-    priceType: "monthly", // monthly или daily
-    price: "",
+    longTermRent: true, // true — в месяц, false — за сутки
+    cost: "",
   });
-
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
 
-  const handlePriceTypeChange = (type) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      priceType: type,
+  const handleRentTypeChange = (isMonthly) => {
+    setFormData((prev) => ({
+      ...prev,
+      longTermRent: isMonthly,
     }));
   };
 
   const handleNext = () => {
-    navigate("/create-ad/step5"); // Абсолютный путь
+    console.log("Данные шага 4:", formData);
+    const allData = {
+      ...previousData,
+      ...formData,
+    };
+
+    navigate("/create-ad/step5", { state: allData });
   };
 
   return (
-    <div className="create-ad-container">
-      <HeadWithText props="Новое объявление"/>
-      <p>Составьте описание и укажите цену</p>
-      <label>
-        <span>Описание</span>
-        <textarea
-          name="description"
-          placeholder="Составьте или сгенерируйте описание для вашего жилья"
-          value={formData.description}
-          onChange={handleInputChange}
+      <div className="create-ad-container">
+        <HeadWithText props="Новое объявление" />
+        <p>Составьте описание и укажите цену</p>
+
+        <label>
+          <span>Описание</span>
+          <textarea
+              name="description"
+              placeholder="Составьте или сгенерируйте описание для вашего жилья"
+              value={formData.description}
+              onChange={handleInputChange}
+          />
+        </label>
+
+        <BigBlueButton
+            props="Сгенерировать описание с помощью AI"
+            inverted="inverted"
         />
-      </label>
-      <BigBlueButton props="Сгенерировать описание с помощью AI" inverted="inverted"/>
-      <label>
-        <span>Арендная плата, ₽</span>
-        <div className="rent-price">
-          <button
-            onClick={() => handlePriceTypeChange("daily")}
-            style={{
-              borderColor:
-                formData.priceType === "daily" ? "#007bff" : "#c1c1c1",
-            }}
-          >
-            За сутки
-          </button>
-          <button
-            onClick={() => handlePriceTypeChange("monthly")}
-            style={{
-              borderColor:
-                formData.priceType === "monthly" ? "#007bff" : "#c1c1c1",
-            }}
-          >
-            В месяц
-          </button>
-        </div>
-        <input
-          type="number"
-          name="price"
-          placeholder="Укажите сумму"
-          value={formData.price}
-          onChange={handleInputChange}
-        />
-      </label>
-      <BigBlueButton props="Далее" fix="fixed" onClick={handleNext}/>
-    </div>
+
+        <label>
+          <span>Арендная плата, ₽</span>
+          <div className="rent-price">
+            <button
+                className={!formData.longTermRent ? "active" : ""}
+                onClick={() => handleRentTypeChange(false)}
+            >
+              За сутки
+            </button>
+            <button
+                className={formData.longTermRent ? "active" : ""}
+                onClick={() => handleRentTypeChange(true)}
+            >
+              В месяц
+            </button>
+          </div>
+          <input
+              type="number"
+              name="cost"
+              placeholder="Укажите сумму"
+              value={formData.cost}
+              onChange={handleInputChange}
+          />
+        </label>
+
+        <BigBlueButton props="Далее" fix="fixed" onClick={handleNext} />
+      </div>
   );
 };
 
