@@ -11,10 +11,9 @@ import AnnouncementPage from "./pages/AnnouncementPage";
 import LoadingScreen from "./components/LoadingScreen";
 import EmailInputPage from "./pages/EmailInputPage";
 import AuthFlow from "./pages/AuthFlow";
-
-// Импортируем новый компонент роутинга
 import CreateAdFlow from "./pages/CreateAdFlow";
 import BookingForm from "./pages/BookingForm";
+import BookingConfirmation from "./pages/BookingConfirmation"; // Импортируем новый компонент
 
 function App() {
   return (
@@ -35,8 +34,12 @@ function App() {
 
           {/* Новый роутинг для создания объявления */}
           <Route path="/create-ad/*" element={<CreateAdFlow />} />
+          
           {/* Страница бронирования */}
           <Route path="/booking-form" element={<BookingForm />} />
+          
+          {/* Новая страница подтверждения бронирования */}
+          <Route path="/booking-confirmation" element={<BookingConfirmation />} />
         </Routes>
 
         {/* Вывод нижней навигации */}

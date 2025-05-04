@@ -6,7 +6,7 @@ import { MapPin } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import "./PropertyCard.css";
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property,isfav }) => {
   const isFavorite = favoritesStore.isFavorite(property.id);
   const location = useLocation();
   const handleToggleFavorite = () => {
@@ -18,7 +18,7 @@ const PropertyCard = ({ property }) => {
   };
 
   return (
-    <div className={`property-card ${location.pathname === "/favorites" ? "favorite" : ""}`}>
+    <div className={`property-card ${(location.pathname === "/favorites") || isfav ? "favorite" : ""}`}>
       <div className="property-image-container">
         <img
           src={property.image}
