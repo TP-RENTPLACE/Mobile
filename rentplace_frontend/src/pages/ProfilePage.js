@@ -83,10 +83,7 @@ const ProfilePage = () => {
             </div>
 
             <div className="additional-sections">
-              <div className="section-item">
-                <Trophy />
-                <span>Достижения</span>
-              </div>
+              
               <div className="section-item">
                 <Settings />
                 <span>Настройки приложения</span>
