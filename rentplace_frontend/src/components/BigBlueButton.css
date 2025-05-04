@@ -38,6 +38,7 @@
   border: 0px solid #000;
 }
 .button-container .big-blue-button span {
+  text-wrap: nowrap;
   color: var(--White, #fff);
   font-variant-numeric: lining-nums proportional-nums;
   /* Rentplace Mobile/Big Bold */
