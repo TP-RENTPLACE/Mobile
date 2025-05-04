@@ -25,6 +25,7 @@
 }
 .upper_header .profile {
   height: 55px;
+  margin: 0;
 }
 .upper_header .profile img {
   width: 55px;

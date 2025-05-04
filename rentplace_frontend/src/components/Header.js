@@ -22,6 +22,14 @@ const Header = () => {
         return "Rentplace"; // Дефолтный текст
     }
   };
+  const getImage = () => {
+    switch (location.pathname) {
+      case "/profile":
+        return ""; 
+      default:
+        return <img src="./images/profile.png" alt="Profile" />; 
+    }
+  };
 
   return (
     <div className="upper_header">
@@ -30,7 +38,7 @@ const Header = () => {
         <span className="header-text">{getHeaderText()}</span> {/* Добавляем текст */}
       </div>
       <div className="profile">
-        <img src="./images/profile.png" alt="Profile" />
+        {getImage()}
       </div>
     </div>
   );
