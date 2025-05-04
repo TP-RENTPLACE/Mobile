@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom"; // Импортируем хук для навигации
 import RecentFirst from "../components/RecentFirst";
@@ -6,9 +6,11 @@ import Categories from "../components/Categories";
 import "./CreatePage.css";
 import BigBlueButton from "../components/BigBlueButton";
 import BottomNavigation from "../components/BottomNavigation";
+import MyPropertyList from "../components/MyPropertyList";
 
 const CreatePage = () => {
-  const navigate = useNavigate(); // Инициализируем хук
+  const navigate = useNavigate();
+  const [filterStatus, setFilterStatus] = useState("PUBLISHED");
 
   // Функция для обработки клика по кнопке
   const handleButtonClick = () => {
@@ -20,10 +22,8 @@ const CreatePage = () => {
       <div className="booking">
         <Header></Header>
         <RecentFirst></RecentFirst>
-        <Categories></Categories>
-        <div className="cards_container">
-          <p>У вас нет активных объявлений о сдаче жилья</p>
-        </div>
+        <Categories onCategoryChange={setFilterStatus} />
+        <MyPropertyList filterStatus={filterStatus} />
         {/* Передаем функцию в кнопку */}
         <BigBlueButton props="Разместить объявление" fix="fixed" onClick={handleButtonClick} />
       </div>
