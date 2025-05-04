@@ -19,7 +19,7 @@ const propertiesData = [
   {
     id: 1,
     image: './images/property2.png',
-    title: 'Вилла с охуенным видом',
+    title: 'Вилла с хорошим видом',
     rating: 4.96,
     reviews: 217,
     area: 360,
@@ -32,7 +32,7 @@ const propertiesData = [
   {
     id: 1,
     image: './images/property2.png',
-    title: 'Вилла с охуенным видом',
+    title: 'Вилла с хорошим видом',
     rating: 4.96,
     reviews: 217,
     area: 360,

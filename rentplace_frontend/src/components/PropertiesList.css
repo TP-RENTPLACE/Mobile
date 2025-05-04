@@ -1,5 +1,5 @@
 .properties-list {
-  margin: 0 20px;
+  margin-bottom: 90px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;

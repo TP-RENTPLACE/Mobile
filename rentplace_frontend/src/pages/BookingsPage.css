@@ -1,0 +1,19 @@
+.booking {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.booking .cards_container {
+  display: flex;
+}
+.booking .cards_container p {
+  color: var(--Main-Color-Dark, #151515);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium SemiBold */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px; /* 128.571% */
+}/*# sourceMappingURL=BookingsPage.css.map */

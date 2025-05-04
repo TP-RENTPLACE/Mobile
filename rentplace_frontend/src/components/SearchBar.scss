@@ -3,12 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
   .search-bar {
     display: flex;
     align-items: center;
     background-color: white; /* Серый фон */
     border-radius: 40px; /* Круглые углы */
+    box-sizing: border-box;
     width: 82%;
     height: 40px; /* Высота */
     border: 1px solid #C1C1C1;

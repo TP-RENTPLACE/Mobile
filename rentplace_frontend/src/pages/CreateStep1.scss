@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+.create-ad-container {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  p {
+    color: var(--Main-Color-Dark, #151515);
+    text-align: center;
+    font-variant-numeric: lining-nums proportional-nums;
+
+    /* Rentplace Mobile/Medium SemiBold */
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 128.571% */
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    .item {
+      display: flex;
+      height: 40px;
+      padding: 6px 10px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 20px;
+      border: 1px solid var(--Secondary-Gray, #c1c1c1);
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.category-grid h2 {
+  margin-top: 0;
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+.category-grid .grid-container .grid-row .grid-item {
+  display: inline-flex;
+  height: 40px;
+  padding: 6px 20px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  width: auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Small */
+  font-family: Raleway;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 140% */
+}/*# sourceMappingURL=CategoryTable.css.map */

@@ -1,0 +1,15 @@
+.loading-screen_logo img {
+  width: 50px;
+  height: 40px;
+}
+.loading-screen_logo span {
+  color: var(--White, #fff);
+  text-align: right;
+  /* H1 */
+  font-family: Montserrat;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 56px; /* 107.692% */
+  margin-left: 14px;
+}/*# sourceMappingURL=Logo.css.map */
