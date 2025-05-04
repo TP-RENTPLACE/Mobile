@@ -6,7 +6,11 @@
   flex-direction: column;
   align-items: center;
 
-  .head{
+  .head {
+    width: 100%;
+  }
+  form {
+    margin-top: 20px;
     width: 100%;
   }
   // Заголовок формы
@@ -21,7 +25,7 @@
   // Группа ввода (дата, количество месяцев)
   .input-group {
     margin-bottom: 20px;
-
+    width: 100%;
     // Подпись к полю ввода
     label {
       display: block;
@@ -29,18 +33,29 @@
       margin-bottom: 5px;
       color: #555;
     }
+    label {
+      margin-bottom: 20px;
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
 
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
     // Поле ввода
     input {
+      width: 100%;
       display: flex;
-      width: 362px;
       height: 54px;
       padding: 11px 20px;
       justify-content: space-between;
       align-items: center;
       border-radius: 20px;
       border: 1px solid var(--Secondary-Gray, #c1c1c1);
-
+      
       &:focus {
         border-color: #007bff;
         outline: none;

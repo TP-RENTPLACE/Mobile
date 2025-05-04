@@ -16,7 +16,10 @@ const BookingForm = () => {
     endDate: new Date(),
     key: 'selection',
   });
+  const formData = {}
+  const handleChange = ()=>{
 
+  }
   const handleSelect = (ranges) => {
     setSelection(ranges.selection);
   };
@@ -46,14 +49,14 @@ const BookingForm = () => {
       <form onSubmit={handleSubmit}>
         {/* Поле для выбора даты */}
         <div className="input-group">
-          <label htmlFor="start-date">Выберите дату начала проживания</label>
-          <input
-            type="date"
-            id="start-date"
-            value={startDate}
-            onChange={handleDateChange}
-            placeholder="Не указана"
-          />
+          <label className="column-name">Дата начала проживания</label>
+              <input
+                type="date"
+                name="checkIn"
+                value={formData.checkIn}
+                onChange={handleChange}
+                required
+              />
         </div>
         {/* <DateRangePicker
       ranges={[selection]}
@@ -61,18 +64,18 @@ const BookingForm = () => {
     /> */}
         {/* Поле для ввода количества месяцев */}
         <div className="input-group">
-          <label htmlFor="months">Укажите количество месяцев</label>
-          <input
-            type="number"
-            id="months"
-            value={months}
-            onChange={handleMonthsChange}
-            placeholder="Введите текст"
-          />
+          <label className="column-name">Дата окончания проживания</label>
+              <input
+                type="date"
+                name="checkIn"
+                value={formData.checkIn}
+                onChange={handleChange}
+                required
+              />
         </div>
 
         {/* Кнопка подтверждения */}
-        <BigBlueButton props="Забронировать" />
+        <BigBlueButton props="Забронировать" fix="fixed"/>
       </form>
     </div>
   );
