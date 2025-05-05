@@ -32,12 +32,6 @@
 .create-ad-container .rent-price {
   display: flex;
 }
-
-.create-ad-container .rent-price button.active {
-  border: 1px solid #007aff;
-  color: #007aff;
-}
-
 .create-ad-container .rent-price button {
   display: flex;
   padding: 12px 30px;
@@ -49,6 +43,10 @@
   background: white;
   border: 1px solid var(--Secondary-Gray, #c1c1c1);
   margin-right: 10px;
+}
+.create-ad-container .active {
+  border: 1px solid var(--Main-Color-Blue, #007aff) !important;
+  color: var(--Main-Color-Blue, #007aff);
 }
 .create-ad-container input {
   display: flex;
