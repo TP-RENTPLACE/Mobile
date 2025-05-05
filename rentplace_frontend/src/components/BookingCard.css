@@ -14,7 +14,7 @@
 .property-card.favorite .property-image-container .property-image {
   border-radius: 20px 0px 0px 20px;
   width: 120px;
-  height: 134px;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
@@ -50,7 +50,7 @@
   display: flex;
   justify-content: start;
 }
-.property-card.favorite .property-details .property_adress_price .property-address {
+.property-card.favorite .property-details .property_address_price_reservation .property-address {
   margin-bottom: 11px;
 }
 .property-card .property-image-container {
@@ -98,7 +98,7 @@
   gap: 10px;
   padding: 10px;
   border-radius: 0px 0px 20px 20px;
-  width: 93%;
+  width: 100%;
 }
 .property-card .property-details .property-title {
   color: var(--Main-Color-Dark, #151515);
@@ -123,7 +123,7 @@
   margin: 0;
   width: 100%;
 }
-.property-card .property-details .property_adress_price {
+.property-card .property-details .property_address_price_reservation {
   display: flex;
   width: 100%;
   justify-content: start;
@@ -131,7 +131,7 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
-.property-card .property-details .property_adress_price .property-address {
+.property-card .property-details .property_address_price_reservation .property-address {
   display: flex;
   align-items: center;
   color: var(--Main-Color-Dark, #151515);
@@ -143,12 +143,12 @@
   font-weight: 400;
   line-height: 14px; /* 140% */
 }
-.property-card .property-details .property_adress_price .property-address .map_icon {
+.property-card .property-details .property_address_price_reservation .property-address .map_icon {
   width: 18px;
   height: 18px;
   margin-right: 3px;
 }
-.property-card .property-details .property_adress_price .property-price {
+.property-card .property-details .property_address_price_reservation .property-price {
   display: flex;
   padding: 4px 10px;
   align-items: center;
@@ -156,7 +156,7 @@
   border-radius: 20px;
   border: 1px solid var(--Main-Color-Dark, #151515);
 }
-.property-card .property-details .property_adress_price .property-price :first-child {
+.property-card .property-details .property_address_price_reservation .property-price :first-child {
   color: var(--Main-Color-Dark, #151515);
   font-variant-numeric: lining-nums proportional-nums;
   /* Rentplace Mobile/Medium Bold */
@@ -166,7 +166,7 @@
   font-weight: 700;
   line-height: 18px; /* 128.571% */
 }
-.property-card .property-details .property_adress_price .property-price :nth-child(2) {
+.property-card .property-details .property_address_price_reservation .property-price :nth-child(2) {
   color: var(--Main-Color-Dark, #151515);
   font-variant-numeric: lining-nums proportional-nums;
   /* Rentplace Mobile/Medium Bold */
@@ -176,7 +176,7 @@
   font-weight: 400;
   line-height: 18px; /* 128.571% */
 }
-.property-card .property-details .property_adress_price .property-price :last-child {
+.property-card .property-details .property_address_price_reservation .property-price :last-child {
   color: var(--Main-Color-Dark, #151515);
   font-family: Raleway;
   font-size: 10px;
