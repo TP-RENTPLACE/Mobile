@@ -6,6 +6,7 @@ import BottomNavigation from "../components/BottomNavigation";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../api/apiClient";
 import authService from "../api/authService";
+import BigBlueButton from "../components/BigBlueButton"
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -42,9 +43,10 @@ const ProfilePage = () => {
               <p className="login-prompt">
                 Войдите, чтобы получить доступ ко всем функциям приложения
               </p>
-              <button className="auth-button" onClick={handleAuthRedirect}>
-                Войти / Зарегистрироваться
-              </button>
+              <BigBlueButton props="Войти / Зарегистрироваться" fullwidth="fullwidth"  onClick={handleAuthRedirect}/>
+              {/* <button className="auth-button" onClick={handleAuthRedirect}> */}
+                {/* Войти / Зарегистрироваться
+              </button> */}
               <div className="additional-sections">
                 <div className="section-item">
                   <Info />

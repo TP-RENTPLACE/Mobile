@@ -18,6 +18,7 @@
   .inverted{
     background: white !important;
     border: 1px solid var(--Main-Color-Blue, #007AFF) !important;
+
     span{
       color: #007AFF !important;
     }
@@ -25,6 +26,9 @@
   .big-blue-button {
     box-sizing: border-box;
     width: 91%;
+    &.fullwidth{
+      width: 100% !important;
+    }
     display: flex;
     height: 54px;
     padding: 14px 100px;

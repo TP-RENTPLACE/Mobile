@@ -45,6 +45,24 @@ const AnnouncementPage = () => {
             </div>
 
             <Facilities facilities={property.facilitiesDTOs}/>
+            <div className="owner">
+                <h1>Хозяин</h1>
+                <div className="owner_data">
+                    <img src={property.ownerDTO.imageDTO.url} alt="" />
+                    <div className="owner_name_email">
+                        <div className="owner_name">
+                            {property.ownerDTO.name} {property.ownerDTO.surname}
+                        </div>
+                        <div className="owner_email">
+                            {property.ownerDTO.email}
+                        </div>
+                    </div>
+                    
+                </div>
+                <div className="from-date">
+                        Участник rentplace с 2025 года
+                    </div>
+            </div>
             <BigBlueButton props="Выбрать даты" fix="fixed" onClick={handleBookClick}/>
             <BottomNavigation/>
         </div>

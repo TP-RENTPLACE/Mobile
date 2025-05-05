@@ -175,6 +175,7 @@ $border-radius: 20px; // Радиус скругления углов
 
     .property_adress_price {
       display: flex;
+      gap: 10px;
       width: 100%;
       justify-content: space-between;
       align-items: center;
@@ -213,7 +214,7 @@ $border-radius: 20px; // Радиус скругления углов
         gap: 2px;
         border-radius: 20px;
         border: 1px solid var(--Main-Color-Dark, #151515);
-
+        // margin-top: 10px !important;
         :first-child {
           color: var(--Main-Color-Dark, #151515);
           font-variant-numeric: lining-nums proportional-nums;

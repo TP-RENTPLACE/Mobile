@@ -126,6 +126,7 @@
 }
 .property-card .property-details .property_adress_price {
   display: flex;
+  gap: 10px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
