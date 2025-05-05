@@ -2,82 +2,91 @@ import React, { useState } from "react";
 import "./BookingForm.css";
 import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
-// import { DateRangePicker } from 'react-date-range';
-// import 'react-date-range/dist/styles.css'; // Главный CSS
-// import 'react-date-range/dist/theme/default.css'; // Тема (опционально)
-// import { addYears } from 'date-fns'; 
+import { useLocation, useNavigate } from "react-router-dom";
 
 const BookingForm = () => {
-  // Состояния для хранения выбранных данных
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { property } = location.state || {};
+
   const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [months, setMonths] = useState("");
-  const [selection, setSelection] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-    key: 'selection',
-  });
-  const formData = {}
-  const handleChange = ()=>{
 
-  }
-  const handleSelect = (ranges) => {
-    setSelection(ranges.selection);
-  };
-  // Обработчик изменения даты
-  const handleDateChange = (event) => {
-    setStartDate(event.target.value);
-  };
+  if (!property) return <div>Объявление не найдено</div>;
 
-  // Обработчик изменения количества месяцев
-  const handleMonthsChange = (event) => {
-    setMonths(event.target.value);
-  };
+  const isLongTerm = property.longTermRent;
 
-  // Обработчик отправки формы
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Дата начала проживания:", startDate);
-    console.log("Количество месяцев:", months);
-    alert("Данные успешно отправлены!");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!startDate || (!isLongTerm && !endDate) || (isLongTerm && !months)) {
+      alert("Заполните все поля!");
+      return;
+    }
+
+    let calculatedEndDate = endDate;
+
+    if (isLongTerm) {
+      const start = new Date(startDate);
+      start.setMonth(start.getMonth() + Number(months));
+      calculatedEndDate = start.toISOString().split("T")[0];
+    }
+
+    const bookingInfo = {
+      propertyId: property.propertyId,
+      startDate,
+      endDate: calculatedEndDate,
+      costInPeriod: property.cost,
+      longTermRent: isLongTerm,
+      property,
+    };
+
+    navigate("/booking-confirmation", { state: bookingInfo });
   };
 
   return (
-    <div className="booking-form">
-      <div className="head">
-        <HeadWithText props="Выберите даты" />
-      </div>
-      <form onSubmit={handleSubmit}>
-        {/* Поле для выбора даты */}
-        <div className="input-group">
-          <label className="column-name">Дата начала проживания</label>
-              <input
-                type="date"
-                name="checkIn"
-                value={formData.checkIn}
-                onChange={handleChange}
-                required
-              />
+      <div className="booking-form">
+        <div className="head">
+          <HeadWithText props="Выберите даты" />
         </div>
-        {/* <DateRangePicker
-      ranges={[selection]}
-      onChange={handleSelect}
-    /> */}
-        {/* Поле для ввода количества месяцев */}
-        <div className="input-group">
-          <label className="column-name">Дата окончания проживания</label>
-              <input
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label className="column-name">Дата начала проживания</label>
+            <input
                 type="date"
-                name="checkIn"
-                value={formData.checkIn}
-                onChange={handleChange}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
                 required
-              />
-        </div>
+            />
+          </div>
 
-        {/* Кнопка подтверждения */}
-        <BigBlueButton props="Забронировать" fix="fixed"/>
-      </form>
-    </div>
+          {isLongTerm ? (
+              <div className="input-group">
+                <label className="column-name">Количество месяцев</label>
+                <input
+                    type="number"
+                    min="1"
+                    value={months}
+                    onChange={(e) => setMonths(e.target.value)}
+                    required
+                />
+              </div>
+          ) : (
+              <div className="input-group">
+                <label className="column-name">Дата окончания проживания</label>
+                <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    required
+                />
+              </div>
+          )}
+
+          <BigBlueButton props="Далее" fix="fixed" />
+        </form>
+      </div>
   );
 };
 

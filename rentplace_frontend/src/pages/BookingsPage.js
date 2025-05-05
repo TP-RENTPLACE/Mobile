@@ -1,36 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import RecentFirst from "../components/RecentFirst";
 import Categories from "../components/Categories";
 import "./BookingsPage.css";
 import BottomNavigation from "../components/BottomNavigation";
 import BookingCard from "../components/BookingCard";
+import ReservationService from "../api/reservationService";
 
 const BookingsPage = () => {
-  const property = {
-    id: 1,
-    image: './images/property1.png',
-    title: 'Вилла с панорамным видом',
-    from:19,
-    to:20,
-    months:"августа",
-    address: 'Лоо, Таллинская улица, 93',
-    price: '59 000',
-  }
-  return (
-    <>
-      <div className="booking">
-        <Header></Header>
-        <RecentFirst></RecentFirst>
-        <Categories></Categories>
-        <div className="cards_container">
-          {/* <p>У вас нет активных броней</p> */}
-          <BookingCard property={property}/>
-        </div>
-      </div>
-      <BottomNavigation />
-    </>
-  );
+    const [reservations, setReservations] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        ReservationService.getMy()
+            .then((data) => {
+                setReservations(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error("Ошибка загрузки бронирований:", err);
+                setError("Не удалось загрузить бронирования");
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) return <div>Загрузка...</div>;
+
+    return (
+        <>
+            <div className="booking">
+                <Header />
+                <RecentFirst />
+                <Categories />
+                <div>{error}</div>
+                <div className="cards_container">
+                    {reservations.map((reservation) => (
+                        <BookingCard
+                            property={reservation.propertyDTO}
+                        />
+                    ))}
+                </div>
+            </div>
+            <BottomNavigation />
+        </>
+    );
 };
 
 export default BookingsPage;
