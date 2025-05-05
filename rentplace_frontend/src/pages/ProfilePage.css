@@ -75,6 +75,10 @@
   align-self: stretch;
 }
 
+.login-prompt {
+  text-align: center;
+}
+
 .additional-sections .section-item {
   display: flex;
   height: 54px;
