@@ -59,6 +59,7 @@ const CreateStep4 = () => {
         <BigBlueButton
             props="Сгенерировать описание с помощью AI"
             inverted="inverted"
+            fullwidth="fullwidth"
         />
 
         <label>

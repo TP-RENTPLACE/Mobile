@@ -22,6 +22,7 @@
   width: 100%;
   color: var(--Secondary-Gray, #c1c1c1);
   font-variant-numeric: lining-nums proportional-nums;
+  color: black;
   /* Rentplace Mobile/Medium */
   font-family: Raleway;
   font-size: 14px;
