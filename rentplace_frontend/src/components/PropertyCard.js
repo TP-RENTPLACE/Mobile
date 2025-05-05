@@ -3,13 +3,20 @@ import { observer } from "mobx-react-lite";
 import favoritesStore from "../store/favoritesStore";
 import { Heart } from "lucide-react";
 import { MapPin } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import "./PropertyCard.css";
 
-const PropertyCard = ({ property,isfav }) => {
+const PropertyCard = ({ property }) => {
   const isFavorite = favoritesStore.isFavorite(property.id);
   const location = useLocation();
-  const handleToggleFavorite = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/announcement/${property.propertyId}`, {state: { property } });
+  }
+
+  const handleToggleFavorite = (e) => {
+    e.stopPropagation();
     if (isFavorite) {
       favoritesStore.removeFromFavorites(property.id);
     } else {
@@ -17,13 +24,28 @@ const PropertyCard = ({ property,isfav }) => {
     }
   };
 
+  const getImageUrl = (images = []) => {
+    const previewImg = images.find((img) => img.previewImage === false && img.imageId === 2);
+    const chosenImg = previewImg || images[0];
+    if (!chosenImg) {
+      return "/assets/image.png";
+    }
+    if (chosenImg.url) {
+      return chosenImg.url;
+    }
+  };
+
   return (
-    <div className={`property-card ${(location.pathname === "/favorites") || isfav ? "favorite" : ""}`}>
+    <div
+        className={`property-card ${location.pathname === "/favorites" ? "favorite" : ""}`}
+        onClick={handleClick}
+        style={{cursor: "pointer"}}
+    >
       <div className="property-image-container">
         <img
-          src={property.image}
+          src={getImageUrl(property.imagesDTOs)}
           alt={property.title}
-          className="property-image"
+          className="property-image-big"
         />
         <button
           className={`favorite-button ${isFavorite ? "active" : ""}`}
@@ -35,17 +57,17 @@ const PropertyCard = ({ property,isfav }) => {
       <div className="property-details">
         <h3 className="property-title">{property.title}</h3>
         <p className="property-description">
-          {property.area} м² · {property.guests} гостей · {property.bedrooms}{" "}
-          спальни · {property.beds} кровати
+          {property.area} м² · {property.maxGuests} гостей · {property.bedrooms}{" "}
+          спальни · {property.sleepingPlaces} кровати
         </p>
         <div className="property_adress_price">
           <div className="property-address">
             <MapPin className="map_icon" />
-            <span>{property.address}</span>
+            <span className="address-text">{property.address}</span>
           </div>
           <div className="property-price">
             <span>
-              <span>{property.price} </span>
+              <span>{property.cost} </span>
               <span>₽</span>
               <span> за сутки</span>
             </span>

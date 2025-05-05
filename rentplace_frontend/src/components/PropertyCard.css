@@ -10,7 +10,7 @@
   position: relative;
   overflow: hidden;
 }
-.property-card.favorite .property-image-container .property-image {
+.property-card.favorite .property-image-container .property-image-big {
   border-radius: 20px 0px 0px 20px;
   width: 120px;
   height: 134px;
@@ -56,10 +56,14 @@
   position: relative;
   overflow: hidden;
 }
-.property-card .property-image-container .property-image {
+.property-card .property-image-container .property-image-big {
   width: 100%;
+  max-height: 304px;
+  -o-object-fit: cover;
+     object-fit: cover;
   height: auto;
   display: block;
+  border-radius: 20px 20px 0 0;
 }
 .property-card .property-image-container .favorite-button {
   display: flex;
@@ -143,6 +147,13 @@
   width: 18px;
   height: 18px;
   margin-right: 3px;
+}
+.property-card .property-details .property_adress_price .address-text {
+  display: block;
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .property-card .property-details .property_adress_price .property-price {
   display: flex;

@@ -49,6 +49,10 @@
       margin-right: 10px;
     }
   }
+  .active {
+    border: 1px solid var(--Main-Color-Blue, #007aff) !important;
+    color: var(--Main-Color-Blue, #007aff);
+  }
   input {
     display: flex;
     width: 362px;
@@ -60,7 +64,7 @@
     border: 1px solid var(--Secondary-Gray, #c1c1c1);
     margin-top: 10px;
   }
-  .center{
+  .center {
     height: 70vh;
     display: flex;
     flex-direction: column;

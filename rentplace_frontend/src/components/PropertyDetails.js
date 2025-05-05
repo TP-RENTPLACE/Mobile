@@ -2,18 +2,18 @@
 import React from 'react';
 import './PropertyDetails.css';
 
-const PropertyDetails = ({ details }) => {
-  if (!details) {
+const PropertyDetails = ({ property }) => {
+  if (!property) {
     return <div>Детали недоступны</div>;
   }
 
   return (
     <div className="propertyDetails">
-      <span>{details.area}</span>
-      <span>{details.rooms}</span>
-      <span>{details.guests}</span>
-      <span>{details.bedrooms}</span>
-      <span>{details.beds}</span>
+      <span>{property.area} м²</span>
+      <span>{property.rooms} комнат</span>
+      <span>{property.maxGuests} гостей</span>
+      <span>{property.bedrooms} спален</span>
+      <span>{property.sleepingPlaces} кроватей</span>
     </div>
   );
 };

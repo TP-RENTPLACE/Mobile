@@ -2,7 +2,7 @@
 .propertyDetails {
   display: flex;
   gap: 10px;
-
+  flex-wrap: wrap;
   span {
     padding: 5px 10px;
     border-radius: 5px;
@@ -15,6 +15,7 @@
     border-radius: 20px;
     border: 1px solid var(--Secondary-Gray, #c1c1c1);
     color: var(--Main-Color-Dark, #151515);
+    text-wrap: nowrap;
 
     /* Rentplace Mobile/Small */
     font-family: Raleway;

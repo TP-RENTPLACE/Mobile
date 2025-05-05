@@ -11,13 +11,13 @@ $border-radius: 20px; // Радиус скругления углов
   &.favorite {
     display: flex;
     .property-image-container {
-      position: relative; // Разрешаем абсолютное позиционирование
+      position: relative;
       overflow: hidden;
 
       .property-image {
         border-radius: 20px 0px 0px 20px;
         width: 120px;
-        height: 134px;
+        height: 100%;
         object-fit: cover;
         display: block;
       }
@@ -64,7 +64,7 @@ $border-radius: 20px; // Радиус скругления углов
         justify-content: start;
       }
   
-      .property_adress_price {
+      .property_address_price_reservation {
         
   
         .property-address {
@@ -144,7 +144,7 @@ $border-radius: 20px; // Радиус скругления углов
     gap: 10px;
     padding: 10px;
     border-radius: 0px 0px $border-radius $border-radius;
-    width: 93%;
+    width: 100%;
 
     .property-title {
       color: var(--Main-Color-Dark, #151515);
@@ -173,15 +173,13 @@ $border-radius: 20px; // Радиус скругления углов
       width: 100%;
     }
 
-    .property_adress_price {
+    .property_address_price_reservation {
       display: flex;
       width: 100%;
       justify-content: start;
       align-items:start;
       flex-wrap: wrap;
-      flex-direction: column;
-
-      .property-address {
+      flex-direction: column;.property-address {
         display: flex;
         align-items: center;
         color: var(--Main-Color-Dark, #151515);

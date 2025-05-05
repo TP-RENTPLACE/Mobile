@@ -1,100 +1,111 @@
-import React from "react";
-// import BookingHeader from './BookingHeader';
-// import BookingDetails from './BookingDetails';
-// import GuestInfo from './GuestInfo';
-// import PriceBreakdown from './PriceBreakdown';
-// import ConfirmButton from './ConfirmButton';
+import React, { useEffect, useState } from "react";
 import HeadWithText from "../components/HeadWithText";
 import PropertyCard from "../components/PropertyCard";
 import BigBlueButton from "../components/BigBlueButton";
 import "./BookingConfirmation.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import authService from "../api/authService";
+import apiClient from "../api/apiClient";
+import reservationService from "../api/reservationService";
+import BookingCard from "../components/BookingCard";
 
 const BookingConfirmation = () => {
-  const property = {
-    id: 1,
-    image: "./images/property1.png",
-    title: "Вилла с панорамным видом",
-    rating: 4.96,
-    reviews: 217,
-    area: 360,
-    guests: 6,
-    bedrooms: 3,
-    beds: 3,
-    address: "Лоо, Таллинская улица, 93",
-    price: "59 000",
-  };
-  return (
-    <div className="booking-confirmation">
-      <HeadWithText props="Подтверждение бронирования" />
-      <PropertyCard property={property} isfav={true} />
-      <div className="living-date">
-        <span>Дата проживания</span>
-        <div className="living-date_date">
-          <span>3 февраля - 7 февраля</span>
-          <div className="change">Изменить</div>
-        </div>
-      </div>
-      <div className="your-data">
-        <span>Ваши данные</span>
-        <input type="text" placeholder="Имя" />
-        <input type="text" placeholder="Фамилия" />
-      </div>
-      <div className="price-count">
-        <span className="head">Расчет стоимости</span>
-        <div className="price-count_item">
-          <span>Стоимость проживания</span>
-          <span>90000₽</span>
-        </div>
-        <div className="price-count_item">
-          <span>Комиссия сервиса</span>
-          <span>4500₽</span>
-        </div>
-      </div>
-      <div className="summarize">
-        <div className="summarize_item-sum">
-          <span>Итого</span>
-          <span>94500₽</span>
-        </div>
-        <div className="summarize_item">
-          <span>Предоплата</span>
-          <span>18900₽</span>
-        </div>
-        <div className="summarize_item">
-          <span>Оплата при заселении</span>
-          <span>75600₽</span>
-        </div>
-      </div>
-      <BigBlueButton props={"Подтвердить бронирование"} fix={"fixed"} />
-      {/* <BookingHeader 
-        title="Подтверждение бронирования"
-        property="Hillside из территории Огня-Песне"
-        details="4 гостин - 3 спальни - 3 недели"
-        link="https://www.facebook.com/office/2018/01/1"
-        address="Мыслитель Аллайский проезд: 3/1"
-      /> */}
+    const location = useLocation();
+    const navigate = useNavigate();
+    const booking = location.state;
 
-      {/* <BookingDetails 
-        dates="3 февраля - 7 февраля"
-      /> */}
+    const [user, setUser] = useState(null);
 
-      {/* <GuestInfo 
-        firstName="Борис"
-        lastName="Назаров"
-      /> */}
+    useEffect(() => {
+        authService.getInfo()
+            .then((data) => setUser(data))
+            .catch((err) => {
+                console.error("Ошибка получения пользователя:", err);
+                alert("Не удалось получить информацию о пользователе");
+            });
+    }, []);
 
-      {/* <PriceBreakdown 
-        items={[
-          { label: "Стоимость проживания", value: "90000 ₽" },
-          { label: "Комиссия сервиса", value: "4500 ₽" },
-          { label: "Итого", value: "94500 ₽", isTotal: true },
-          { label: "Предоплата", value: "18900 ₽" },
-          { label: "Оплата при заселении", value: "75600 ₽" }
-        ]}
-      />
-      
-      <ConfirmButton text="Подтвердить бронирование" /> */}
-    </div>
-  );
+    const handleConfirm = async () => {
+        if (!booking || !user.userId) {
+            alert("Недостаточно данных для бронирования");
+            return;
+        }
+
+        try {
+            const formData = new FormData();
+
+            formData.append("propertyId", booking.propertyId);
+            formData.append("renterId", user.userId);
+            formData.append("startDate", booking.startDate);
+            formData.append("endDate", booking.endDate)
+            formData.append("costInPeriod", booking.costInPeriod);
+            formData.append("longTermRent", booking.longTermRent);
+
+
+            await reservationService.create(formData);
+
+            alert("Бронирование успешно создано!");
+            navigate("/bookings");
+        } catch (error) {
+            console.error("Ошибка бронирования:", error);
+            alert("Произошла ошибка при бронировании. Попробуйте позже.");
+        }
+    };
+
+    if (!booking || !booking.property) {
+        return <div>Данные бронирования не найдены</div>;
+    }
+
+    const { property, startDate, endDate, costInPeriod } = booking;
+
+    return (
+        <div className="booking-confirmation">
+            <HeadWithText props="Подтверждение бронирования" />
+            <BookingCard property={property} />
+
+            <div className="living-date">
+                <span>Дата проживания</span>
+                <div className="living-date_date">
+                    <span>{startDate} — {endDate}</span>
+                    <div className="change" onClick={() => navigate(-1)}>Изменить</div>
+                </div>
+            </div>
+
+            <div className="your-data">
+                <span>Ваши данные</span>
+                <input type="text" placeholder="Имя" disabled />
+                <input type="text" placeholder="Фамилия" disabled />
+            </div>
+
+            <div className="price-count">
+                <span className="head">Расчет стоимости</span>
+                <div className="price-count_item">
+                    <span>Стоимость проживания</span>
+                    <span>{costInPeriod}₽</span>
+                </div>
+                <div className="price-count_item">
+                    <span>Комиссия сервиса</span>
+                    <span>{Math.floor(costInPeriod * 0.05)}₽</span>
+                </div>
+            </div>
+
+            <div className="summarize">
+                <div className="summarize_item-sum">
+                    <span>Итого</span>
+                    <span>{Math.floor(costInPeriod * 1.05)}₽</span>
+                </div>
+                <div className="summarize_item">
+                    <span>Предоплата</span>
+                    <span>{Math.floor(costInPeriod * 0.2)}₽</span>
+                </div>
+                <div className="summarize_item">
+                    <span>Оплата при заселении</span>
+                    <span>{Math.floor(costInPeriod * 0.85)}₽</span>
+                </div>
+            </div>
+
+            <BigBlueButton props="Подтвердить бронирование" fix="fixed" onClick={handleConfirm} />
+        </div>
+    );
 };
-
 export default BookingConfirmation;

@@ -1,11 +1,12 @@
 import React from "react";
 import "./Description.css"
 
-const Description = ({ description }) => {
+const Description = ({ property }) => {
+    console.log(property);
   return (
     <div className="description">
       <h1>Описание</h1>
-      <span>{description}</span>
+      <span>{property.description}</span>
       <div className="showMore">Показать полностью</div>
     </div>
   );

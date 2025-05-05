@@ -16,29 +16,32 @@
   line-height: 20px; /* 125% */
   margin: 0;
 }
-.announcement-page .location h3 {
-  margin: 0;
-  color: var(--Main-Color-Dark, #151515);
-  font-variant-numeric: lining-nums proportional-nums;
+.announcement-page .location {
   /* Rentplace Mobile/Big Bold */
   font-family: Raleway;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px; /* 125% */
+}
+.announcement-page .location h3 {
+  margin: 0;
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
   margin-bottom: 20px;
 }
-.announcement-page .location .cont {
+.announcement-page .cont {
   display: flex;
   align-items: center;
+  margin: 0;
 }
-.announcement-page .location .icon {
+.announcement-page .icon {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
   margin-right: 6px;
 }
-.announcement-page .location span {
+.announcement-page span {
   color: var(--Main-Color-Dark, #151515);
   font-variant-numeric: lining-nums proportional-nums;
   /* Rentplace Mobile/Medium */
