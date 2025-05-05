@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-.announcement-page{
+.announcement-page {
   margin: 20px;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   h1 {
     color: var(--Main-Color-Dark, #151515);
     font-variant-numeric: lining-nums proportional-nums;
-  
+
     /* Rentplace Mobile/Big Bold */
     font-family: Raleway;
     font-size: 16px;
@@ -31,7 +31,7 @@
     font-weight: 700;
     line-height: 20px; /* 125% */
   }
-  .cont{
+  .cont {
     display: flex;
     align-items: center;
     margin: 0;
@@ -52,5 +52,69 @@
     font-style: normal;
     font-weight: 400;
     line-height: 18px; /* 128.571% */
+  }
+  .owner {
+    margin-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h1 {
+      margin-bottom: 10px;
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
+    .owner_data {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+      }
+      .owner_name_email {
+        .owner_name {
+          color: var(--Main-Color-Dark, #151515);
+          font-variant-numeric: lining-nums proportional-nums;
+
+          /* Rentplace Mobile/Medium */
+          font-family: Raleway;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 18px; /* 128.571% */
+        }
+        .owner_email {
+          color: var(--Secondary-Gray, #c1c1c1);
+          font-variant-numeric: lining-nums proportional-nums;
+
+          /* Rentplace Mobile/Small */
+          font-family: Raleway;
+          font-size: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 14px; /* 140% */
+        }
+      }
+      
+    }
+    .from-date {
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
   }
 }
