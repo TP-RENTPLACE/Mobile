@@ -10,10 +10,9 @@ import { MapPin } from "lucide-react";
 import { Archive } from "lucide-react";
 import { CheckCheck } from "lucide-react";
 
-const Categories = () => {
+const Categories = ({ onCategoryChange }) => {
   const location = useLocation();
 
-  // Определяем список категорий в зависимости от маршрута
   const getCategories = () => {
     switch (location.pathname) {
       case "/":
@@ -47,17 +46,8 @@ const Categories = () => {
         ];
       case "/create":
         return [
-          { id: 9, name: "Активные", icon: <CheckCheck className="icon" /> },
-          {
-            id: 10,
-            name: "Снятые с публикации",
-            icon: <Archive className="icon" />,
-          },
-          {
-            id: 11,
-            name: "На рассмотрении",
-            icon: <Clock className="icon" />,
-          },
+          { id: "PUBLISHED", name: "Активные", icon: <CheckCheck className="icon" /> },
+          { id: "ON_MODERATION", name: "На рассмотрении", icon: <Clock className="icon" /> },
         ];
       default:
         return [];
@@ -71,6 +61,7 @@ const Categories = () => {
 
   const handleCategoryClick = (categoryId) => {
     setActiveCategoryId(categoryId);
+    if (onCategoryChange) onCategoryChange(categoryId);
   };
 
   return (
@@ -79,9 +70,8 @@ const Categories = () => {
         <span
           key={category.id}
           className={`category ${
-            activeCategoryId === category.id ? "active" : ""
-          }`}
-          onClick={() => handleCategoryClick(category.id)}
+            activeCategoryId === category.id ? "active" : ""}`}
+            onClick={() => handleCategoryClick(category.id)}
         >
           {category.icon}
           <span>{category.name}</span>
