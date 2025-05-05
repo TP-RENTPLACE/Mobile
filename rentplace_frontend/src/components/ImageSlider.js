@@ -1,15 +1,41 @@
-import React from 'react';
-import "./ImageSlider.css"
+import React, { useState } from "react";
+import "./ImageSlider.css";
 
 const ImageSlider = ({ images }) => {
-  return (
-    <div className="image-slider">
-      <img src="./images/property1.png" alt="" srcset="" />
-      {/* {images.map((image, index) => (
-        <img key={index} src={image} alt={`property-${index}`} />
-      ))} */}
-    </div>
-  );
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    if (!images || images.length === 0) {
+        return <div className="image-slider">Нет изображений</div>;
+    }
+
+    const goToNext = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    };
+
+    const goToPrev = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? images.length - 1 : prevIndex - 1
+        );
+    };
+
+    return (
+        <div className="image-slider">
+            <button className="nav-button left" onClick={goToPrev}>
+                ❮
+            </button>
+            <img
+                src={images[currentIndex].url}
+                alt={`Фото ${currentIndex + 1}`}
+                className="slider-image"
+            />
+            <button className="nav-button right" onClick={goToNext}>
+                ❯
+            </button>
+            <div className="image-counter">
+                {currentIndex + 1} / {images.length}
+            </div>
+        </div>
+    );
 };
 
 export default ImageSlider;
