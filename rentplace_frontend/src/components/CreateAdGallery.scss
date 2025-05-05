@@ -9,39 +9,48 @@
 }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 }
 
 .image-card {
   display: flex;
-width: 176px;
-height: 120px;
-padding: 6px;
-justify-content: flex-end;
-align-items: flex-end;
-gap: 10px;
-border-radius: 20px;
-background: linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%),  lightgray 50% / cover no-repeat;
+  width: 176px;
+  height: 120px;
+  border-radius: 20px;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.1) 100%
+    ),
+    lightgray 50% / cover no-repeat;
+  position: relative;
 }
 
 .image {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 .delete-button {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: #fff;
-  border: none;
-  padding: 5px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  bottom: 7px;
+  right: 7px;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  padding: 3px;
 }
 
 .delete-button:hover {
@@ -51,14 +60,16 @@ background: linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 10
 
 .add-image-button {
   display: flex;
-width: 176px;
-height: 120px;
-padding: 36px 76px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-border-radius: 20px;
-background: var(--Secondary-Gray, #C1C1C1);
+  flex-direction: column;
+  width: 176px;
+  height: 120px;
+  // padding: 36px 76px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  background: var(--Secondary-Gray, #c1c1c1);
 }
 
 .add-image-button:hover {

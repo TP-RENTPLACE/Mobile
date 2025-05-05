@@ -1,48 +1,61 @@
-import React, { useState } from "react";
-import "./CreateAdGallery.css"; // Ссылка на CSS файл
+import React, { useRef, useState } from "react";
+import "./CreateAdGallery.css";
+import { Trash2 } from 'lucide-react';
+import { Camera } from 'lucide-react';
 
-const CreateAdGallery = () => {
-  // Инициализация состояния для хранения изображений
-  const [images, setImages] = useState([
-    { id: 1, src: "./images/CreateAd1.png" },
-    { id: 2, src: "./images/CreateAd1.png" },
-  ]);
+const CreateAdGallery = ({ onChange }) => {
+    const [files, setFiles] = useState([]);
+    const fileInputRef = useRef(null);
 
-  // Функция для удаления изображения
-  const handleDeleteImage = (id) => {
-    setImages((prevImages) => prevImages.filter((image) => image.id !== id));
-  };
+    const handleAddImage = (e) => {
+        const newFiles = Array.from(e.target.files);
+        const updated = [...files, ...newFiles];
 
-  // Функция для добавления нового изображения (пример)
-  const handleAddImage = () => {
-    // Здесь можно реализовать логику для загрузки файла через input[type="file"]
-    alert("Добавление фото не реализовано в данном примере.");
-  };
+        setFiles(updated);
+        if (onChange) onChange(updated);
+    };
 
-  return (
-    <div className="image-gallery">
-      {/* Галерея изображений */}
-      <div className="gallery-grid">
-        {images.map((image) => (
-          <div key={image.id} className="image-card">
-            <img src={image.src} alt={`Image ${image.id}`} className="image" />
-            <button
-              className="delete-button"
-              onClick={() => handleDeleteImage(image.id)}
+    const handleDeleteImage = (index) => {
+        const updated = files.filter((_, i) => i !== index);
+        setFiles(updated);
+        if (onChange) onChange(updated);
+    };
+
+    return (
+        <div className="image-gallery">
+            <div className="gallery-grid">
+                {files.map((file, index) => (
+                    <div key={index} className="image-card">
+                        <img src={URL.createObjectURL(file)} alt={`img-${index}`} className="image" />
+                        <Trash2
+                            className="delete-button"
+                            onClick={() => handleDeleteImage(index)}
+                        >
+                            Удалить
+                        </Trash2>
+                    </div>
+                ))}
+                {/* Кнопка "Добавить фото" */}
+            <div
+                className="add-image-button"
+                onClick={() => fileInputRef.current.click()}
             >
-              <i className="fas fa-trash-alt"></i> {/* Иконка корзины */}
-            </button>
-          </div>
-        ))}
-      </div>
+                <Camera/>
+                <span>Добавить фото</span>
+                <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    ref={fileInputRef}
+                    onChange={handleAddImage}
+                    style={{ display: "none" }}
+                />
+            </div>
+            </div>
 
-      {/* Кнопка "Добавить фото" */}
-      <div className="add-image-button" onClick={handleAddImage}>
-        <i className="fas fa-camera"></i> {/* Иконка камеры */}
-        <span>Добавить фото</span>
-      </div>
-    </div>
-  );
+            
+        </div>
+    );
 };
 
 export default CreateAdGallery;
