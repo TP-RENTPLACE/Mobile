@@ -37,6 +37,9 @@
   max-width: 100%;
   border: 0px solid #000;
 }
+.button-container .big-blue-button.fullwidth {
+  width: 100% !important;
+}
 .button-container .big-blue-button span {
   text-wrap: nowrap;
   color: var(--White, #fff);
