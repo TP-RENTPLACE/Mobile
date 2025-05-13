@@ -36,7 +36,7 @@ const EmailInputPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
           />
-          <BigBlueButton onClick={handleNext} props="Далее" />
+          <BigBlueButton onClick={handleNext} props="Далее" fullwidth="fullwidth" />
         </div>
       </div>
   );

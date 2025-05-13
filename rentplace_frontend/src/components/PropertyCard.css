@@ -130,10 +130,10 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
 }
 .property-card .property-details .property_adress_price .property-address {
   display: flex;
+  max-width: 50%;
   align-items: center;
   color: var(--Main-Color-Dark, #151515);
   font-variant-numeric: lining-nums proportional-nums;
@@ -151,7 +151,6 @@
 }
 .property-card .property-details .property_adress_price .address-text {
   display: block;
-  max-width: 80%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

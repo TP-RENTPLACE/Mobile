@@ -2,7 +2,7 @@ import React from 'react';
 import ImageSlider from '../components/ImageSlider';
 import PropertyDetails from '../components/PropertyDetails';
 import Description from '../components/Description';
-import announcements from '../store/data'; // Импортируем массив объявлений
+import announcements from '../store/data';
 import "./AnnouncementPage.css"
 import Facilities from '../components/Facilities';
 import HeadWithText from '../components/HeadWithText';
@@ -11,25 +11,26 @@ import BottomNavigation from '../components/BottomNavigation';
 import {useLocation, useNavigate} from "react-router-dom";
 import { MapPin } from "lucide-react";
 
-
 const AnnouncementPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const {property} = location.state || {};
-
 
     if (!property) {
         return <div>Объявление не найдено</div>;
     }
 
     const handleBookClick = () => {
-        navigate("/booking-form", { state: { property } }); // ← передаём property в booking-form
+        navigate("/booking-form", { state: { property } });
     };
+
+    // Safe access to owner image
+    const ownerImageUrl = property?.ownerDTO?.imageDTO?.url || '/assets/default-avatar.png';
 
     return (
         <div className="announcement-page">
             <HeadWithText props="Объявление"/>
-            <ImageSlider images={property.imagesDTOs}/>
+            <ImageSlider images={property.imagesDTOs || []}/>
             <h1>{property.title}</h1>
 
             <PropertyDetails property={property}/>
@@ -44,25 +45,32 @@ const AnnouncementPage = () => {
                 </div>
             </div>
 
-            <Facilities facilities={property.facilitiesDTOs}/>
+            <Facilities facilities={property.facilitiesDTOs || []}/>
+            
             <div className="owner">
                 <h1>Хозяин</h1>
                 <div className="owner_data">
-                    <img src={property.ownerDTO.imageDTO.url} alt="" />
+                    <img 
+                        src={ownerImageUrl} 
+                        alt="Owner" 
+                        onError={(e) => {
+                            e.target.src = '/assets/default-avatar.png';
+                        }}
+                    />
                     <div className="owner_name_email">
                         <div className="owner_name">
-                            {property.ownerDTO.name} {property.ownerDTO.surname}
+                            {property?.ownerDTO?.name || 'Имя не указано'} {property?.ownerDTO?.surname || ''}
                         </div>
                         <div className="owner_email">
-                            {property.ownerDTO.email}
+                            {property?.ownerDTO?.email || 'Email не указан'}
                         </div>
                     </div>
-                    
                 </div>
                 <div className="from-date">
-                        Участник rentplace с 2025 года
-                    </div>
+                    Участник rentplace с 2025 года
+                </div>
             </div>
+            
             <BigBlueButton props="Выбрать даты" fix="fixed" onClick={handleBookClick}/>
             <BottomNavigation/>
         </div>
