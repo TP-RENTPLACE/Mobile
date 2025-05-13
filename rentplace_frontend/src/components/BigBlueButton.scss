@@ -29,6 +29,9 @@
     &.fullwidth{
       width: 100% !important;
     }
+    &.bottom{
+      bottom: 10px !important;
+    }
     display: flex;
     height: 54px;
     padding: 14px 100px;
