@@ -101,7 +101,7 @@ const ProfilePage = () => {
             </div>
 
             <div className="logout-section" onClick={handleLogout}>
-              <LogOut />
+              <LogOut color="#ff7878"/>
               <span>Выйти из аккаунта</span>
             </div>
           </div>
