@@ -3,6 +3,7 @@ import authService from "../api/authService";
 import {useState} from "react";
 import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
+import "./NameInputPage.css"
 
 const NameInputPage = () => {
   const [name, setName] = useState("");
@@ -35,7 +36,7 @@ const NameInputPage = () => {
           <input type="text" placeholder="Имя" value={name} onChange={(e) => setName(e.target.value)} />
           <span>Фамилия</span>
           <input type="text" placeholder="Фамилия" value={surname} onChange={(e) => setSurname(e.target.value)} />
-          <BigBlueButton onClick={handleComplete} props="Далее" />
+          <BigBlueButton onClick={handleComplete} props="Далее" fullwidth="fullwidth" />
         </div>
       </div>
   );
