@@ -1,0 +1,165 @@
+.profile-edit-page {
+  margin: 20px;
+
+  .profile-edit-page_body {
+    margin-top: 20px;
+    .image {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .image-container {
+        position: relative;
+
+        .pencil-icon-container {
+          bottom: 0;
+          right: 0;
+          position: absolute;
+          padding: 8px;
+          display: flex;
+          width: 40px !important;
+          height: 40px !important;
+          justify-content: center;
+          align-items: center;
+          flex-shrink: 0;
+          border-radius: 20px;
+          border: 1px solid var(--Main-Color-Blue, #007aff);
+          background: linear-gradient(
+              0deg,
+              rgba(217, 217, 217, 0.1) 0%,
+              rgba(217, 217, 217, 0.1) 100%
+            ),
+            var(--White, #fff);
+          backdrop-filter: blur(0.5px);
+          color: #007aff;
+          .pencil-icon {
+          }
+        }
+      }
+
+      img {
+        display: flex;
+        width: 100px;
+        height: 100px;
+        justify-content: flex-end;
+        align-items: flex-end;
+        gap: 10px;
+      }
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    span {
+      // color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
+    input,
+    select {
+      display: flex;
+      width: 100% !important;
+      height: 54px;
+      padding: 11px 20px;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 20px;
+      border: 1px solid var(--Secondary-Gray, #c1c1c1);
+    }
+    .sex {
+      appearance: none;
+      /* Кастомная стрелка через background-image */
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 10px center; /* Позиция стрелки */
+      background-size: 18px; /* Размер стрелки */
+    }
+    .real-date-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .custom-date-input {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .date-display {
+      display: flex;
+      height: 54px;
+      padding: 11px 20px;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 20px;
+      border: 1px solid var(--Secondary-Gray, #c1c1c1);
+    }
+
+    .date-display:hover {
+      // border-color: #aaa;
+    }
+
+    .date-display.has-value .date-text {
+      // color: #333;
+    }
+
+    .date-text {
+      color: var(--Secondary-Gray, #c1c1c1);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
+
+    .calendar-icon {
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Для фокуса */
+    .real-date-input:focus + .date-display {
+      border-color: #4285f4;
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+
+    ::placeholder {
+      color: var(--Secondary-Gray, #c1c1c1);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
+    :placeholder-shown {
+      color: var(--Secondary-Gray, #c1c1c1);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
+  }
+}
