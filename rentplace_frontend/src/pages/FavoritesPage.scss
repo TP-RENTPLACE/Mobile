@@ -5,7 +5,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   .cards_container {
-    
+
     margin: 0 20px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -27,6 +27,18 @@
       font-style: normal;
       font-weight: 600;
       line-height: 18px; /* 128.571% */
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #555;
+      padding: 1rem;
     }
   }
 }
