@@ -1,33 +1,59 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { observer } from "mobx-react-lite";
-import favoritesStore from "../store/favoritesStore";
-import PropertyCard from "../components/PropertyCard";
 import Header from "../components/Header";
 import Categories from "../components/Categories";
 import RecentFirst from "../components/RecentFirst";
-import PropertiesList from "../components/PropertiesList";
-import "./FavoritesPage.css";
-import BottomNavigation from "../components/BottomNavigation";
+import BigBlueButton from "../components/BigBlueButton";
+import {useNavigate} from "react-router-dom";
+import FavoritesList from "../components/FavoritesList";
 
 const FavoritesPage = () => {
-  const isEmpty = favoritesStore.favorites.length === 0;
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const handleAuthRedirect = () => {
+        navigate('/auth/email');
+    };
+
+    useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem("accessToken");
+            setIsLoggedIn(token && token !== "null");
+            setLoading(false);
+        };
+        checkAuth();
+    }, []);
+
+
+    const renderContent = () => {
+        if (loading) return <div className="loader">Загрузка...</div>;
+
+        if (!isLoggedIn) {
+            return (
+                <div className="cards_container empty">
+                    <p>Войдите или зарегистрируйтесь, чтобы получить доступ к избранным объявлениям</p>
+                    <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={handleAuthRedirect}/>
+                </div>
+            );
+        }
+
+        return (
+            <div className="cards_container">
+                <FavoritesList/>
+            </div>
+        );
+    };
+
+
   return (
     <>
-      <div className="favorites-page">
+      <div className="home-container">
         <Header></Header>
         <RecentFirst></RecentFirst>
         <Categories></Categories>
-        <div className={`cards_container ${isEmpty ? "empty" : ""}`}>
-          {favoritesStore.favorites.length > 0 ? (
-            favoritesStore.favorites.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))
-          ) : (
-            <p>У вас нет избранных объявлений.</p>
-          )}
-        </div>
+        {renderContent()}
       </div>
-      <BottomNavigation/>
     </>
   );
 };

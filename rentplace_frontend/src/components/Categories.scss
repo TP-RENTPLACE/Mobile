@@ -46,16 +46,22 @@ $scrollbar-track: #f0f0f0; // Цвет трека скроллбара
     .icon {
       width: 24px;
       height: 24px;
-      margin-left: 10px; // Отступ между иконкой и текстом
+      margin-left: 10px;
     }
     span{
       display: inline-block;
       margin: 0 10px;
     }
     &.active {
-      background-color: $active-background; // Белый фон для активной категории
-      border: 1px solid $primary-color; // Голубая граница
+      background-color: $active-background;
+      border: 1px solid $primary-color;
       color: $primary-color;
     }
+  }
+  .category-image {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin-left: 10px;
   }
 }
