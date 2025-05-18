@@ -75,18 +75,11 @@
   flex-direction: column;
 }
 
-/* Остальные ваши стили */
 .search {
   display: flex;
   align-items: center;
-  /* ... другие ваши стили ... */
-}
-
-.search-bar {
-  /* ... ваши стили ... */
 }
 
 .filters-icon {
-  /* ... ваши стили ... */
   cursor: pointer;
 }/*# sourceMappingURL=SearchBar.css.map */
