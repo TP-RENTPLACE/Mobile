@@ -40,6 +40,9 @@
 .button-container .big-blue-button.fullwidth {
   width: 100% !important;
 }
+.button-container .big-blue-button.bottom {
+  bottom: 10px !important;
+}
 .button-container .big-blue-button span {
   text-wrap: nowrap;
   color: var(--White, #fff);

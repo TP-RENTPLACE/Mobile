@@ -10,6 +10,7 @@ const PropertyCard = ({ property }) => {
   const isFavorite = favoritesStore.isFavorite(property.id);
   const location = useLocation();
   const navigate = useNavigate();
+  const hideFavButtonPaths = ['/create'];
 
   const handleClick = () => {
     navigate(`/announcement/${property.propertyId}`, {state: { property } });
@@ -25,8 +26,7 @@ const PropertyCard = ({ property }) => {
   };
 
   const getImageUrl = (images = []) => {
-    const previewImg = images.find((img) => img.previewImage === false && img.imageId === 2);
-    const chosenImg = previewImg || images[0];
+    const chosenImg = images[0];
     if (!chosenImg) {
       return "/assets/image.png";
     }
@@ -47,12 +47,12 @@ const PropertyCard = ({ property }) => {
           alt={property.title}
           className="property-image-big"
         />
-        <button
+        {!hideFavButtonPaths.includes(location.pathname) && <button
           className={`favorite-button ${isFavorite ? "active" : ""}`}
           onClick={handleToggleFavorite}
         >
           <Heart className="favorite-button_icon" />
-        </button>
+        </button>}
       </div>
       <div className="property-details">
         <h3 className="property-title">{property.title}</h3>

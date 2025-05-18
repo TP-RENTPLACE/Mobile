@@ -89,7 +89,7 @@ const CodeVerificationPage = () => {
                 <input
                     key={index}
                     id={`input-${index}`}
-                    type="text"
+                    type="number"
                     maxLength={1}
                     value={value}
                     onChange={(e) => handleInputChange(index, e.target.value)}

@@ -179,8 +179,9 @@ $border-radius: 20px; // Радиус скругления углов
       width: 100%;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;.property-address {
+      .property-address {
         display: flex;
+        max-width: 50%;
         align-items: center;
         color: var(--Main-Color-Dark, #151515);
         font-variant-numeric: lining-nums proportional-nums;
@@ -201,7 +202,7 @@ $border-radius: 20px; // Радиус скругления углов
 
       .address-text {
         display: block;
-        max-width: 80%;
+        
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;

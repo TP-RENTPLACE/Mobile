@@ -22,7 +22,7 @@
 }
 .auth-page .auth-page_body input {
   display: flex;
-  width: 362px;
+  width: 100% !important;
   height: 54px;
   padding: 11px 20px;
   justify-content: space-between;
