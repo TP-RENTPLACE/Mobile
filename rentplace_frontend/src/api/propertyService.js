@@ -28,6 +28,10 @@ class PropertyService {
     async getMy() {
         return await apiClient.get('/properties/my', { authRequired: true });
     }
+
+    async getFiltered(filtersData) {
+        return await apiClient.post('/properties/filtered/', filtersData, { authRequired: false });
+    }
 }
 
 export default new PropertyService();
