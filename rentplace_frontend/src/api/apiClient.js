@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 
 class ApiClient {
@@ -5,14 +6,9 @@ class ApiClient {
         this.baseURL = 'https://rentplace.online/api/v1';
         this.token = localStorage.getItem('accessToken');
 
-
         this.instance = axios.create({
             baseURL: this.baseURL,
-            timeout: 10000,
-            // withCredentials: true,
-            headers: {
-                'Content-Type': 'application/json',
-            }
+            timeout: 20000,
         });
 
         this.initializeInterceptors();
@@ -20,9 +16,12 @@ class ApiClient {
 
     initializeInterceptors() {
         this.instance.interceptors.request.use(config => {
-            if (config.authRequired !== false && this.token) {
+            const authRequired = config._authRequired !== false;
+
+            if (authRequired && this.token) {
                 config.headers.Authorization = `Bearer ${this.token}`;
             }
+
             return config;
         });
 
@@ -87,13 +86,20 @@ class ApiClient {
     async request(method, endpoint, data = null, config = {}) {
         try {
             const headers = this.getContentTypeHeader(data);
+            const finalConfig = {
+                ...config,
+                _authRequired: config.authRequired !== false,
+                headers: { ...headers, ...config.headers }
+            };
+            delete finalConfig.authRequired;
+
             const response = await this.instance.request({
                 method,
                 url: endpoint,
                 data,
-                headers: { ...headers, ...config.headers },
-                ...config
+                ...finalConfig
             });
+
             return response.data;
         } catch (error) {
             this.handleError(error);

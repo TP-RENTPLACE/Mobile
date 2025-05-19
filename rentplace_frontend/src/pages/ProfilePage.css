@@ -29,6 +29,8 @@
   width: 60px;
   height: 60px;
   flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .profile-container .profile-section .profile-info .user-details {
