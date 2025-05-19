@@ -4,11 +4,13 @@ import BigBlueButton from "../components/BigBlueButton";
 import { useNavigate, useLocation } from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
 import authService from "../api/authService";
+import {toast} from "react-hot-toast";
 
 const CodeVerificationPage = () => {
   const [codeInputs, setCodeInputs] = useState(["", "", "", "", ""]);
   const [secondsRemaining, setSecondsRemaining] = useState(120);
   const [canResend, setCanResend] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,28 +25,38 @@ const CodeVerificationPage = () => {
 
   useEffect(() => {
     if (secondsRemaining > 0) {
-      const timer = setTimeout(() => setSecondsRemaining(secondsRemaining - 1), 1000);
+      const timer = setTimeout(() => setSecondsRemaining(prev => prev - 1), 1000);
       return () => clearTimeout(timer);
     } else {
       setCanResend(true);
     }
   }, [secondsRemaining]);
 
-
   useEffect(() => {
     const fullCode = codeInputs.join("");
+
     if (fullCode.length === 5) {
-      if (authType === "AUTH_LOGIN") {
-        authService.login(email, fullCode)
-            .then(() => navigate("/profile"))
-            .catch(() => alert("Неверный код или ошибка авторизации"));
-      } else if (authType === "AUTH_REGISTER") {
-        authService.validateCode(email, fullCode)
-            .then(() => {
+      const verifyCode = async () => {
+        try {
+          if (authType === "AUTH_LOGIN") {
+            await authService.login(email, fullCode);
+            navigate("/profile");
+          } else if (authType === "AUTH_REGISTER") {
+            const response = await authService.validateCode(email, fullCode);
+
+            if (response?.success === true || response?.status === "OK") {
               navigate("/auth/name", { state: { email, code: fullCode } });
-            })
-            .catch(() => alert("Неверный код или ошибка проверки"));
-      }
+            } else {
+              toast.error("Неверный код");
+            }
+          }
+        } catch (error) {
+          toast.error("Неверный код или ошибка проверки");
+          setCodeInputs(["", "", "", "", ""]);
+        }
+      };
+
+      verifyCode();
     }
   }, [codeInputs]);
 
