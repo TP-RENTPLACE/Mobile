@@ -6,26 +6,72 @@ import "./BookingsPage.css";
 import BottomNavigation from "../components/BottomNavigation";
 import BookingCard from "../components/BookingCard";
 import ReservationService from "../api/reservationService";
+import BigBlueButton from "../components/BigBlueButton";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-hot-toast";
 
 const BookingsPage = () => {
+    const navigate = useNavigate();
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const handleAuthRedirect = () => {
+        navigate('/auth/email');
+    };
 
     useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem("accessToken");
+            setIsLoggedIn(token && token !== "null");
+        };
+
+        checkAuth();
+    }, []);
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            setLoading(false);
+            return;
+        }
+
         ReservationService.getMy()
             .then((data) => {
                 setReservations(data);
                 setLoading(false);
             })
             .catch((err) => {
-                console.error("Ошибка загрузки бронирований:", err);
-                setError("Не удалось загрузить бронирования");
+                toast.error("Ошибка загрузки бронирований:", err);
                 setLoading(false);
             });
-    }, []);
+    }, [isLoggedIn]);
 
-    if (loading) return <div>Загрузка...</div>;
+    const renderContent = () => {
+        if (!isLoggedIn) {
+            return (
+                <div className="cards_container empty">
+                    <p>Войдите или зарегистрируйтесь, чтобы получить доступ к своим броням</p>
+                    <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={handleAuthRedirect} />
+                </div>
+            );
+        }
+
+        if (loading) return <div className="loader">Загрузка...</div>;
+
+        return reservations.length > 0 ? (
+            <div className="cards_container">
+                {reservations.map((reservation) => (
+                    <BookingCard
+                        key={reservation.reservationId}
+                        property={reservation.propertyDTO}
+                    />
+                ))}
+            </div>
+        ) : (
+            <div className="cards_container empty">
+                <p>У вас нет активных бронирований</p>
+            </div>
+        );
+    };
 
     return (
         <>
@@ -33,16 +79,8 @@ const BookingsPage = () => {
                 <Header />
                 <RecentFirst />
                 <Categories />
-                <div>{error}</div>
-                <div className="cards_container">
-                    {reservations.map((reservation) => (
-                        <BookingCard
-                            property={reservation.propertyDTO}
-                        />
-                    ))}
-                </div>
+                {renderContent()}
             </div>
-            <BottomNavigation />
         </>
     );
 };
