@@ -1,38 +1,73 @@
 import React, { useEffect, useState } from "react";
 import "./ProfilePage.css";
 import Header from "../components/Header";
-import { ChevronRight, Trophy, Settings, Info, CircleHelp, LogOut } from "lucide-react";
-import BottomNavigation from "../components/BottomNavigation";
+import { ChevronRight, Settings, Info, CircleHelp, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../api/apiClient";
 import authService from "../api/authService";
-import BigBlueButton from "../components/BigBlueButton"
+import BigBlueButton from "../components/BigBlueButton";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import defaultImage from "../assets/Avatar.png";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const isAuthenticated = !!localStorage.getItem('accessToken');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleAuthRedirect = () => {
     navigate('/auth/email');
   };
 
+  const handleProfileEditRedirect = () => {
+    navigate('/edit-profile');
+  };
+
   const handleLogout = () => {
     apiClient.clearAuth();
     localStorage.removeItem('authEmail');
-    navigate("/profile");
+    navigate("/auth/email");
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      authService.getInfo()
-          .then(setUserInfo)
-          .catch(() => {
-            apiClient.clearAuth();
-            navigate("/auth/email");
-          });
-    }
-  }, [isAuthenticated, navigate]);
+    const checkAuth = async () => {
+      const token = localStorage.getItem('accessToken');
+
+      if (!token || token === 'null') {
+        setIsAuthenticated(false);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const authData = await authService.getInfo();
+        setUserInfo(authData);
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        apiClient.clearAuth();
+        setIsAuthenticated(false);
+        navigate("/auth/email");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+  if (loading)
+    return (
+        <div className="booking">
+          <div className="properties-list">
+            <div className="cards_container empty">
+              <Skeleton height={150} borderRadius={8} />
+              <Skeleton count={2} height={20} />
+            </div>
+          </div>
+        </div>
+    );
 
   if (!isAuthenticated) {
     return (
@@ -44,9 +79,6 @@ const ProfilePage = () => {
                 Войдите, чтобы получить доступ ко всем функциям приложения
               </p>
               <BigBlueButton props="Войти / Зарегистрироваться" fullwidth="fullwidth"  onClick={handleAuthRedirect}/>
-              {/* <button className="auth-button" onClick={handleAuthRedirect}> */}
-                {/* Войти / Зарегистрироваться
-              </button> */}
               <div className="additional-sections">
                 <div className="section-item">
                   <Info />
@@ -59,13 +91,8 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          <BottomNavigation />
         </>
     );
-  }
-
-  if (!userInfo) {
-    return <div className="profile-loading">Загрузка профиля...</div>;
   }
 
   return (
@@ -73,9 +100,9 @@ const ProfilePage = () => {
         <div className="profile">
           <Header />
           <div className="profile-container">
-            <div className="profile-section">
+            <div className="profile-section" onClick={handleProfileEditRedirect}>
               <div className="profile-info">
-                <img src={userInfo.imageDTO?.url} alt="Profile" />
+                <img src={userInfo.imageDTO?.url || defaultImage} alt="Profile" />
                 <div className="user-details">
                   <h2>{userInfo.name} {userInfo.surname}</h2>
                   <p>{userInfo.email}</p>
@@ -106,7 +133,6 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-        <BottomNavigation />
       </>
   );
 };
