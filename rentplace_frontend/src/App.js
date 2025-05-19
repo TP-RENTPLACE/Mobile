@@ -15,11 +15,11 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import FiltersPage from "./pages/FiltersPage";
 import DestinationInput from "./pages/DestinationInput";
 import ProfileEdit from "./pages/ProfileEdit";
+import {Toaster} from "react-hot-toast";
 
-// Создаем отдельный компонент для содержимого с навигацией
 function AppContent() {
   const location = useLocation();
-  const hideBottomNavPaths = ['/filters', '/auth','/destination']; // Добавьте сюда другие пути, где нужно скрыть навигацию
+  const hideBottomNavPaths = ['/filters', '/auth','/destination'];
 
   return (
     <>
@@ -47,11 +47,38 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <AppContent />
-      </div>
-    </Router>
+      <>
+        <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 5000,
+              style: {
+                background: '#fff',
+                color: '#333',
+                fontSize: '14px',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+              },
+              success: {
+                iconTheme: {
+                  primary: '#4caf50',
+                  secondary: '#fff',
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: '#f44336',
+                  secondary: '#fff',
+                },
+              },
+            }}
+        />
+        <Router>
+          <div className="App">
+            <AppContent/>
+          </div>
+        </Router>
+      </>
   );
 }
 

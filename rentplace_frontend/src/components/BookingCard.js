@@ -1,24 +1,13 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import favoritesStore from "../store/favoritesStore";
-import { Heart } from "lucide-react";
 import { MapPin } from "lucide-react";
-import { useLocation } from "react-router-dom";
 import "./BookingCard.css";
+import {declension} from "../store/declension";
 
 const BookingCard = ({ property }) => {
-  const isFavorite = favoritesStore.isFavorite(property.id);
-  const location = useLocation();
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      favoritesStore.removeFromFavorites(property.id);
-    } else {
-      favoritesStore.addToFavorites(property);
-    }
-  };
 
   const getImageUrl = (images = []) => {
-    const previewImg = images.find((img) => img.previewImage === false && img.imageId === 2);
+    const previewImg = images.find((img) => img.previewImage === true);
     const chosenImg = previewImg || images[0];
     if (!chosenImg) {
       return "/assets/image.png";
@@ -40,7 +29,10 @@ const BookingCard = ({ property }) => {
       <div className="property-details">
         <h3 className="property-title">{property.title}</h3>
         <p className="property-description">
-          {property.from}-{property.to} {property.months}
+          {property.area} м²
+          · {property.maxGuests} {declension(property.maxGuests, ['гость', 'гостя', 'гостей'])} {""}
+          · {property.bedrooms} {declension(property.bedrooms, ['спальня', 'спальни', 'спален'])} {""}
+          · {property.sleepingPlaces} {declension(property.sleepingPlaces, ['кровать', 'кровати', 'кроватей'])}
         </p>
         <div className="property_address_price_reservation">
           <div className="property-address">

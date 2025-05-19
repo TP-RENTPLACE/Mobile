@@ -122,6 +122,7 @@
   line-height: 14px; /* 140% */
   margin: 0;
   width: 100%;
+  font-variant-numeric: lining-nums proportional-nums;
 }
 .property-card .property-details .property_address_price_reservation {
   display: flex;

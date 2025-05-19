@@ -172,10 +172,10 @@
   font-weight: 400;
   line-height: 18px; /* 128.571% */
 }
-.filters-page .guests-number, .filters-page .beds-number {
+.filters-page .guests-number, .filters-page .beds-number, .filters-page .bedrooms-number, .filters-page .rooms-number {
   margin: 0;
 }
-.filters-page .guests-number h3, .filters-page .beds-number h3 {
+.filters-page .guests-number h3, .filters-page .beds-number h3, .filters-page .bedrooms-number h3, .filters-page .rooms-number h3 {
   margin: 0;
   color: var(--Main-Color-Dark, #151515);
   font-family: Raleway;
@@ -184,23 +184,22 @@
   line-height: 18px;
   margin-bottom: 12px;
 }
-.filters-page .guests-number .scroll-container, .filters-page .beds-number .scroll-container {
+.filters-page .guests-number .scroll-container, .filters-page .beds-number .scroll-container, .filters-page .bedrooms-number .scroll-container, .filters-page .rooms-number .scroll-container {
   width: 100%;
   overflow-x: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE и Edge */
 }
-.filters-page .guests-number .scroll-container::-webkit-scrollbar, .filters-page .beds-number .scroll-container::-webkit-scrollbar {
+.filters-page .guests-number .scroll-container::-webkit-scrollbar, .filters-page .beds-number .scroll-container::-webkit-scrollbar, .filters-page .bedrooms-number .scroll-container::-webkit-scrollbar, .filters-page .rooms-number .scroll-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-.filters-page .guests-number .buts, .filters-page .beds-number .buts {
-  display: inline-flex; /* Важно! */
+.filters-page .guests-number .buts, .filters-page .beds-number .buts, .filters-page .bedrooms-number .buts, .filters-page .rooms-number .buts {
+  display: inline-flex;
   gap: 10px;
-  padding: 0 16px 0px 0; /* Отступ справа для последнего элемента */
+  padding: 0 16px 0 0;
 }
-.filters-page .guests-number .buts .number_item, .filters-page .beds-number .buts .number_item {
+.filters-page .guests-number .buts .number_item, .filters-page .beds-number .buts .number_item, .filters-page .bedrooms-number .buts .number_item, .filters-page .rooms-number .buts .number_item {
   height: 40px;
-  width: 40px;
   display: flex;
   padding: 10px 20px;
   justify-content: center;
@@ -210,9 +209,10 @@
   color: var(--Main-Color-Dark, #151515);
   font-family: Raleway;
   font-size: 14px;
-  flex: 0 0 auto; /* Запрещаем сжатие/растяжение */
+  flex: 0 0 auto;
+  font-variant-numeric: lining-nums proportional-nums;
 }
-.filters-page .guests-number .buts .number_item1, .filters-page .beds-number .buts .number_item1 {
+.filters-page .guests-number .buts .number_item1, .filters-page .beds-number .buts .number_item1, .filters-page .bedrooms-number .buts .number_item1, .filters-page .rooms-number .buts .number_item1 {
   height: 40px;
   display: flex;
   padding: 10px 20px;
@@ -226,11 +226,10 @@
   white-space: nowrap;
   flex: 0 0 auto;
 }
-.filters-page .beds-number {
+.filters-page .rooms-number {
   margin-bottom: 20px;
 }
 
-/* Добавьте эти стили в существующий файл */
 .type_item {
   cursor: pointer;
   transition: all 0.2s ease;
@@ -256,7 +255,7 @@
   color: #007AFF !important;
 }
 
-.head div {
+.head .reset-button {
   cursor: pointer;
   color: #007AFF;
 }
