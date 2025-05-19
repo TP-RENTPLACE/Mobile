@@ -18,6 +18,9 @@
   }
 
   .location {
+    display: flex;
+    flex-direction: column;
+
     h3 {
       margin: 0;
       color: var(--Main-Color-Dark, #151515);
@@ -34,15 +37,15 @@
   .cont {
     display: flex;
     align-items: center;
-    margin: 0;
+    margin-top: 20px;
   }
-  .icon {
-    width: 16px;
-    height: 16px;
+  .address-icon {
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
     margin-right: 6px;
   }
-  span {
+  .address {
     color: var(--Main-Color-Dark, #151515);
     font-variant-numeric: lining-nums proportional-nums;
 
@@ -97,7 +100,7 @@
 
           /* Rentplace Mobile/Small */
           font-family: Raleway;
-          font-size: 10px;
+          font-size: 12px;
           font-style: normal;
           font-weight: 400;
           line-height: 14px; /* 140% */

@@ -2,7 +2,7 @@ import React from 'react';
 import ImageSlider from '../components/ImageSlider';
 import PropertyDetails from '../components/PropertyDetails';
 import Description from '../components/Description';
-import announcements from '../store/data';
+import defaultImage from '../../src/assets/Avatar.png';
 import "./AnnouncementPage.css"
 import Facilities from '../components/Facilities';
 import HeadWithText from '../components/HeadWithText';
@@ -24,8 +24,7 @@ const AnnouncementPage = () => {
         navigate("/booking-form", { state: { property } });
     };
 
-    // Safe access to owner image
-    const ownerImageUrl = property?.ownerDTO?.imageDTO?.url || '/assets/default-avatar.png';
+    const ownerImageUrl = property?.ownerDTO?.imageDTO?.url || defaultImage;
 
     return (
         <div className="announcement-page">
@@ -38,10 +37,10 @@ const AnnouncementPage = () => {
             <Description property={property}/>
 
             <div className="location">
-                <h3>Расположение</h3>
+                <h1>Расположение</h1>
                 <div className="cont">
-                    <MapPin className="icon"/>
-                    <span>{property.address}</span>
+                    <MapPin className="address-icon"/>
+                    <span className="address">{property.address}</span>
                 </div>
             </div>
 
@@ -52,10 +51,7 @@ const AnnouncementPage = () => {
                 <div className="owner_data">
                     <img 
                         src={ownerImageUrl} 
-                        alt="Owner" 
-                        onError={(e) => {
-                            e.target.src = '/assets/default-avatar.png';
-                        }}
+                        alt="Owner"
                     />
                     <div className="owner_name_email">
                         <div className="owner_name">
