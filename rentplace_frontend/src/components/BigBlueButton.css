@@ -4,7 +4,6 @@
 }
 
 .button-container {
-  margin: 0 auto;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -47,7 +46,16 @@
   text-wrap: nowrap;
   color: var(--White, #fff);
   font-variant-numeric: lining-nums proportional-nums;
-  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+.button-container .big-blue-button .big-blue-button-span {
+  text-wrap: nowrap;
+  color: var(--White, #fff);
+  font-variant-numeric: lining-nums proportional-nums;
   font-family: Raleway;
   font-size: 16px;
   font-style: normal;
