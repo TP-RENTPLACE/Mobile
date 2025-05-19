@@ -1,6 +1,26 @@
 .properties-list {
-  margin-bottom:90px;
+  margin-bottom: 90px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  min-height: 60vh;
+
+  .no-results {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
+    padding: 1rem;
+    color: var(--Main-Color-Dark, #151515);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    margin: 0;
+    width: 100%;
+  }
 }
