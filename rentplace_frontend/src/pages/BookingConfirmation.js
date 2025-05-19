@@ -73,8 +73,18 @@ const BookingConfirmation = () => {
 
             <div className="your-data">
                 <span>Ваши данные</span>
-                <input type="text" placeholder="Имя" disabled />
-                <input type="text" placeholder="Фамилия" disabled />
+                <input
+                    type="text"
+                    value={user?.name || ""}
+                    placeholder="Имя"
+                    disabled
+                />
+                <input
+                    type="text"
+                    value={user?.surname || ""}
+                    placeholder="Фамилия"
+                    disabled
+                />
             </div>
 
             <div className="price-count">

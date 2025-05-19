@@ -27,12 +27,11 @@
         color: var(--Main-Color-Dark, #151515);
         font-variant-numeric: lining-nums proportional-nums;
 
-        /* Rentplace Mobile/Small */
         font-family: Raleway;
-        font-size: 10px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 400;
-        line-height: 14px; /* 140% */
+        line-height: 14px;
       }
       .grid-item.active {
         border: 1px solid #007AFF;

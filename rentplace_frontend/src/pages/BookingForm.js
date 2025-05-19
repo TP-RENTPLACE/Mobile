@@ -3,6 +3,7 @@ import "./BookingForm.css";
 import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
 import { useLocation, useNavigate } from "react-router-dom";
+import {toast} from "react-hot-toast";
 
 const BookingForm = () => {
   const navigate = useNavigate();
@@ -20,9 +21,26 @@ const BookingForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!startDate || (!isLongTerm && !endDate) || (isLongTerm && !months)) {
-      alert("Заполните все поля!");
+    if (!startDate) {
+      toast.error("Выберите дату начала проживания");
       return;
+    }
+
+    if (isLongTerm) {
+      if (!months || Number(months) <= 0) {
+        toast.error("Введите корректное количество месяцев");
+        return;
+      }
+    } else {
+      if (!endDate) {
+        toast.error("Выберите дату окончания проживания");
+        return;
+      }
+
+      if (new Date(endDate) <= new Date(startDate)) {
+        toast.error("Дата окончания должна быть позже даты начала");
+        return;
+      }
     }
 
     let calculatedEndDate = endDate;
@@ -57,7 +75,7 @@ const BookingForm = () => {
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                required
+                min={new Date().toISOString().split("T")[0]}
             />
           </div>
 
@@ -69,7 +87,6 @@ const BookingForm = () => {
                     min="1"
                     value={months}
                     onChange={(e) => setMonths(e.target.value)}
-                    required
                 />
               </div>
           ) : (
@@ -79,7 +96,7 @@ const BookingForm = () => {
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    required
+                    min={new Date().toISOString().split("T")[0]}
                 />
               </div>
           )}

@@ -18,4 +18,10 @@
   font-style: normal;
   font-weight: 600;
   line-height: 18px; /* 128.571% */
+}
+.booking .cards_container.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 382px);
 }/*# sourceMappingURL=BookingsPage.css.map */

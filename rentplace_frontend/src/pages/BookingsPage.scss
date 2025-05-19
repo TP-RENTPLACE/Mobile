@@ -1,4 +1,4 @@
-.booking{
+.booking {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
@@ -20,6 +20,12 @@
       font-style: normal;
       font-weight: 600;
       line-height: 18px; /* 128.571% */
+    }
+    &.empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 382px);
     }
   }
 }

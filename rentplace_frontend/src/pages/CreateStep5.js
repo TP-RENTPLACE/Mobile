@@ -4,6 +4,7 @@ import HeadWithText from "../components/HeadWithText";
 import BigBlueButton from "../components/BigBlueButton";
 import PropertyService from "../api/propertyService";
 import authService from "../api/authService";
+import {toast} from "react-hot-toast";
 
 const CreateStep5 = () => {
     const navigate = useNavigate();
@@ -18,8 +19,7 @@ const CreateStep5 = () => {
                 setOwnerId(user.userId);
             })
             .catch((error) => {
-                console.error("Ошибка получения пользователя:", error);
-                alert("Ошибка авторизации. Пожалуйста, войдите заново.");
+                toast.error("Ошибка получения пользователя:", error);
                 navigate("/auth/email");
             });
     }, [navigate]);
@@ -27,17 +27,19 @@ const CreateStep5 = () => {
     const handleDone = async () => {
         try {
             if (!formDataAllSteps) {
-                alert("Данные не найдены");
+                toast.error("Данные не найдены");
                 return;
             }
 
-            // Создаём объект FormData
             const formData = new FormData();
 
-            // Шаг 1: Категории (array of IDs)
-            formDataAllSteps.categories.forEach((id) => formData.append("categoryIds", id));
+            formDataAllSteps.categories.forEach((id) =>
+                formData.append("categoriesIds", id.toString())
+            );
+            formDataAllSteps.facilities.forEach((id) =>
+                formData.append("facilitiesIds", id.toString())
+            );
 
-            // Шаг 2: Основная информация
             formData.append("title", formDataAllSteps.title);
             formData.append("address", formDataAllSteps.address);
             formData.append("area", formDataAllSteps.area);
@@ -46,17 +48,10 @@ const CreateStep5 = () => {
             formData.append("bedrooms", formDataAllSteps.bedrooms);
             formData.append("sleepingPlaces", formDataAllSteps.sleepingPlaces);
 
-            // Удобства
-            formDataAllSteps.facilities.forEach((id) =>
-                formData.append("facilityIds", id)
-            );
-
-            // Шаг 3: Фотографии (files[])
             formDataAllSteps.images.forEach((file) =>
-                formData.append("images", file)
+                formData.append("files", file, file.name)
             );
 
-            // Шаг 4: Описание и цена
             formData.append("description", formDataAllSteps.description);
             formData.append("cost", formDataAllSteps.cost);
             formData.append("longTermRent", formDataAllSteps.longTermRent);
@@ -68,11 +63,10 @@ const CreateStep5 = () => {
 
             await PropertyService.create(formData);
 
-            alert("Объявление успешно создано!");
+            toast.success("Объявление успешно отправлено на рассмотрение!");
             navigate("/");
         } catch (error) {
-            console.error("Ошибка при создании:", error);
-            alert("Произошла ошибка при отправке. Попробуйте снова.");
+            toast.error("Ошибка при создании:", error);
         }
     };
 

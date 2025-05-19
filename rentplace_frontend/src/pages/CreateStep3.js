@@ -3,6 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
 import CreateAdGallery from "../components/CreateAdGallery";
+import {toast} from "react-hot-toast";
 
 const CreateStep3 = () => {
     const location = useLocation();
@@ -11,7 +12,11 @@ const CreateStep3 = () => {
     const [images, setImages] = useState([]);
 
     const handleNext = () => {
-        console.log("Загруженные файлы:", images); // это File[]
+        if (images.length < 3) {
+            toast.error("Минимум 3 фотографии");
+            return;
+        }
+
         const allData = {
             ...previousData,
             images,
