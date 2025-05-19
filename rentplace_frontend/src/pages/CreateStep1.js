@@ -1,9 +1,11 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
 import "./CreateStep1.css";
 import BigBlueButton from "../components/BigBlueButton";
 import { getAllCategories } from "../store/allCategories";
+import {toast} from "react-hot-toast";
 
 const CreateStep1 = () => {
     const navigate = useNavigate();
@@ -15,7 +17,7 @@ const CreateStep1 = () => {
     }, []);
 
     const toggleCategory = (id) => {
-        const numericId = Number(id); // 👈 обязательно!
+        const numericId = Number(id);
         setSelectedIds((prev) => {
             if (prev.includes(numericId)) {
                 return prev.filter((item) => item !== numericId);
@@ -30,7 +32,7 @@ const CreateStep1 = () => {
 
     const handleNext = () => {
         if (selectedIds.length === 0) {
-            alert("Выберите хотя бы одну категорию");
+            toast.error("Выберите хотя бы одну категорию");
             return;
         }
 
