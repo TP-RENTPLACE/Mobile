@@ -183,7 +183,7 @@
       }
     }
   }
-  .guests-number, .beds-number {
+  .guests-number, .beds-number, .bedrooms-number, .rooms-number {
     margin: 0;
     h3 {
       margin: 0;
@@ -207,13 +207,12 @@
     }
     
     .buts {
-      display: inline-flex; /* Важно! */
+      display: inline-flex;
       gap: 10px;
-      padding: 0 16px 0px 0; /* Отступ справа для последнего элемента */
+      padding: 0 16px 0 0;
       
       .number_item {
         height: 40px;
-        width: 40px;
         display: flex;
         padding: 10px 20px;
         justify-content: center;
@@ -223,7 +222,8 @@
         color: var(--Main-Color-Dark, #151515);
         font-family: Raleway;
         font-size: 14px;
-        flex: 0 0 auto; /* Запрещаем сжатие/растяжение */
+        flex: 0 0 auto;
+        font-variant-numeric: lining-nums proportional-nums;
       }
       
       .number_item1 {
@@ -243,12 +243,11 @@
       }
     }
   }
-  .beds-number{
+  .rooms-number{
     margin-bottom: 20px;
   }
 
 }
-/* Добавьте эти стили в существующий файл */
 
 .type_item {
   cursor: pointer;
@@ -275,7 +274,7 @@
   color: #007AFF !important;
 }
 
-.head div {
+.head .reset-button {
   cursor: pointer;
   color: #007AFF;
 }
