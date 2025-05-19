@@ -79,7 +79,7 @@ const Header = () => {
         return (
             <div className="upper_header">
                 <div className="logo">
-                    <img src="./images/logo.png" alt="Rentplace Logo"/>
+                    <img src="./images/rentplace.svg" alt="Rentplace Logo"/>
                     <span className="header-text">{getHeaderText()}</span>
                 </div>
                 <div className="profile">
