@@ -1,37 +1,65 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./BottomNavigation.css";
-import { House } from "lucide-react";
-import { Heart } from "lucide-react";
-import { Calendar1 } from "lucide-react";
-import { SquarePlus } from "lucide-react";
-import { User } from "lucide-react";
+import { House, Heart, Calendar1, SquarePlus, User } from "lucide-react";
 
 const BottomNavigation = () => {
-  return (
-    <div className="bottom-navigation">
-      <Link to="/" className="nav-item" aria-label="Главная">
-        <House className="icon" />
-        <span>Главная</span>
-      </Link>
-      <Link to="/favorites" className="nav-item" aria-label="Избранное">
-        <Heart className="icon" />
-        <span>Избранное</span>
-      </Link>
-      <Link to="/bookings" className="nav-item" aria-label="Мои брони">
-        <Calendar1 className="icon" />
-        <span>Мои брони</span>
-      </Link>
-      <Link to="/create" className="nav-item" aria-label="Создать жилье">
-        <SquarePlus className="icon" />
-        <span>Сдать жилье</span>
-      </Link>
-      <Link to="/profile" className="nav-item" aria-label="Профиль">
-        <User className="icon" />
-        <span>Профиль</span>
-      </Link>
-    </div>
-  );
+    const location = useLocation();
+
+    const isActive = (path) => {
+        return location.pathname === path;
+    };
+
+    return (
+        <div className="bottom-navigation">
+            <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    `nav-item ${isActive ? "active" : ""}`
+                }
+                end
+            >
+                <House className="icon" />
+                <span>Главная</span>
+            </NavLink>
+            <NavLink
+                to="/favorites"
+                className={({ isActive }) =>
+                    `nav-item ${isActive ? "active" : ""}`
+                }
+            >
+                <Heart className="icon" />
+                <span>Избранное</span>
+            </NavLink>
+            <NavLink
+                to="/bookings"
+                className={({ isActive }) =>
+                    `nav-item ${isActive ? "active" : ""}`
+                }
+            >
+                <Calendar1 className="icon" />
+                <span>Мои брони</span>
+            </NavLink>
+            <NavLink
+                to="/create"
+                className={({ isActive }) =>
+                    `nav-item ${isActive ? "active" : ""}`
+                }
+            >
+                <SquarePlus className="icon" />
+                <span>Сдать жилье</span>
+            </NavLink>
+            <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                    `nav-item ${isActive ? "active" : ""}`
+                }
+            >
+                <User className="icon" />
+                <span>Профиль</span>
+            </NavLink>
+        </div>
+    );
 };
 
 export default BottomNavigation;

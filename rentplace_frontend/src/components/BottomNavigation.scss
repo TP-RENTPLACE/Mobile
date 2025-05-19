@@ -30,8 +30,8 @@
     font-weight: 500;
     cursor: pointer;
     background: white;
-    outline: none; /* Убирает внешний ободок фокуса */
-    border: none; /* Убирает границы кнопки */
+    outline: none;
+    border: none; 
     &:hover,
     &.active {
       color: var(--Main-Color-Blue, #007AFF);
