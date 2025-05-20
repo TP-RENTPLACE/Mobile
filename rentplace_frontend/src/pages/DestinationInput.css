@@ -14,6 +14,13 @@
   align-items: center;
   gap: 6px;
 }
+.destination-block .cities-section .cities-grid .city-tag span {
+  max-width: 90%;
+  text-wrap: wrap;
+}
+.destination-block .cities-section .cities-grid .city-tag .mapicon {
+  width: 24px !important;
+}
 .destination-block .cities-section div {
   color: var(--Main-Color-Dark, #151515);
   font-variant-numeric: lining-nums proportional-nums;
