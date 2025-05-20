@@ -6,6 +6,7 @@ import RecentFirst from "../components/RecentFirst";
 import BigBlueButton from "../components/BigBlueButton";
 import {useNavigate} from "react-router-dom";
 import FavoritesList from "../components/FavoritesList";
+import "./FavoritesPage.css"
 
 const FavoritesPage = () => {
     const navigate = useNavigate();
