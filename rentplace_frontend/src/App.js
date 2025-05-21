@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import BottomNavigation from "./components/BottomNavigation";
 import HomePage from "./pages/HomePage";
@@ -16,6 +16,7 @@ import FiltersPage from "./pages/FiltersPage";
 import DestinationInput from "./pages/DestinationInput";
 import ProfileEdit from "./pages/ProfileEdit";
 import {Toaster} from "react-hot-toast";
+import Logo from "./components/Logo";
 
 function AppContent() {
   const location = useLocation();
@@ -46,40 +47,44 @@ function AppContent() {
 }
 
 function App() {
-  return (
-      <>
-        <Toaster
-            position="top-center"
-            toastOptions={{
-              duration: 5000,
-              style: {
-                background: '#fff',
-                color: '#333',
-                fontSize: '14px',
-                borderRadius: '12px',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-              },
-              success: {
-                iconTheme: {
-                  primary: '#4caf50',
-                  secondary: '#fff',
-                },
-              },
-              error: {
-                iconTheme: {
-                  primary: '#f44336',
-                  secondary: '#fff',
-                },
-              },
-            }}
-        />
-        <Router>
-          <div className="App">
-            <AppContent/>
-          </div>
-        </Router>
-      </>
-  );
+    const [loading, setLoading] = useState(true);
+
+    return loading ? (
+        <Logo onComplete={() => setLoading(false)} />
+    ) : (
+        <>
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    duration: 4000,
+                    style: {
+                        background: '#fff',
+                        color: '#333',
+                        fontSize: '14px',
+                        borderRadius: '12px',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                    },
+                    success: {
+                        iconTheme: {
+                            primary: '#4caf50',
+                            secondary: '#fff',
+                        },
+                    },
+                    error: {
+                        iconTheme: {
+                            primary: '#f44336',
+                            secondary: '#fff',
+                        },
+                    },
+                }}
+            />
+            <Router>
+                <div className="App">
+                    <AppContent/>
+                </div>
+            </Router>
+        </>
+    );
 }
 
 export default App;
