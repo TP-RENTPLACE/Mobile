@@ -19,6 +19,7 @@ const FiltersPage = () => {
   const [activeRooms, setActiveRooms] = useState("Любое");
   const [isLongTermRent, setIsLongTermRent] = useState(undefined);
   const [categories, setCategories] = useState([]);
+  const [address, setAddress] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,26 +27,36 @@ const FiltersPage = () => {
   const [selectedFacilities, setSelectedFacilities] = useState([]);
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("appliedFilters"));
-    if (saved) {
-      setSortOption(saved.sortType || "MOST_RECENT");
-      setIsLongTermRent(saved.hasOwnProperty("isLongTermRent") ? saved.isLongTermRent : undefined);
-      setValue([saved.minPrice ?? 0, saved.maxPrice ?? 100000]);
-      setActiveGuests(saved.guestsAmount == null ? "Любое" : saved.guestsAmount >= 5 ? "5 и более" : String(saved.guestsAmount));
-      setActiveBeds(saved.bedsAmount == null ? "Любое" : saved.bedsAmount >= 5 ? "5 и более" : String(saved.bedsAmount));
-      setActiveBedrooms(saved.bedrooms == null ? "Любое" : saved.bedrooms >= 5 ? "5 и более" : String(saved.bedrooms));
-      setActiveRooms(saved.rooms == null ? "Любое" : saved.rooms >= 5 ? "5 и более" : String(saved.rooms));
-      setSelectedCategories(saved.categoryIds || loadSelectedCategories());
-      setSelectedFacilities(saved.facilityIds || []);
+    const savedFiltersRaw = localStorage.getItem("appliedFilters");
+    const savedFilters = savedFiltersRaw ? JSON.parse(savedFiltersRaw) : null;
+    const storedCategories = loadSelectedCategories();
+    const storedAddress = localStorage.getItem("searchAddress") || "";
+
+    if (savedFilters) {
+      setSortOption(savedFilters.sortType || "MOST_RECENT");
+      setIsLongTermRent(savedFilters.hasOwnProperty("isLongTermRent") ? savedFilters.isLongTermRent : undefined);
+      setValue([savedFilters.minPrice ?? 0, savedFilters.maxPrice ?? 100000]);
+      setActiveGuests(savedFilters.guestsAmount == null ? "Любое" : savedFilters.guestsAmount >= 5 ? "5 и более" : String(savedFilters.guestsAmount));
+      setActiveBeds(savedFilters.bedsAmount == null ? "Любое" : savedFilters.bedsAmount >= 5 ? "5 и более" : String(savedFilters.bedsAmount));
+      setActiveBedrooms(savedFilters.bedrooms == null ? "Любое" : savedFilters.bedrooms >= 5 ? "5 и более" : String(savedFilters.bedrooms));
+      setActiveRooms(savedFilters.rooms == null ? "Любое" : savedFilters.rooms >= 5 ? "5 и более" : String(savedFilters.rooms));
+      setSelectedCategories(savedFilters.categoryIds ?? storedCategories);
+      setSelectedFacilities(savedFilters.facilityIds ?? []);
+      setAddress(savedFilters?.address ?? storedAddress);
     } else {
+      setSelectedCategories(storedCategories);
       setActiveGuests("Любое");
       setActiveBeds("Любое");
       setActiveBedrooms("Любое");
       setActiveRooms("Любое");
       setIsLongTermRent(undefined);
-      setSelectedCategories(loadSelectedCategories());
+      setValue([20, 100000]);
+      setSortOption("MOST_RECENT");
+      setSelectedFacilities([]);
+      setAddress(storedAddress);
     }
   }, []);
+
 
 
   useEffect(() => {
@@ -84,9 +95,11 @@ const FiltersPage = () => {
       ...(roomsValue !== null && { rooms: roomsValue }),
       ...(selectedCategories.length > 0 && { categoryIds: selectedCategories }),
       ...(selectedFacilities.length > 0 && { facilityIds: selectedFacilities }),
-      ...(isLongTermRent !== undefined && { isLongTermRent })
+      ...(isLongTermRent !== undefined && { isLongTermRent }),
+      ...(address && { address }),
     };
 
+    saveSelectedCategories(selectedCategories);
     localStorage.setItem("appliedFilters", JSON.stringify(filters));
     navigate("/", { state: { filters } });
   };
@@ -104,6 +117,7 @@ const FiltersPage = () => {
     localStorage.removeItem("selectedCategoryIds");
     setSelectedFacilities([]);
     setSelectedCategories([]);
+    setAddress("");
   };
 
 
@@ -116,7 +130,6 @@ const FiltersPage = () => {
   const handleToggleCategory = (id) => {
     setSelectedCategories((prev) => {
       const updated = prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id];
-      saveSelectedCategories(updated);
       return updated;
     });
   };
@@ -286,8 +299,8 @@ const FiltersPage = () => {
           </div>
         </div>
 
-        <FacilityTable facilities={facilities} title="Техника" selected={selectedFacilities} onToggle={handleToggleFacility}/>
-
+        <FacilityTable facilities={facilities} title="Удобства" selected={selectedFacilities} onToggle={handleToggleFacility}/>
+        <div className="bott"></div>
 
         <BigBlueButton fix="fixed" props="Применить" onClick={handleApplyFilters} />
       </div>
