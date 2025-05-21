@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
 import "./DestinationInput.css";
 import HeadWithText from "../components/HeadWithText";
 import BigBlueButton from "../components/BigBlueButton";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const MIN_QUERY_LENGTH = 2;
 
@@ -11,8 +13,18 @@ const DestinationInput = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cache, setCache] = useState({});
+  const navigate = useNavigate();
 
   const popularCities = ["Москва", "Санкт-Петербург", "Сочи", "Казань"];
+
+  useEffect(() => {
+    const storedAddress = localStorage.getItem("searchAddress") || "";
+    setSearchQuery(storedAddress);
+
+    if (storedAddress.length >= MIN_QUERY_LENGTH) {
+      void fetchSuggestions(storedAddress);
+    }
+  }, []);
 
   const fetchSuggestions = async (query) => {
     const encodedQuery = encodeURIComponent(query);
@@ -53,7 +65,7 @@ const DestinationInput = () => {
       }));
       setSuggestions(filteredSuggestions);
     } catch (error) {
-      console.error("Ошибка при запросе данных:", error);
+      toast.error("Ошибка при запросе данных:", error);
     } finally {
       setLoading(false);
     }
@@ -64,7 +76,7 @@ const DestinationInput = () => {
     setSearchQuery(query);
 
     if (query.length >= MIN_QUERY_LENGTH) {
-      fetchSuggestions(query);
+      void fetchSuggestions(query);
     } else {
       setSuggestions([]);
     }
@@ -72,7 +84,7 @@ const DestinationInput = () => {
 
   const handlePopularCityClick = (city) => {
     setSearchQuery(city);
-    fetchSuggestions(city);
+    void fetchSuggestions(city);
   };
 
   return (
@@ -129,7 +141,20 @@ const DestinationInput = () => {
           </>
         )}
       </div>
-      <BigBlueButton fix="fixed" bottom="bottom" props="Поиск" />
+      <BigBlueButton
+        fix="fixed"
+        bottom="bottom"
+        props="Поиск"
+        onClick={() => {
+          const trimmed = searchQuery.trim();
+          if (trimmed) {
+            localStorage.setItem("searchAddress", trimmed);
+          } else {
+            localStorage.removeItem("searchAddress");
+          }
+          navigate("/");
+        }}
+      />
     </div>
   );
 };
