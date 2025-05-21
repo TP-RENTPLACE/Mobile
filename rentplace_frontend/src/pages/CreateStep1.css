@@ -5,6 +5,9 @@
   flex-direction: column;
   gap: 20px;
 }
+.create-ad-container .bott {
+  margin-bottom: 144px;
+}
 .create-ad-container p {
   color: var(--Main-Color-Dark, #151515);
   text-align: center;

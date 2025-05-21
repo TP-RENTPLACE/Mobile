@@ -92,7 +92,6 @@ const CreateStep4 = () => {
                 toast.error("AI не вернул описание");
             }
         } catch (err) {
-            console.error(err);
             toast.error("Ошибка при генерации описания");
         } finally {
             setLoadingAI(false);
@@ -126,7 +125,6 @@ const CreateStep4 = () => {
     const handleNext = () => {
         if (!validate()) return;
 
-        console.log("Данные шага 4:", formData);
         const allData = {
             ...previousData,
             ...formData,
