@@ -46,6 +46,10 @@ const PropertiesList = ({ filters = null }) => {
                         formData.append("rooms", filters.rooms);
                     }
 
+                    if (filters.address) {
+                        formData.append("address", filters.address);
+                    }
+
                     if (
                         Array.isArray(filters.categoryIds) &&
                         filters.categoryIds.length > 0 &&
@@ -61,8 +65,7 @@ const PropertiesList = ({ filters = null }) => {
                     }
 
                     const response = await PropertyService.getFiltered(formData);
-                    // setProperties(response.filter(p => p.propertyStatus === "PUBLISHED"));
-                    setProperties(response);
+                    setProperties(response.filter(p => p.propertyStatus === "PUBLISHED"));
                     setNoResults(response.length === 0);
                 } else {
                     const all = await PropertyService.getAll();

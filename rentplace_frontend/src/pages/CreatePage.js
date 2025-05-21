@@ -14,13 +14,14 @@ const CreatePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem("accessToken");
-      setIsLoggedIn(token && token !== "null");
-      setLoading(false);
-    };
-    checkAuth();
-  }, []);
+        const checkAuth = () => {
+            const token = localStorage.getItem("accessToken");
+            const isValidToken = Boolean(token && token !== "null" && token !== "undefined");
+            setIsLoggedIn(isValidToken);
+            setLoading(false);
+        };
+        checkAuth();
+    }, []);
 
   const handleAuthRedirect = () => {
     navigate('/auth/email');
@@ -68,6 +69,7 @@ const CreatePage = () => {
         <Header></Header>
         <RecentFirst></RecentFirst>
         {renderContent()}
+        <div className="bott"></div>
       </div>
     </>
   );

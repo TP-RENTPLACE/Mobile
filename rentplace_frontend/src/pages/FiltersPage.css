@@ -5,6 +5,9 @@
   gap: 20px;
   margin: 20px;
 }
+.filters-page .bott {
+  margin-bottom: 100px;
+}
 .filters-page .apartment_type .head {
   display: flex;
   align-items: center;

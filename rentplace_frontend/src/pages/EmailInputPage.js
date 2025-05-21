@@ -4,6 +4,7 @@ import HeadWithText from "../components/HeadWithText";
 import "./EmailInputPage.css";
 import BigBlueButton from "../components/BigBlueButton";
 import authService from "../api/authService";
+import toast from "react-hot-toast";
 
 const EmailInputPage = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const EmailInputPage = () => {
 
   const handleNext = async () => {
     if (!email) {
-      alert("Введите почту");
+      toast.error("Введите почту");
       return;
     }
 
@@ -20,7 +21,7 @@ const EmailInputPage = () => {
       localStorage.setItem("authEmail", email);
       navigate("/auth/code", { state: { email, authType } });
     } catch (error) {
-      alert("Ошибка при отправке кода: " + error.message);
+      toast.error("Ошибка при отправке кода: " + error.message);
     }
   };
 

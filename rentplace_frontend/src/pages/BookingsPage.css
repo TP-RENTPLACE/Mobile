@@ -12,12 +12,11 @@
   color: var(--Main-Color-Dark, #151515);
   text-align: center;
   font-variant-numeric: lining-nums proportional-nums;
-  /* Rentplace Mobile/Medium SemiBold */
   font-family: Raleway;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
 }
 .booking .cards_container.empty {
   display: flex;

@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  .bott{
+    margin-bottom: 144px;
+  }
   p {
     color: var(--Main-Color-Dark, #151515);
     text-align: center;

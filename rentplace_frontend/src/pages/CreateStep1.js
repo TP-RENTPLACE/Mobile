@@ -13,7 +13,7 @@ const CreateStep1 = () => {
     const [selectedIds, setSelectedIds] = useState([]);
 
     useEffect(() => {
-        getAllCategories().then(setCategories).catch(console.error);
+        getAllCategories().then(setCategories).catch(toast.error);
     }, []);
 
     const toggleCategory = (id) => {
@@ -36,7 +36,6 @@ const CreateStep1 = () => {
             return;
         }
 
-        console.log("Выбранные ID:", selectedIds);
         navigate("/create-ad/step2", {state: {categories: selectedIds}});
     };
 
@@ -60,7 +59,7 @@ const CreateStep1 = () => {
                     );
                 })}
             </div>
-
+            <div className="bott"></div>
             <BigBlueButton props="Далее" fix="fixed" onClick={handleNext} />
         </div>
     );

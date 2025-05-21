@@ -22,11 +22,13 @@ const BookingsPage = () => {
     useEffect(() => {
         const checkAuth = () => {
             const token = localStorage.getItem("accessToken");
-            setIsLoggedIn(token && token !== "null");
+            const isValidToken = Boolean(token && token !== "null" && token !== "undefined");
+            setIsLoggedIn(isValidToken);
         };
 
         checkAuth();
     }, []);
+
 
     useEffect(() => {
         if (!isLoggedIn) {

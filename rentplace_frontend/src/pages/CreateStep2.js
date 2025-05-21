@@ -39,7 +39,7 @@ const CreateStep2 = () => {
   const [allFacilities, setAllFacilities] = useState([]);
 
   useEffect(() => {
-    getAllFacilities().then(setAllFacilities).catch(console.error);
+    getAllFacilities().then(setAllFacilities).catch(toast.error);
   }, []);
 
   const fetchAddressSuggestions = async (query) => {
@@ -70,7 +70,7 @@ const CreateStep2 = () => {
       setCache((prevCache) => ({ ...prevCache, [encodedQuery]: filteredSuggestions }));
       setAddressSuggestions(filteredSuggestions);
     } catch (error) {
-      console.error("Ошибка при запросе данных:", error);
+      toast.error("Ошибка при запросе данных:", error);
     } finally {
       setLoading(false);
     }
@@ -156,15 +156,12 @@ const CreateStep2 = () => {
 
   const handleInputFocus = () => {
     setShowSuggestions(true);
-    console.log(addressSuggestions);
-    console.log(showSuggestions);
   };
 
 
   const handleNext = () => {
     if (!validate()) return;
-    console.log("ШАГ 2 — Сформированные данные:");
-    console.log(formData);
+
 
     const allData = {
       ...previousData,
@@ -280,7 +277,7 @@ const CreateStep2 = () => {
         </label>
         
       </form>
-      <FacilityTable facilities={allFacilities} title="Техника" selected={formData.facilities} onToggle={handleFacilityChange}/>
+      <FacilityTable facilities={allFacilities} title="Удобства" selected={formData.facilities} onToggle={handleFacilityChange}/>
 
       <p className="last"></p>
       <BigBlueButton props="Далее" fix="fixed" onClick={handleNext}/>

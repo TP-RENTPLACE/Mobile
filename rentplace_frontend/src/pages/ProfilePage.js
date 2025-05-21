@@ -9,6 +9,7 @@ import BigBlueButton from "../components/BigBlueButton";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import defaultImage from "../assets/Avatar.png";
+import {toast} from "react-hot-toast";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -78,13 +79,13 @@ const ProfilePage = () => {
               <p className="login-prompt">
                 Войдите, чтобы получить доступ ко всем функциям приложения
               </p>
-              <BigBlueButton props="Войти / Зарегистрироваться" fullwidth="fullwidth"  onClick={handleAuthRedirect}/>
+              <BigBlueButton props="Войти / Зарегистрироваться" fullwidth="fullwidth" onClick={handleAuthRedirect}/>
               <div className="additional-sections">
-                <div className="section-item">
+                <div className="section-item" onClick={() => toast("Данный раздел находится в разработке.")}>
                   <Info />
                   <span>О нас</span>
                 </div>
-                <div className="section-item">
+                <div className="section-item" onClick={() => toast("Данный раздел находится в разработке.")}>
                   <CircleHelp />
                   <span>Помощь</span>
                 </div>
@@ -113,15 +114,15 @@ const ProfilePage = () => {
 
             <div className="additional-sections">
               
-              <div className="section-item">
+              <div className="section-item" onClick={() => toast("Данный раздел находится в разработке.")}>
                 <Settings />
                 <span>Настройки приложения</span>
               </div>
-              <div className="section-item">
+              <div className="section-item" onClick={() => toast("Данный раздел находится в разработке.")}>
                 <Info />
                 <span>О нас</span>
               </div>
-              <div className="section-item">
+              <div className="section-item" onClick={() => toast("Данный раздел находится в разработке.")}>
                 <CircleHelp />
                 <span>Помощь</span>
               </div>

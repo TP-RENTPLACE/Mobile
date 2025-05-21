@@ -3,18 +3,14 @@ import { observer } from "mobx-react-lite";
 import { MapPin } from "lucide-react";
 import "./BookingCard.css";
 import {declension} from "../store/declension";
+import propertyImage from "../assets/property1.png";
 
 const BookingCard = ({ property }) => {
 
   const getImageUrl = (images = []) => {
     const previewImg = images.find((img) => img.previewImage === true);
     const chosenImg = previewImg || images[0];
-    if (!chosenImg) {
-      return "/assets/image.png";
-    }
-    if (chosenImg.url) {
-      return chosenImg.url;
-    }
+    return chosenImg ? chosenImg.url : propertyImage;
   };
 
   return (
