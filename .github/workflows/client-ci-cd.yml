@@ -1,0 +1,52 @@
+name: Admin CI/CD
+
+on:
+  push:
+    branches: [development]
+    paths:
+      - 'rentplace_frontend/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: 'repo'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.0'
+          cache: 'npm'
+          cache-dependency-path: 'repo/rentplace_frontend/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: repo/rentplace_frontend
+        run: npm ci
+
+      - name: Build project
+        working-directory: repo/rentplace_frontend
+        run: |
+          export DISABLE_ESLINT_PLUGIN=true
+          npm run build
+      - name: Deploy to server
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: 'repo/rentplace_frontend/build'
+          target: 'react-client'
+          strip_components: 0
+      - name: Restart Docker containers
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd Deploy
+            docker compose down
+            docker compose up -d --build
