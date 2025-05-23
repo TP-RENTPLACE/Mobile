@@ -1,8 +1,26 @@
+@charset "UTF-8";
 .booking-form {
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.booking-form .real-date-input {
+  position: relative !important;
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+.booking-form .real-date-input::-webkit-calendar-picker-indicator {
+  font-size: 20px; /* иногда не работает */
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  filter: invert(0.5);
+}
+.booking-form .real-date-input::-webkit-inner-spin-button,
+.booking-form .real-date-input::-webkit-clear-button {
+  display: none;
 }
 .booking-form .head {
   width: 100%;

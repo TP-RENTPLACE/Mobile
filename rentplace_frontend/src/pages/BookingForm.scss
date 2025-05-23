@@ -5,7 +5,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  .real-date-input{
+    position: relative !important;
+      display: inline-block;
+      width: 100%;
+      cursor: pointer;
+  }
+  .real-date-input::-webkit-calendar-picker-indicator {
+    font-size: 20px; /* иногда не работает */
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    filter: invert(0.5);
+  }
 
+  .real-date-input::-webkit-inner-spin-button,
+  .real-date-input::-webkit-clear-button {
+    display: none;
+  }
   .head {
     width: 100%;
   }
@@ -55,7 +72,7 @@
       align-items: center;
       border-radius: 20px;
       border: 1px solid var(--Secondary-Gray, #c1c1c1);
-      
+
       &:focus {
         border-color: #007bff;
         outline: none;
