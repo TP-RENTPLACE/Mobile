@@ -29,10 +29,10 @@
   font-size: 14px; /* Размер шрифта */
   border-radius: 40px; /* Круглые углы */
 }
-.search .search-bar input .placeholder {
+.search .search-bar input.placeholder {
   color: #C1C1C1;
 }
-.search .search-bar input .has-value {
+.search .search-bar input.has-value {
   color: #151515;
 }
 .search .search-bar input::-moz-placeholder {

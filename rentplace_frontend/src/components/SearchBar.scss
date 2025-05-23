@@ -27,11 +27,11 @@
       font-size: 14px; /* Размер шрифта */
       border-radius: 40px; /* Круглые углы */
 
-      .placeholder {
+      &.placeholder {
         color: #C1C1C1;
       }
 
-      .has-value {
+      &.has-value {
         color: #151515;
       }
     }
