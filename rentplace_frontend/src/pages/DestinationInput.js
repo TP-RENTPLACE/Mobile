@@ -143,7 +143,8 @@ const DestinationInput = () => {
       </div>
       <BigBlueButton
         fix="fixed"
-        bottom="bottom"
+        // bottom="bottom"
+        top={30}
         props="Поиск"
         onClick={() => {
           const trimmed = searchQuery.trim();

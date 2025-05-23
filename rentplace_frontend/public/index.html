@@ -1,27 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/images/rentplace.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#000000" />
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="%PUBLIC_URL%/images/logo.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="theme-color" content="#000000"/>
     <meta
-      name="description"
-      content="Web site created using create-react-app"
+            name="description"
+            content="Web site created using create-react-app"
     />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/app-logo-180x180.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/app-logo-512x512.png"/>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/app-logo-192x192.png"/>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/app-logo-180x180.png"/>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/app-logo-144x144.png"/>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/app-logo-96x96.png"/>
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Rentplace" />
-    <meta name="application-name" content="Rentplace" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-title" content="Rentplace"/>
+    <meta name="application-name" content="Rentplace"/>
 
     <title>Rentplace</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+
+<script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+            if (document.scripts[j].src === r) {
+                return;
+            }
+        }
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r,
+            a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(102057666, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+    });
+</script>
+<noscript>
+    <div>
+        <img src="https://mc.yandex.ru/watch/102057666" style="position:absolute; left:-9999px;" alt=""/>
+    </div>
+</noscript>
+</body>
 </html>

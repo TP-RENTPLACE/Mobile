@@ -10,14 +10,15 @@ $border-radius: 20px; // Радиус скругления углов
   width: 100%;
   &.favorite {
     display: flex;
+    height: 144px;
     .property-image-container {
       position: relative;
       overflow: hidden;
 
-      .property-image {
-        border-radius: 20px 0px 0px 20px;
+      .property-image{
+       border-radius: 20px 0px 0px 20px !important;
         width: 120px;
-        height: 100%;
+        height: 144px;
         object-fit: cover;
         display: block;
       }

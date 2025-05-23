@@ -1,21 +1,35 @@
 @charset "UTF-8";
-/* ImageGallery.css */
 .image-gallery {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  max-width: 800px;
-  margin: 20px auto;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 144px;
 }
 
 .gallery-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
+  justify-content: space-between; /* Теперь центрируем элементы внутри grid */
 }
 
+.image-card,
+.add-image-button {
+  width: 176px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 452px) {
+  .image-card {
+    width: 136px !important;
+    height: 100px !important;
+  }
+  .add-image-button {
+    width: 136px !important;
+    height: 100px !important;
+  }
+}
 .image-card {
   display: flex;
   width: 176px;
@@ -51,7 +65,7 @@
 }
 
 .delete-button:hover {
-  background-color: #f44336; /* Красный фон при наведении */
+  background-color: #f44336;
   color: white;
 }
 
@@ -66,6 +80,7 @@
   gap: 10px;
   border-radius: 20px;
   background: var(--Secondary-Gray, #c1c1c1);
+  cursor: pointer; /* Добавлено для лучшего UX */
 }
 
 .add-image-button:hover {

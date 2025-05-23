@@ -3,14 +3,14 @@ import { observer } from "mobx-react-lite";
 import { MapPin } from "lucide-react";
 import "./BookingCard.css";
 import {declension} from "../store/declension";
-import propertyImage from "../assets/property1.png";
+import propertyImage from "../assets/placeholder-image.webp";
 
 const BookingCard = ({ property }) => {
 
   const getImageUrl = (images = []) => {
     const previewImg = images.find((img) => img.previewImage === true);
     const chosenImg = previewImg || images[0];
-    return chosenImg ? chosenImg.url : propertyImage;
+    return chosenImg ? chosenImg.url : null;
   };
 
   return (
@@ -30,6 +30,9 @@ const BookingCard = ({ property }) => {
           · {property.bedrooms} {declension(property.bedrooms, ['спальня', 'спальни', 'спален'])} {""}
           · {property.sleepingPlaces} {declension(property.sleepingPlaces, ['кровать', 'кровати', 'кроватей'])}
         </p>
+        {/* <p className="property-description">
+          12-19 августа
+        </p> */}
         <div className="property_address_price_reservation">
           <div className="property-address">
             <MapPin className="map_icon" />

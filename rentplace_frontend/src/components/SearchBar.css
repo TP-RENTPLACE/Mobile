@@ -29,6 +29,12 @@
   font-size: 14px; /* Размер шрифта */
   border-radius: 40px; /* Круглые углы */
 }
+.search .search-bar input.placeholder {
+  color: #C1C1C1;
+}
+.search .search-bar input.has-value {
+  color: #151515;
+}
 .search .search-bar input::-moz-placeholder {
   font-family: "Raleway", sans-serif;
   font-optical-sizing: auto;
@@ -56,7 +62,6 @@
   margin: 0 8px 0 14px;
 }
 
-/* Fullscreen Filters Styles */
 .fullscreen-filters-overlay {
   position: fixed;
   top: 0;

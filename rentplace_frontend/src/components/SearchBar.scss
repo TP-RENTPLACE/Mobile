@@ -26,6 +26,14 @@
       outline: none; /* Убираем выделение при фокусе */
       font-size: 14px; /* Размер шрифта */
       border-radius: 40px; /* Круглые углы */
+
+      &.placeholder {
+        color: #C1C1C1;
+      }
+
+      &.has-value {
+        color: #151515;
+      }
     }
     input::placeholder {
       font-family: "Raleway", sans-serif;
@@ -47,7 +55,7 @@
     margin: 0 8px 0 14px;
   }
 }
-/* Fullscreen Filters Styles */
+
 .fullscreen-filters-overlay {
   position: fixed;
   top: 0;
@@ -70,7 +78,6 @@
   display: flex;
   align-items: center;
 }
-
 
 .filters-icon {
   cursor: pointer;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./CodeVerificationPage.css";
 import BigBlueButton from "../components/BigBlueButton";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -39,8 +39,8 @@ const CodeVerificationPage = () => {
       if (remaining <= 0) {
         clearTimer();
         setIsBlocked(false);
-        localStorage.removeItem('blockTime');
-        localStorage.removeItem('failedAttempts');
+        localStorage.removeItem("blockTime");
+        localStorage.removeItem("failedAttempts");
         setBlockTimeRemaining(0);
         return;
       }
@@ -55,7 +55,9 @@ const CodeVerificationPage = () => {
   useEffect(() => {
     if (!email) navigate("/auth/email");
 
-    const savedAttempts = parseInt(localStorage.getItem("failedAttempts") || "0");
+    const savedAttempts = parseInt(
+      localStorage.getItem("failedAttempts") || "0"
+    );
     const savedBlockTime = parseInt(localStorage.getItem("blockTime") || "0");
 
     setFailedAttempts(savedAttempts);
@@ -76,7 +78,10 @@ const CodeVerificationPage = () => {
 
   useEffect(() => {
     if (secondsRemaining > 0) {
-      const timer = setTimeout(() => setSecondsRemaining(prev => prev - 1), 1000);
+      const timer = setTimeout(
+        () => setSecondsRemaining((prev) => prev - 1),
+        1000
+      );
       return () => clearTimeout(timer);
     } else {
       setCanResend(true);
@@ -95,19 +100,15 @@ const CodeVerificationPage = () => {
             localStorage.removeItem("failedAttempts");
             navigate("/profile");
           } else if (authType === "AUTH_REGISTER") {
-            const response = await authService.validateCode(email, fullCode);
-            if (response?.success === true || response?.status === "OK") {
-              localStorage.removeItem("failedAttempts");
-              navigate("/auth/name", { state: { email, code: fullCode } });
-            } else {
-              toast.error("Неверный код");
-            }
+            await authService.validateCode(email, fullCode);
+            localStorage.removeItem("failedAttempts");
+            navigate("/auth/name", { state: { email, code: fullCode } });
           }
         } catch (error) {
           toast.error("Неверный код");
           setCodeInputs(["", "", "", "", ""]);
 
-          setFailedAttempts(prev => {
+          setFailedAttempts((prev) => {
             const newAttempts = prev + 1;
             localStorage.setItem("failedAttempts", newAttempts);
 
@@ -161,50 +162,51 @@ const CodeVerificationPage = () => {
   };
 
   return (
-      <div className="code-verification-page">
-        <HeadWithText props="Вход/Регистрация" />
-        <div className="verification_body">
-          <h2>Введите код из письма, отправленного на {email}</h2>
+    <div className="code-verification-page">
+      <HeadWithText props="Вход/Регистрация" />
+      <div className="verification_body">
+        <h2>Введите код из письма, отправленного на {email}</h2>
 
-          {isBlocked && (
-              <p className="blocked-message">
-                Превышено количество попыток. Повторите через {blockTimeRemaining} секунд.
-              </p>
-          )}
-
-          <div className="code-inputs">
-            {codeInputs.map((value, index) => (
-                <input
-                    key={index}
-                    id={`input-${index}`}
-                    type="number"
-                    maxLength={1}
-                    value={value}
-                    onChange={(e) => handleInputChange(index, e.target.value)}
-                    onFocus={(e) => e.target.select()}
-                    className="code-input"
-                    disabled={isBlocked || isVerifying}
-                />
-            ))}
-          </div>
-
-          {canResend ? (
-              <p className="resend-available">Повторная отправка кода доступна</p>
-          ) : (
-              <p>Повторная отправка возможна через {secondsRemaining} секунд</p>
-          )}
-
-          <BigBlueButton
-              onClick={handleResendCode}
-              props="Отправить код повторно"
-              disabled={!canResend}
-          />
-
-          <p>
-            <a href="/auth/email">Ввести другую почту</a>
+        {isBlocked && (
+          <p className="blocked-message">
+            Превышено количество попыток. Повторите через {blockTimeRemaining}{" "}
+            секунд.
           </p>
+        )}
+
+        <div className="code-inputs">
+          {codeInputs.map((value, index) => (
+            <input
+              key={index}
+              id={`input-${index}`}
+              type="number"
+              maxLength={1}
+              value={value}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+              onFocus={(e) => e.target.select()}
+              className="code-input"
+              disabled={isBlocked || isVerifying}
+            />
+          ))}
         </div>
+
+        {canResend ? (
+          <p className="resend-available">Повторная отправка кода доступна</p>
+        ) : (
+          <p>Повторная отправка возможна через {secondsRemaining} секунд</p>
+        )}
+
+        <BigBlueButton
+          onClick={handleResendCode}
+          props="Отправить код повторно"
+          disabled={!canResend}
+        />
+
+        <p>
+          <a href="/auth/email">Ввести другую почту</a>
+        </p>
       </div>
+    </div>
   );
 };
 

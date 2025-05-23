@@ -4,7 +4,7 @@ import { Heart } from "lucide-react";
 import { MapPin } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./PropertyCard.css";
-import propertyImage from "../assets/property1.png";
+import propertyImage from "../assets/placeholder-image.webp";
 import FavoritesService from "../api/favoritesService";
 import { toast } from "react-hot-toast";
 
@@ -14,6 +14,7 @@ const PropertyCard = ({ property }) => {
   const navigate = useNavigate();
   const hideFavButtonPaths = ["/create"];
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const checkAuth = () => {
@@ -51,7 +52,9 @@ const PropertyCard = ({ property }) => {
     e.stopPropagation();
 
     if (!isLoggedIn) {
-      toast.error("Войдите или зарегистрируйтесь чтобы добавить объявление в избранное");
+      toast.error(
+        "Войдите или зарегистрируйтесь чтобы добавить объявление в избранное"
+      );
       return;
     }
     const originalState = isFavorite;
@@ -71,12 +74,26 @@ const PropertyCard = ({ property }) => {
     }
   };
 
-
   const getImageUrl = (images = []) => {
     const previewImg = images.find((img) => img.previewImage === true);
     const chosenImg = previewImg || images[0];
-    return chosenImg ? chosenImg.url : propertyImage;
+    return chosenImg ? chosenImg.url : null;
   };
+  
+  const imageUrl = getImageUrl(property.imagesDTOs);
+
+  useEffect(() => {
+    if (!imageUrl) return;
+
+    const img = new Image();
+    img.src = imageUrl;
+
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+
+    img.onerror = () => {};
+  }, [imageUrl]);
 
   return (
     <div
@@ -88,10 +105,20 @@ const PropertyCard = ({ property }) => {
     >
       <div className="property-image-container">
         <img
-          src={getImageUrl(property.imagesDTOs) || propertyImage}
-          alt={propertyImage}
-          className="property-image-big"
+          src={propertyImage}
+          alt="placeholder"
+          className="property-image placeholder"
+          style={{ display: imageLoaded ? "none" : "block" }}
         />
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={property.title}
+            className="property-image-big"
+            loading="lazy"
+            style={{ display: imageLoaded ? "block" : "none" }}
+          />
+        )}
         {!hideFavButtonPaths.includes(location.pathname) && (
           <button
             className={`favorite-button ${isFavorite ? "active" : ""}`}
