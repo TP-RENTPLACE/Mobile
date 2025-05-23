@@ -10,7 +10,7 @@ const BookingCard = ({ property }) => {
   const getImageUrl = (images = []) => {
     const previewImg = images.find((img) => img.previewImage === true);
     const chosenImg = previewImg || images[0];
-    return chosenImg ? chosenImg.url : propertyImage;
+    return chosenImg ? chosenImg.url : null;
   };
 
   return (
