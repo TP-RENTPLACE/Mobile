@@ -3,7 +3,7 @@ import "./BookingForm.css";
 import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
 import { useLocation, useNavigate } from "react-router-dom";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const BookingForm = () => {
   const navigate = useNavigate();
@@ -64,46 +64,48 @@ const BookingForm = () => {
   };
 
   return (
-      <div className="booking-form">
-        <div className="head">
-          <HeadWithText props="Выберите даты" />
+    <div className="booking-form">
+      <div className="head">
+        <HeadWithText props="Выберите даты" />
+      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <label className="column-name">Дата начала проживания</label>
+          <input
+          className="real-date-input"
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            min={new Date().toISOString().split("T")[0]}
+          />
         </div>
-        <form onSubmit={handleSubmit}>
+
+        {isLongTerm ? (
           <div className="input-group">
-            <label className="column-name">Дата начала проживания</label>
+            <label className="column-name">Количество месяцев</label>
             <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                min={new Date().toISOString().split("T")[0]}
+              type="number"
+              min="1"
+              value={months}
+              onChange={(e) => setMonths(e.target.value)}
             />
           </div>
+        ) : (
+          <div className="input-group">
+            <label className="column-name">Дата окончания проживания</label>
+            <input
+              className="real-date-input"
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              min={new Date().toISOString().split("T")[0]}
+            />
+          </div>
+        )}
 
-          {isLongTerm ? (
-              <div className="input-group">
-                <label className="column-name">Количество месяцев</label>
-                <input
-                    type="number"
-                    min="1"
-                    value={months}
-                    onChange={(e) => setMonths(e.target.value)}
-                />
-              </div>
-          ) : (
-              <div className="input-group">
-                <label className="column-name">Дата окончания проживания</label>
-                <input
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    min={new Date().toISOString().split("T")[0]}
-                />
-              </div>
-          )}
-
-          <BigBlueButton props="Далее" fix="fixed" />
-        </form>
-      </div>
+        <BigBlueButton props="Далее" fix="fixed" />
+      </form>
+    </div>
   );
 };
 

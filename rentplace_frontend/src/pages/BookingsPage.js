@@ -65,6 +65,8 @@ const BookingsPage = () => {
                     <BookingCard
                         key={reservation.reservationId}
                         property={reservation.propertyDTO}
+                        reservation={reservation}
+                        isBookingConfirmationPage={false}
                     />
                 ))}
             </div>

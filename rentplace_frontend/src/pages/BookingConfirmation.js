@@ -61,7 +61,7 @@ const BookingConfirmation = () => {
     return (
         <div className="booking-confirmation">
             <HeadWithText props="Подтверждение бронирования" />
-            <BookingCard property={property} />
+            <BookingCard property={property} isBookingConfirmationPage={true}/>
 
             <div className="living-date">
                 <span>Дата проживания</span>

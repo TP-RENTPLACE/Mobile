@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import authService from "../api/authService";
-import {useState} from "react";
+import { useState, useEffect } from "react";
 import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
-import "./NameInputPage.css"
-import {toast} from "react-hot-toast";
+import "./NameInputPage.css";
+import { toast } from "react-hot-toast";
 
 const NameInputPage = () => {
   const [name, setName] = useState("");
@@ -13,7 +13,27 @@ const NameInputPage = () => {
   const navigate = useNavigate();
 
   const { email, code } = location.state;
+  useEffect(() => {
+    const loadYandexMetrika = () => {
+      const script = document.createElement("script");
+      script.src = "https://mc.yandex.ru/metrika/tag.js";
+      script.async = true;
+      script.onload = () => {
+        window.ym(102057666, "init", {
+          clickmap: true,
+          trackLinks: true,
+          accurateTrackBounce: true,
+          webvisor: true,
+        });
+      };
+      script.onerror = () => {
+        console.error("Ошибка загрузки скрипта Яндекс.Метрики");
+      };
+      document.body.appendChild(script);
+    };
 
+    loadYandexMetrika();
+  });
   const validateFields = () => {
     const errors = [];
     const nameRegex = /^[A-Za-zА-Яа-я\s'-]+$/;
@@ -46,7 +66,7 @@ const NameInputPage = () => {
       }
     }
 
-    errors.forEach(error => toast.error(error));
+    errors.forEach((error) => toast.error(error));
     return errors.length === 0;
   };
 
@@ -55,6 +75,11 @@ const NameInputPage = () => {
 
     try {
       await authService.register(email, code, name, surname);
+      if (window.ym) {
+        window.ym(102057666,'reachGoal','submit_registration_form');
+      } else {
+        console.error("Яндекс.Метрика не загружена.");
+      }
       navigate("/profile");
     } catch (e) {
       toast.error("Ошибка при регистрации");
@@ -62,17 +87,31 @@ const NameInputPage = () => {
   };
 
   return (
-      <div className="auth-page">
-        <HeadWithText props="Вход/Регистрация" />
-        <div className="auth-page_body">
-          <h1>Укажите имя и фамилию</h1>
-          <span>Имя</span>
-          <input type="text" placeholder="Имя" value={name} onChange={(e) => setName(e.target.value)} />
-          <span>Фамилия</span>
-          <input type="text" placeholder="Фамилия" value={surname} onChange={(e) => setSurname(e.target.value)} />
-          <BigBlueButton onClick={handleComplete} props="Далее" fullwidth="fullwidth" />
-        </div>
+    <div className="auth-page">
+      <HeadWithText props="Вход/Регистрация" />
+      <div className="auth-page_body">
+        <h1>Укажите имя и фамилию</h1>
+        <span>Имя</span>
+        <input
+          type="text"
+          placeholder="Имя"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <span>Фамилия</span>
+        <input
+          type="text"
+          placeholder="Фамилия"
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
+        />
+        <BigBlueButton
+          onClick={handleComplete}
+          props="Далее"
+          fullwidth="fullwidth"
+        />
       </div>
+    </div>
   );
 };
 
