@@ -11,6 +11,7 @@ const PropertiesList = ({ filters = null }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                let response;
                 if (filters) {
                     const formData = new FormData();
 
@@ -64,13 +65,14 @@ const PropertiesList = ({ filters = null }) => {
                         );
                     }
 
-                    const response = await PropertyService.getFiltered(formData);
-                    setProperties(response.filter(p => p.propertyStatus === "PUBLISHED"));
-                    setNoResults(response.length === 0);
+                    response = await PropertyService.getFiltered(formData);
+                    
                 } else {
-                    const all = await PropertyService.getAll();
-                    setProperties(all.filter(p => p.propertyStatus === "PUBLISHED"));
+                    response = await PropertyService.getAll();
                 }
+                const published = response.filter(p => p.propertyStatus === "PUBLISHED");
+                setProperties(published);
+                setNoResults(response.length === 0);
             } catch (err) {
                 toast.error("Ошибка при загрузке объявлений");
                 console.error(err);

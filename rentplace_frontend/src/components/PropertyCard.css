@@ -116,6 +116,9 @@
   font-weight: 700;
   line-height: 18px; /* 128.571% */
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .property-card .property-details .property-description {
   color: var(--Main-Color-Dark, #151515);
