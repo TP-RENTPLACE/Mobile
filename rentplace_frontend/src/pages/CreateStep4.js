@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
 import "./CreateStep4.css";
@@ -16,6 +16,28 @@ const CreateStep4 = () => {
     const location = useLocation();
     const previousData = location.state || {};
     const [loadingAI, setLoadingAI] = useState(false);
+
+    useEffect(()=>{
+        const loadYandexMetrika = () => {
+        const script = document.createElement("script");
+        script.src = "https://mc.yandex.ru/metrika/tag.js";
+        script.async = true;
+        script.onload = () => {
+            window.ym(102057666, "init", {
+                clickmap: true,
+                trackLinks: true,
+                accurateTrackBounce: true,
+                webvisor: true,
+            });
+        };
+        script.onerror = () => {
+            console.error("Ошибка загрузки скрипта Яндекс.Метрики");
+        };
+        document.body.appendChild(script);
+    };
+    loadYandexMetrika();
+
+    })
 
     const [formData, setFormData] = useState({
         description: "",
@@ -45,6 +67,13 @@ const CreateStep4 = () => {
         }
 
         setLoadingAI(true);
+
+        if (window.ym) {
+            window.ym(102057666,'reachGoal','click_generate_ai_description');
+        } else {
+            console.error("Яндекс.Метрика не загружена.");
+        }   
+
         try {
             const allCategories = await getAllCategories();
             const allFacilities = await getAllFacilities();

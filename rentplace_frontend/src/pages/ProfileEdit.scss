@@ -1,3 +1,15 @@
+* {
+  input:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+  }
+  select:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+  }
+}
 .profile-edit-page {
   margin: 20px;
 
@@ -86,64 +98,37 @@
       background-size: 18px; /* Размер стрелки */
     }
     .real-date-input {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
-
-    .custom-date-input {
       position: relative;
       display: inline-block;
       width: 100%;
       cursor: pointer;
       margin-bottom: 126px;
     }
-
-    .date-display {
-      display: flex;
-      height: 54px;
-      padding: 11px 20px;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 20px;
-      border: 1px solid var(--Secondary-Gray, #c1c1c1);
+    .real-date-input::-webkit-calendar-picker-indicator {
+      font-size: 20px; /* иногда не работает */
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      filter: invert(0.5);
     }
 
-    .date-display:hover {
-      // border-color: #aaa;
+    .real-date-input::-webkit-inner-spin-button,
+    .real-date-input::-webkit-clear-button {
+      display: none;
+    }
+    .real-date-input:focus {
+      outline: none;
+      box-shadow: none;
     }
 
-    .date-display.has-value .date-text {
-      // color: #333;
-    }
-
-    .date-text {
-      color: #151515;
-      font-variant-numeric: lining-nums proportional-nums;
-
-      /* Rentplace Mobile/Medium */
-      font-family: Raleway;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 18px; /* 128.571% */
-    }
-
-    .calendar-icon {
-      margin-left: 10px;
-      display: flex;
-      align-items: center;
-    }
-
+    
     /* Для фокуса */
     .real-date-input:focus + .date-display {
       border-color: #4285f4;
       box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+    .real-date-input {
+      z-index: 10;
     }
 
     ::placeholder {
