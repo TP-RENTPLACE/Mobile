@@ -10,6 +10,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import defaultImage from "../assets/Avatar.png";
 import {toast} from "react-hot-toast";
+import { sendMetrik } from "../utils/metrics";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -17,17 +18,8 @@ const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const handleLoginRegisterClick = () => {
-    // Проверяем, доступна ли функция ym (метрика загружена)
-    if (window.ym) {
-      window.ym(102057666, 'reachGoal', 'click_login_register_button');
-    } else {
-      console.error("Яндекс.Метрика не загружена.");
-    }
-    handleAuthRedirect();  // Далее редирект
-  };
-
   const handleAuthRedirect = () => {
+    sendMetrik('reachGoal','click_login_register_button');
     navigate('/auth/email');
   };
 
@@ -42,26 +34,7 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    const loadYandexMetrika = () => {
-      const script = document.createElement("script");
-      script.src = "https://mc.yandex.ru/metrika/tag.js";
-      script.async = true;
-      script.onload = () => {
-        // Инициализация метрики
-        window.ym(102057666, "init", {
-          clickmap: true,
-          trackLinks: true,
-          accurateTrackBounce: true,
-          webvisor: true
-        });
-      };
-      script.onerror = () => {
-        console.error("Ошибка загрузки скрипта Яндекс.Метрики");
-      };
-      document.body.appendChild(script);
-    };
-
-    loadYandexMetrika();
+    
     const checkAuth = async () => {
       const token = localStorage.getItem('accessToken');
 
@@ -109,7 +82,7 @@ const ProfilePage = () => {
               <p className="login-prompt">
                 Войдите, чтобы получить доступ ко всем функциям приложения
               </p>
-              <BigBlueButton props="Войти / Зарегистрироваться" fullwidth="fullwidth" onClick={handleLoginRegisterClick}/>
+              <BigBlueButton props="Войти / Зарегистрироваться" fullwidth="fullwidth" onClick={handleAuthRedirect}/>
               <div className="additional-sections">
                 <div className="section-item" onClick={() => toast("Данный раздел находится в разработке.")}>
                   <Info />
