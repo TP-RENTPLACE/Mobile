@@ -11,6 +11,7 @@ import BottomNavigation from "../components/BottomNavigation";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
+import { sendMetrik } from "../utils/metrics";
 
 const AnnouncementPage = () => {
   const navigate = useNavigate();
@@ -88,6 +89,7 @@ const AnnouncementPage = () => {
           props="Войти / Зарегистрироваться"
           fix="fixed"
           onClick={() => {
+            sendMetrik('reachGoal','click_login_register_button');
             navigate("/auth/email", {
               state: { returnTo: location.pathname, property },
             });

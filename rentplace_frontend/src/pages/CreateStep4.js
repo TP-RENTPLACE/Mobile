@@ -7,6 +7,7 @@ import {toast} from "react-hot-toast";
 import {generateDescriptionFromAI} from "../api/aiService";
 import {getAllCategories} from "../store/allCategories";
 import {getAllFacilities} from "../store/allFacilities";
+import { sendMetrik } from "../utils/metrics";
 
 const DESCRIPTION_MAX_LENGTH = 2000;
 const MIN_COST = 1;
@@ -16,28 +17,6 @@ const CreateStep4 = () => {
     const location = useLocation();
     const previousData = location.state || {};
     const [loadingAI, setLoadingAI] = useState(false);
-
-    useEffect(()=>{
-        const loadYandexMetrika = () => {
-        const script = document.createElement("script");
-        script.src = "https://mc.yandex.ru/metrika/tag.js";
-        script.async = true;
-        script.onload = () => {
-            window.ym(102057666, "init", {
-                clickmap: true,
-                trackLinks: true,
-                accurateTrackBounce: true,
-                webvisor: true,
-            });
-        };
-        script.onerror = () => {
-            console.error("Ошибка загрузки скрипта Яндекс.Метрики");
-        };
-        document.body.appendChild(script);
-    };
-    loadYandexMetrika();
-
-    })
 
     const [formData, setFormData] = useState({
         description: "",
@@ -68,11 +47,7 @@ const CreateStep4 = () => {
 
         setLoadingAI(true);
 
-        if (window.ym) {
-            window.ym(102057666,'reachGoal','click_generate_ai_description');
-        } else {
-            console.error("Яндекс.Метрика не загружена.");
-        }   
+        sendMetrik('reachGoal','click_generate_ai_description');
 
         try {
             const allCategories = await getAllCategories();

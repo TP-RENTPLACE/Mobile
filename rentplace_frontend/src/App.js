@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import BottomNavigation from "./components/BottomNavigation";
 import HomePage from "./pages/HomePage";
@@ -15,38 +15,44 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import FiltersPage from "./pages/FiltersPage";
 import DestinationInput from "./pages/DestinationInput";
 import ProfileEdit from "./pages/ProfileEdit";
-import {Toaster} from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import Logo from "./components/Logo";
+import { sendMetrik } from "./utils/metrics";
 
 function AppContent() {
-  const location = useLocation();
-  const hideBottomNavPaths = ['/filters', '/auth','/destination'];
+    const location = useLocation();
+    const hideBottomNavPaths = ['/filters', '/auth', '/destination'];
 
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/loading" element={<LoadingScreen />} />
-        <Route path="/announcement/:id" element={<AnnouncementPage />} />
-        <Route path="/auth/*" element={<AuthFlow />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="/bookings" element={<BookingsPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/create" element={<CreatePage />} />
-        <Route path="/create-ad/*" element={<CreateAdFlow />} />
-        <Route path="/booking-form" element={<BookingForm />} />
-        <Route path="/booking-confirmation" element={<BookingConfirmation />} />
-        <Route path="/filters" element={<FiltersPage />} />
-        <Route path="/destination" element={<DestinationInput />} />
-        <Route path="/edit-profile" element={<ProfileEdit />} />
-      </Routes>
+    useEffect(() => {
+        sendMetrik('hit', window.location.href);
+    }, [location.pathname]);
 
-      {!hideBottomNavPaths.includes(location.pathname) && <BottomNavigation />}
-    </>
-  );
+    return (
+        <>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/loading" element={<LoadingScreen />} />
+                <Route path="/announcement/:id" element={<AnnouncementPage />} />
+                <Route path="/auth/*" element={<AuthFlow />} />
+                <Route path="/favorites" element={<FavoritesPage />} />
+                <Route path="/bookings" element={<BookingsPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/create" element={<CreatePage />} />
+                <Route path="/create-ad/*" element={<CreateAdFlow />} />
+                <Route path="/booking-form" element={<BookingForm />} />
+                <Route path="/booking-confirmation" element={<BookingConfirmation />} />
+                <Route path="/filters" element={<FiltersPage />} />
+                <Route path="/destination" element={<DestinationInput />} />
+                <Route path="/edit-profile" element={<ProfileEdit />} />
+            </Routes>
+
+            {!hideBottomNavPaths.includes(location.pathname) && <BottomNavigation />}
+        </>
+    );
 }
 
 function App() {
+
     const [loading, setLoading] = useState(true);
 
     return loading ? (
@@ -80,7 +86,7 @@ function App() {
             />
             <Router>
                 <div className="App">
-                    <AppContent/>
+                    <AppContent />
                 </div>
             </Router>
         </>

@@ -7,8 +7,9 @@ import BottomNavigation from "../components/BottomNavigation";
 import BookingCard from "../components/BookingCard";
 import ReservationService from "../api/reservationService";
 import BigBlueButton from "../components/BigBlueButton";
-import {useNavigate} from "react-router-dom";
-import {toast} from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { sendMetrik } from "../utils/metrics";
 
 const BookingsPage = () => {
     const navigate = useNavigate();
@@ -52,7 +53,10 @@ const BookingsPage = () => {
             return (
                 <div className="cards_container empty">
                     <p>Войдите или зарегистрируйтесь, чтобы получить доступ к своим броням</p>
-                    <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={handleAuthRedirect} />
+                    <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={() => {
+                        sendMetrik('reachGoal', 'click_login_register_button');
+                        handleAuthRedirect()
+                    }} />
                 </div>
             );
         }

@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import Header from "../components/Header";
 import Categories from "../components/Categories";
 import RecentFirst from "../components/RecentFirst";
 import BigBlueButton from "../components/BigBlueButton";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FavoritesList from "../components/FavoritesList";
 import "./FavoritesPage.css"
+import { sendMetrik } from "../utils/metrics";
 
 const FavoritesPage = () => {
     const navigate = useNavigate();
@@ -35,29 +36,32 @@ const FavoritesPage = () => {
             return (
                 <div className="cards_container empty">
                     <p>Войдите или зарегистрируйтесь, чтобы получить доступ к избранным объявлениям</p>
-                    <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={handleAuthRedirect}/>
+                    <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={() => {
+                        sendMetrik('reachGoal', 'click_login_register_button');
+                        handleAuthRedirect()
+                    }} />
                 </div>
             );
         }
 
         return (
             <div className="cards_container">
-                <FavoritesList/>
+                <FavoritesList />
             </div>
         );
     };
 
 
-  return (
-    <>
-      <div className="home-container">
-        <Header></Header>
-        <RecentFirst></RecentFirst>
-        <Categories></Categories>
-        {renderContent()}
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className="home-container">
+                <Header></Header>
+                <RecentFirst></RecentFirst>
+                <Categories></Categories>
+                {renderContent()}
+            </div>
+        </>
+    );
 };
 
 export default observer(FavoritesPage);

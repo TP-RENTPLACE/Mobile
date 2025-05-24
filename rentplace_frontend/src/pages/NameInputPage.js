@@ -5,6 +5,7 @@ import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
 import "./NameInputPage.css";
 import { toast } from "react-hot-toast";
+import { sendMetrik } from "../utils/metrics";
 
 const NameInputPage = () => {
   const [name, setName] = useState("");
@@ -13,27 +14,7 @@ const NameInputPage = () => {
   const navigate = useNavigate();
 
   const { email, code } = location.state;
-  useEffect(() => {
-    const loadYandexMetrika = () => {
-      const script = document.createElement("script");
-      script.src = "https://mc.yandex.ru/metrika/tag.js";
-      script.async = true;
-      script.onload = () => {
-        window.ym(102057666, "init", {
-          clickmap: true,
-          trackLinks: true,
-          accurateTrackBounce: true,
-          webvisor: true,
-        });
-      };
-      script.onerror = () => {
-        console.error("Ошибка загрузки скрипта Яндекс.Метрики");
-      };
-      document.body.appendChild(script);
-    };
 
-    loadYandexMetrika();
-  });
   const validateFields = () => {
     const errors = [];
     const nameRegex = /^[A-Za-zА-Яа-я\s'-]+$/;
@@ -75,11 +56,7 @@ const NameInputPage = () => {
 
     try {
       await authService.register(email, code, name, surname);
-      if (window.ym) {
-        window.ym(102057666,'reachGoal','submit_registration_form');
-      } else {
-        console.error("Яндекс.Метрика не загружена.");
-      }
+      sendMetrik("reachGoal", "submit_registration_form");
       navigate("/profile");
     } catch (e) {
       toast.error("Ошибка при регистрации");
