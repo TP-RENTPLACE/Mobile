@@ -30,7 +30,7 @@
   font-style: normal;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid #C1C1C1;
+  border: 1px solid #c1c1c1;
 }
 .categories .category .icon {
   width: 24px;
@@ -43,8 +43,8 @@
 }
 .categories .category.active {
   background-color: #ffffff;
-  border: 1px solid #007AFF;
-  color: #007AFF;
+  border: 1px solid #007aff;
+  color: #007aff;
 }
 .categories .category-image {
   width: 24px;
@@ -52,4 +52,6 @@
   -o-object-fit: contain;
      object-fit: contain;
   margin-left: 10px;
+  fill: #007aff;
+  stroke: #007aff;
 }/*# sourceMappingURL=Categories.css.map */

@@ -151,7 +151,7 @@ const FiltersPage = () => {
                     className={`type_item ${selectedCategories.includes(category.categoryId) ? "active" : ""}`}
                     onClick={() => handleToggleCategory(category.categoryId)}
                 >
-                  <img src={category.imageUrl || 1} alt={category.categoryId} />
+                  <img src={category.imageDTO.url} alt={category.categoryId} />
                   <span>{category.name}</span>
                 </div>
             ))}
