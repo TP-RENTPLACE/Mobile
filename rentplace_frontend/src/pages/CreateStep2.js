@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import HeadWithText from "../components/HeadWithText";
 import "./CreateStep2.css"
 import FacilityTable from "../components/FacilityTable";
 import BigBlueButton from "../components/BigBlueButton";
-import {getAllFacilities} from "../store/allFacilities";
-import {toast} from "react-hot-toast";
+import { getAllFacilities } from "../store/allFacilities";
+import { toast } from "react-hot-toast";
 import { MapPin } from 'lucide-react';
 
 const VALIDATION_RULES = {
@@ -13,7 +13,15 @@ const VALIDATION_RULES = {
   ADDRESS_MAX_LENGTH: 200,
   MIN_NUMBER_VALUE: 0,
   MAX_REASONABLE_AREA: 1000,
-  MAX_REASONABLE_GUESTS: 100,
+  MAX_REASONABLE_GUESTS: 500,
+  MAX_REASONABLE_ROOMS: 500,
+  MAX_REASONABLE_BEDROOMS: 500,
+  MAX_REASONABLE_BEDS: 500,
+  MIN_LETTERS_COUNT: 3,
+  TITLE_MIN_LENGTH: 5,
+  ADDRESS_MIN_LENGTH: 10,
+  SYMBOLS_REGEX: /[^\p{L}\d\s]/gu,
+  DIGITS_ONLY_REGEX: /^\d+$/,
 };
 
 const CreateStep2 = () => {
@@ -53,19 +61,19 @@ const CreateStep2 = () => {
     try {
       setLoading(true);
       const response = await fetch(
-          `https://geocode-maps.yandex.ru/v1/?apikey=e0bb9270-d90c-43c9-871b-b084b6db3402&geocode=${encodedQuery}&lang=ru_RU&format=json`
+        `https://geocode-maps.yandex.ru/v1/?apikey=e0bb9270-d90c-43c9-871b-b084b6db3402&geocode=${encodedQuery}&lang=ru_RU&format=json`
       );
       const data = await response.json();
 
       const filteredSuggestions = data.response.GeoObjectCollection.featureMember
-          .filter(
-              (item) => item.GeoObject.metaDataProperty.GeocoderMetaData.Address.country_code === "RU"
-          )
-          .map((item) => {
-            const address = item.GeoObject.metaDataProperty.GeocoderMetaData.Address.formatted;
-            const addressWithoutCountry = address.replace(/^Россия, /, '');
-            return { ...item, addressWithoutCountry };
-          });
+        .filter(
+          (item) => item.GeoObject.metaDataProperty.GeocoderMetaData.Address.country_code === "RU"
+        )
+        .map((item) => {
+          const address = item.GeoObject.metaDataProperty.GeocoderMetaData.Address.formatted;
+          const addressWithoutCountry = address.replace(/^Россия, /, '');
+          return { ...item, addressWithoutCountry };
+        });
 
       setCache((prevCache) => ({ ...prevCache, [encodedQuery]: filteredSuggestions }));
       setAddressSuggestions(filteredSuggestions);
@@ -104,8 +112,8 @@ const CreateStep2 = () => {
     setFormData((prev) => ({
       ...prev,
       facilities: prev.facilities.includes(id)
-          ? prev.facilities.filter((f) => f !== id)
-          : [...prev.facilities, id],
+        ? prev.facilities.filter((f) => f !== id)
+        : [...prev.facilities, id],
     }));
   };
 
@@ -116,20 +124,43 @@ const CreateStep2 = () => {
       bedrooms, sleepingPlaces, facilities
     } = formData;
 
-    if (!title.trim()) errors.push("Название: поле обязательно");
-    if (title.length > VALIDATION_RULES.TITLE_MAX_LENGTH)
-      errors.push(`Название: максимум ${VALIDATION_RULES.TITLE_MAX_LENGTH} символов`);
+    if (!title.trim()) {
+      errors.push("Название: поле обязательно");
+    } else {
+      if (title.length < VALIDATION_RULES.TITLE_MIN_LENGTH) {
+        errors.push(`Название: минимум ${VALIDATION_RULES.TITLE_MIN_LENGTH} символов`);
+      }
+      if (VALIDATION_RULES.DIGITS_ONLY_REGEX.test(title)) {
+        errors.push("Название: не может состоять только из цифр");
+      }
+      if (title.replace(VALIDATION_RULES.SYMBOLS_REGEX, '').length < VALIDATION_RULES.MIN_LETTERS_COUNT) {
+        errors.push(`Название: должно содержать минимум ${VALIDATION_RULES.MIN_LETTERS_COUNT} буквы`);
+      }
+    }
 
-    if (!address.trim()) errors.push("Адрес: поле обязательно");
-    if (address.length > VALIDATION_RULES.ADDRESS_MAX_LENGTH)
-      errors.push(`Адрес: максимум ${VALIDATION_RULES.ADDRESS_MAX_LENGTH} символов`);
+    if (!address.trim()) {
+      errors.push("Адрес: поле обязательно");
+    } else {
+      if (address.length < VALIDATION_RULES.ADDRESS_MIN_LENGTH) {
+        errors.push(`Адрес: минимум ${VALIDATION_RULES.ADDRESS_MIN_LENGTH} символов`);
+      }
+      if (VALIDATION_RULES.DIGITS_ONLY_REGEX.test(address)) {
+        errors.push("Адрес: не может состоять только из цифр");
+      }
+      const lettersCount = address.replace(VALIDATION_RULES.SYMBOLS_REGEX, '')
+        .replace(/\d/g, '')
+        .trim().length;
+      if (lettersCount < VALIDATION_RULES.MIN_LETTERS_COUNT) {
+        errors.push(`Адрес: должно содержать минимум ${VALIDATION_RULES.MIN_LETTERS_COUNT} буквы`);
+      }
+    }
 
     const numberChecks = [
       { name: "area", value: area, label: "Общая площадь", max: VALIDATION_RULES.MAX_REASONABLE_AREA },
       { name: "maxGuests", value: maxGuests, label: "Количество гостей", max: VALIDATION_RULES.MAX_REASONABLE_GUESTS },
-      { name: "rooms", value: rooms, label: "Количество комнат" },
-      { name: "bedrooms", value: bedrooms, label: "Количество спален" },
-      { name: "sleepingPlaces", value: sleepingPlaces, label: "Количество кроватей" },
+      { name: "rooms", value: rooms, label: "Количество комнат", max: VALIDATION_RULES.MAX_REASONABLE_ROOMS },
+      { name: "bedrooms", value: bedrooms, label: "Количество спален", max: VALIDATION_RULES.MAX_REASONABLE_BEDROOMS },
+      { name: "sleepingPlaces", value: sleepingPlaces, label: "Количество кроватей", max: VALIDATION_RULES.MAX_REASONABLE_BEDS },
     ];
 
     numberChecks.forEach(({ name, value, label, max }) => {
@@ -168,16 +199,16 @@ const CreateStep2 = () => {
       ...formData
     };
 
-    navigate("/create-ad/step3", {state: allData});
+    navigate("/create-ad/step3", { state: allData });
   };
 
   return (
     <div className="create-ad-container">
-      <HeadWithText props="Новое объявление"/>
+      <HeadWithText props="Новое объявление" />
       <p>Укажите основную информацию</p>
       <form>
         <label>
-          
+
           <span>Название</span>
           <input
             type="text"
@@ -188,7 +219,7 @@ const CreateStep2 = () => {
           />
         </label>
         <label>
-          <span>Адрес</span> 
+          <span>Адрес</span>
           <input
             type="text"
             name="address"
@@ -199,25 +230,26 @@ const CreateStep2 = () => {
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           />
           {showSuggestions && addressSuggestions.length > 0 && (
-              <div className="input-wrapper">
-                <div className="suggestions-dropdown">
-                  {addressSuggestions.map((place, index) => (
-                      <div
-                          key={index}
-                          className="suggestion-item"
-                          onClick={() => handleAddressSelect(place.addressWithoutCountry)}
-                      >
-                        <MapPin/>
-                        {place.addressWithoutCountry}
-                      </div>
-                  ))}
-                </div>
+            <div className="input-wrapper">
+              <div className="suggestions-dropdown">
+                {addressSuggestions.map((place, index) => (
+                  <div
+                    key={index}
+                    className="suggestion-item"
+                    onClick={() => handleAddressSelect(place.addressWithoutCountry)}
+                  >
+                    <MapPin />
+                    <span>{place.addressWithoutCountry}</span>
+
+                  </div>
+                ))}
               </div>
+            </div>
           )}
         </label>
         <label>
           <span>Общая площадь, м²</span>
-          
+
           <input
             type="number"
             name="area"
@@ -229,7 +261,7 @@ const CreateStep2 = () => {
         </label>
         <label>
           <span>Количество гостей</span>
-          
+
           <input
             type="number"
             name="maxGuests"
@@ -241,7 +273,7 @@ const CreateStep2 = () => {
         </label>
         <label>
           <span>Количество комнат</span>
-          
+
           <input
             type="number"
             name="rooms"
@@ -253,7 +285,7 @@ const CreateStep2 = () => {
         </label>
         <label>
           <span>Количество спален</span>
-          
+
           <input
             type="number"
             name="bedrooms"
@@ -265,7 +297,7 @@ const CreateStep2 = () => {
         </label>
         <label>
           <span>Количество кроватей</span>
-          
+
           <input
             type="number"
             name="sleepingPlaces"
@@ -275,12 +307,12 @@ const CreateStep2 = () => {
             onWheel={(e) => e.target.blur()}
           />
         </label>
-        
+
       </form>
-      <FacilityTable facilities={allFacilities} title="Удобства" selected={formData.facilities} onToggle={handleFacilityChange}/>
+      <FacilityTable facilities={allFacilities} title="Удобства" selected={formData.facilities} onToggle={handleFacilityChange} />
 
       <p className="last"></p>
-      <BigBlueButton props="Далее" fix="fixed" onClick={handleNext}/>
+      <BigBlueButton props="Далее" fix="fixed" onClick={handleNext} />
     </div>
   );
 };
