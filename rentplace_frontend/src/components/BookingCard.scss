@@ -11,6 +11,7 @@ $border-radius: 20px; // Радиус скругления углов
   &.favorite {
     display: flex;
     height: 144px;
+    
     .property-image-container {
       position: relative;
       overflow: hidden;

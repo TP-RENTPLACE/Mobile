@@ -2,6 +2,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  .bott{
+  margin-bottom: 160px !important;
+}
+
   .cards_container {
     display: flex;
     flex-direction: column;
