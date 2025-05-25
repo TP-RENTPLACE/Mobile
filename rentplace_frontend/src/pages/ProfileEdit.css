@@ -98,11 +98,15 @@
   margin-bottom: 126px;
 }
 .profile-edit-page .profile-edit-page_body .real-date-input::-webkit-calendar-picker-indicator {
-  font-size: 20px; /* иногда не работает */
-  width: 24px;
-  height: 24px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   filter: invert(0.5);
+  z-index: 1;
 }
 .profile-edit-page .profile-edit-page_body .real-date-input::-webkit-inner-spin-button,
 .profile-edit-page .profile-edit-page_body .real-date-input::-webkit-clear-button {
