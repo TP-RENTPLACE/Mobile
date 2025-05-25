@@ -5,18 +5,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  .real-date-input{
+  .real-date-input {
     position: relative !important;
-      display: inline-block;
-      width: 100%;
-      cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
   }
   .real-date-input::-webkit-calendar-picker-indicator {
-    font-size: 20px; /* иногда не работает */
-    width: 24px;
-    height: 24px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     filter: invert(0.5);
+    z-index: 1;
   }
 
   .real-date-input::-webkit-inner-spin-button,

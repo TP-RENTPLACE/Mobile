@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import HeadWithText from "../components/HeadWithText";
-import PropertyCard from "../components/PropertyCard";
 import BigBlueButton from "../components/BigBlueButton";
 import "./BookingConfirmation.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import authService from "../api/authService";
-import apiClient from "../api/apiClient";
 import reservationService from "../api/reservationService";
 import BookingCard from "../components/BookingCard";
+import {toast} from "react-hot-toast";
 
 const BookingConfirmation = () => {
     const location = useLocation();
@@ -16,18 +15,24 @@ const BookingConfirmation = () => {
 
     const [user, setUser] = useState(null);
 
+    const { property, startDate, endDate, costInPeriod, longTermRent, days, months } = booking || {};
+
+    const commission = costInPeriod * 0.04;
+    const total = costInPeriod + commission;
+    const prepayment = total * 0.10;
+    const paymentOnCheckIn = total - prepayment;
+
     useEffect(() => {
         authService.getInfo()
             .then((data) => setUser(data))
             .catch((err) => {
-                console.error("Ошибка получения пользователя:", err);
-                alert("Не удалось получить информацию о пользователе");
+                toast.error("Ошибка получения пользователя:", err);
             });
     }, []);
 
     const handleConfirm = async () => {
         if (!booking || !user.userId) {
-            alert("Недостаточно данных для бронирования");
+            toast.error("Недостаточно данных для бронирования");
             return;
         }
 
@@ -38,25 +43,21 @@ const BookingConfirmation = () => {
             formData.append("renterId", user.userId);
             formData.append("startDate", booking.startDate);
             formData.append("endDate", booking.endDate)
-            formData.append("costInPeriod", booking.costInPeriod);
+            formData.append("costInPeriod", property.cost);
             formData.append("longTermRent", booking.longTermRent);
-
 
             await reservationService.create(formData);
 
-            alert("Бронирование успешно создано!");
+            toast.success("Бронирование успешно создано!");
             navigate("/bookings");
         } catch (error) {
-            console.error("Ошибка бронирования:", error);
-            alert("Произошла ошибка при бронировании. Попробуйте позже.");
+            toast.error("Ошибка бронирования, попробуйте позже");
         }
     };
 
     if (!booking || !booking.property) {
         return <div>Данные бронирования не найдены</div>;
     }
-
-    const { property, startDate, endDate, costInPeriod } = booking;
 
     return (
         <div className="booking-confirmation">
@@ -95,22 +96,22 @@ const BookingConfirmation = () => {
                 </div>
                 <div className="price-count_item">
                     <span>Комиссия сервиса</span>
-                    <span>{Math.floor(costInPeriod * 0.05)}₽</span>
+                    <span>{Math.round(commission)}₽</span>
                 </div>
             </div>
 
             <div className="summarize">
                 <div className="summarize_item-sum">
                     <span>Итого</span>
-                    <span>{Math.floor(costInPeriod * 1.05)}₽</span>
+                    <span>{Math.round(total)}₽</span>
                 </div>
                 <div className="summarize_item">
                     <span>Предоплата</span>
-                    <span>{Math.floor(costInPeriod * 0.2)}₽</span>
+                    <span>{Math.round(prepayment)}₽</span>
                 </div>
                 <div className="summarize_item">
                     <span>Оплата при заселении</span>
-                    <span>{Math.floor(costInPeriod * 0.85)}₽</span>
+                    <span>{Math.round(paymentOnCheckIn)}₽</span>
                 </div>
             </div>
 

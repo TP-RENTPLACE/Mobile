@@ -48,6 +48,13 @@
   .input-wrapper {
     position: relative;
     width: 100%;
+    span{
+          max-width: 80%;
+          text-wrap: wrap;
+          font-weight: 400;
+          font-size: 14px;
+        }
+        
   }
 
   .suggestions-dropdown {

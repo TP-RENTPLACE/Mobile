@@ -3,6 +3,9 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
+.booking .bott {
+  margin-bottom: 160px !important;
+}
 .booking .cards_container {
   display: flex;
   flex-direction: column;

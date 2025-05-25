@@ -44,7 +44,7 @@ const BookingCard = ({ property, reservation, isBookingConfirmationPage }) => {
         <div className="property_address_price_reservation">
           <div className="property-address">
             <MapPin className="map_icon" />
-            <span>{property.address}</span>
+            <span className="address-text">{property.address}</span>
           </div>
           <div className="property-price">
             {isBookingConfirmationPage ? (

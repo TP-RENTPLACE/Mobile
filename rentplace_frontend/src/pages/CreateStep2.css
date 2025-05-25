@@ -46,6 +46,12 @@
   position: relative;
   width: 100%;
 }
+.create-ad-container .input-wrapper span {
+  max-width: 80%;
+  text-wrap: wrap;
+  font-weight: 400;
+  font-size: 14px;
+}
 .create-ad-container .suggestions-dropdown {
   position: absolute;
   top: 100%;

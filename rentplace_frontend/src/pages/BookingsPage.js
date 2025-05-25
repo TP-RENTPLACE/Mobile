@@ -51,29 +51,36 @@ const BookingsPage = () => {
     const renderContent = () => {
         if (!isLoggedIn) {
             return (
-                <div className="cards_container empty">
-                    <p>Войдите или зарегистрируйтесь, чтобы получить доступ к своим броням</p>
-                    <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={() => {
-                        sendMetrik('reachGoal', 'click_login_register_button');
-                        handleAuthRedirect()
-                    }} />
-                </div>
+                <>
+                    <div className="cards_container empty">
+                        <p>Войдите или зарегистрируйтесь, чтобы получить доступ к своим броням</p>
+                        <BigBlueButton props="Войти/Зарегистрироваться" fix="fixed" onClick={() => {
+                            sendMetrik('reachGoal', 'click_login_register_button');
+                            handleAuthRedirect()
+                        }} />
+                    </div>
+                </>
+
             );
         }
 
         if (loading) return <div className="loader">Загрузка...</div>;
 
         return reservations.length > 0 ? (
-            <div className="cards_container">
-                {reservations.map((reservation) => (
-                    <BookingCard
-                        key={reservation.reservationId}
-                        property={reservation.propertyDTO}
-                        reservation={reservation}
-                        isBookingConfirmationPage={false}
-                    />
-                ))}
-            </div>
+            <>
+                <div className="cards_container">
+                    {reservations.map((reservation) => (
+                        <BookingCard
+                            key={reservation.reservationId}
+                            property={reservation.propertyDTO}
+                            reservation={reservation}
+                            isBookingConfirmationPage={false}
+                        />
+                    ))}
+                </div>
+                <div className="bott"></div>
+
+            </>
         ) : (
             <div className="cards_container empty">
                 <p>У вас нет активных бронирований</p>
@@ -88,6 +95,7 @@ const BookingsPage = () => {
                 <RecentFirst />
                 <Categories />
                 {renderContent()}
+                <div className="bott"></div>
             </div>
         </>
     );
