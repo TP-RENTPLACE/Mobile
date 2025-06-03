@@ -5,6 +5,10 @@
   color: var(--Main-Color-Dark, #151515);
   text-align: center;
   font-variant-numeric: lining-nums proportional-nums;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  height: calc(100vh - 375px);
   /* Rentplace Mobile/Medium SemiBold */
   font-family: Raleway;
   font-size: 14px;

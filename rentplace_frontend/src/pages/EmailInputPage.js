@@ -39,6 +39,7 @@ const EmailInputPage = () => {
           />
           <BigBlueButton onClick={handleNext} props="Далее" fullwidth="fullwidth" />
         </div>
+        <span className="policy">Регистрируя аккаунт, вы соглашаетесь с условиями сервиса и политикой конфиденциальности.</span>
       </div>
   );
 };

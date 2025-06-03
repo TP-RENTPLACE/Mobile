@@ -1,6 +1,13 @@
 .auth-page {
   margin: 20px;
 }
+.auth-page .policy {
+  position: fixed;
+  bottom: 100px;
+  display: inline-block;
+  width: 94%;
+  text-align: center;
+}
 .auth-page .auth-page_body {
   display: flex;
   flex-direction: column;

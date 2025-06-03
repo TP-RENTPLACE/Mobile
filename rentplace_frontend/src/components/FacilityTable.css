@@ -4,9 +4,9 @@
   font-variant-numeric: lining-nums proportional-nums;
   /* Rentplace Mobile/Big Bold */
   font-family: Raleway;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 20px; /* 125% */
 }
 .category-grid .grid-container .grid-row .grid-item {

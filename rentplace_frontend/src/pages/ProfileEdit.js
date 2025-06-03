@@ -8,6 +8,7 @@ import { Pencil } from "lucide-react";
 import userService from "../api/userService";
 import defaultImage from "../assets/Avatar.png";
 import { toast } from "react-hot-toast";
+import { CalendarRange } from 'lucide-react';
 
 const ProfileEdit = () => {
   const location = useLocation();
@@ -194,6 +195,7 @@ const ProfileEdit = () => {
             onChange={handleChange}
             className="real-date-input"
           />
+          <CalendarRange className="calendar-icon" />
         </div>
 
         <BigBlueButton props="Сохранить" fix="fixed" onClick={handleSubmit} />

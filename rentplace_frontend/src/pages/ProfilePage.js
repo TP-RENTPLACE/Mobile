@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProfilePage.css";
 import Header from "../components/Header";
 import { ChevronRight, Settings, Info, CircleHelp, LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import apiClient from "../api/apiClient";
 import authService from "../api/authService";
 import BigBlueButton from "../components/BigBlueButton";
@@ -11,6 +11,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import defaultImage from "../assets/Avatar.png";
 import {toast} from "react-hot-toast";
 import { sendMetrik } from "../utils/metrics";
+
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -25,6 +26,9 @@ const ProfilePage = () => {
 
   const handleProfileEditRedirect = () => {
     navigate('/edit-profile');
+  };
+  const handleSettings = () => {
+    navigate('/settings');
   };
 
   const handleLogout = () => {
@@ -117,7 +121,7 @@ const ProfilePage = () => {
 
             <div className="additional-sections">
               
-              <div className="section-item" onClick={() => toast("Данный раздел находится в разработке.")}>
+              <div className="section-item" onClick={handleSettings}>
                 <Settings />
                 <span>Настройки приложения</span>
               </div>

@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: space-around;
   height: 100px;
+  max-width: 700px;
 }
 
 .profile-container .profile-section .profile-info {
@@ -92,6 +93,7 @@
   align-items: center;
   gap: 10px;
   width: 100% !important;
+  max-width: 700px;
 }
 
 .additional-sections .section-item span {
@@ -118,6 +120,7 @@
   align-items: center;
   gap: 10px;
   width: 100% !important;
+  max-width: 700px;
 }
 
 .logout-section span {

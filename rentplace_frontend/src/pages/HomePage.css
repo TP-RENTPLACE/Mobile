@@ -1,7 +1,9 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 .home-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr; /* Только одна колонка */
+  grid-auto-rows: auto; /* Автоматическая высота строк */
   gap: 20px;
   margin: 20px;
 }/*# sourceMappingURL=HomePage.css.map */

@@ -97,23 +97,35 @@
       background-position: right 10px center; /* Позиция стрелки */
       background-size: 18px; /* Размер стрелки */
     }
-    .real-date-input {
+    .custom-date-input {
       position: relative;
-      display: inline-block;
-      width: 100%;
-      cursor: pointer;
-      margin-bottom: 126px;
+      .real-date-input {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        cursor: pointer;
+        margin-bottom: 126px;
+      }
+      .calendar-icon {
+        position: absolute;
+        right: 15px;
+        top: 17px;
+        width: 20px;
+        height: 20px;
+      }
     }
+
     .real-date-input::-webkit-calendar-picker-indicator {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      filter: invert(0.5);
-      z-index: 1;
+      display: none;
+      // position: absolute;
+      // right: 10px;
+      // top: 50%;
+      // transform: translateY(-50%);
+      // width: 20px;
+      // height: 20px;
+      // cursor: pointer;
+      // filter: invert(0.5);
+      // z-index: 1;
     }
 
     .real-date-input::-webkit-inner-spin-button,
@@ -130,9 +142,9 @@
       border-color: #4285f4;
       box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
     }
-    .real-date-input {
-      z-index: 10;
-    }
+    // .real-date-input {
+    //   z-index: 10;
+    // }
 
     ::placeholder {
       color: var(--Secondary-Gray, #c1c1c1);

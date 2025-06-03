@@ -4,6 +4,9 @@ import BigBlueButton from "../components/BigBlueButton";
 import HeadWithText from "../components/HeadWithText";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { CalendarRange } from 'lucide-react';
+import reservationService from "../api/reservationService";
+
 
 const BookingForm = () => {
   const navigate = useNavigate();
@@ -34,12 +37,44 @@ const BookingForm = () => {
   nextDay.setDate(nextDay.getDate() + 1);
   const nextDayString = nextDay.toISOString().split("T")[0];
 
-  const handleSubmit = (e) => {
+  const checkDatesAvailability = (startDate, endDate, existingReservations) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    for (let reservation of existingReservations) {
+      const reservedStart = new Date(reservation.startDate);
+      const reservedEnd = new Date(reservation.endDate);
+
+      if (
+          (start >= reservedStart && start <= reservedEnd) ||
+          (end >= reservedStart && end <= reservedEnd) ||
+          (start <= reservedStart && end >= reservedEnd)
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!startDate) {
       toast.error("Выберите дату начала проживания");
       return;
+    }
+
+    const existingReservations = await reservationService.getReservationDates(property.propertyId);
+
+    if (existingReservations.length === 0) {
+      console.log("Нет существующих бронирований, можно бронировать");
+    } else {
+      if (!checkDatesAvailability(startDate, endDate, existingReservations)) {
+        toast.error("Эти даты уже заняты, выберите другие");
+        return;
+      }
     }
 
     let calculatedEndDate = endDate;
@@ -59,7 +94,7 @@ const BookingForm = () => {
         start.getDate()
       );
 
-      costInPeriod = property.monthlyCost * Number(months);
+      costInPeriod = property.cost * Number(months);
     } else {
       if (!endDate) {
         toast.error("Выберите дату окончания проживания");
@@ -81,7 +116,8 @@ const BookingForm = () => {
         return;
       }
 
-      days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+      const timeDifference = end - start;
+      days = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
       costInPeriod = property.cost * days;
     }
 
@@ -115,6 +151,7 @@ const BookingForm = () => {
             min={nextDayString}
             max={maxDateString}
           />
+          <CalendarRange className="calendar-icon" />
         </div>
 
         {isLongTerm ? (
@@ -139,6 +176,7 @@ const BookingForm = () => {
               min={nextDayString}
               max={maxDateString}
             />
+            <CalendarRange className="calendar-icon" />
           </div>
         )}
 
