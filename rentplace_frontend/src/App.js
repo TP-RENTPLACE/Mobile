@@ -18,6 +18,7 @@ import ProfileEdit from "./pages/ProfileEdit";
 import { Toaster } from "react-hot-toast";
 import Logo from "./components/Logo";
 import { sendMetrik } from "./utils/metrics";
+import SettingsPage from "./pages/SettingsPage";
 
 function AppContent() {
     const location = useLocation();
@@ -44,6 +45,7 @@ function AppContent() {
                 <Route path="/filters" element={<FiltersPage />} />
                 <Route path="/destination" element={<DestinationInput />} />
                 <Route path="/edit-profile" element={<ProfileEdit />} />
+                <Route path="/settings" element={<SettingsPage />} />
             </Routes>
 
             {!hideBottomNavPaths.includes(location.pathname) && <BottomNavigation />}
