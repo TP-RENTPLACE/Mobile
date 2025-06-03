@@ -10,19 +10,22 @@ class ReservationService {
     }
 
     async create(reservationData) {
-        return await apiClient.post('/reservations/', reservationData, {authRequired: true});
+        return await apiClient.post('/reservations/', reservationData, { authRequired: true });
     }
 
     async update(reservationId, reservationData) {
-        return await apiClient.patch(`/reservations/${reservationId}`, reservationData, {authRequired: true});
+        return await apiClient.patch(`/reservations/${reservationId}`, reservationData, { authRequired: true });
     }
 
     async delete(reservationId) {
-        return await apiClient.delete(`/reservations/${reservationId}`, {authRequired: true});
+        return await apiClient.delete(`/reservations/${reservationId}`, { authRequired: true });
     }
 
     async getMy() {
-        return await apiClient.get(`/reservations/my`, {authRequired: true});
+        return await apiClient.get(`/reservations/my`, { authRequired: true });
+    }
+    async getReservationDates(propertyId) {
+        return await apiClient.get(`/reservations/property/${propertyId}`, { authRequired: true });
     }
 }
 

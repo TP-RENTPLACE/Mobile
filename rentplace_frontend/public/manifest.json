@@ -42,6 +42,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "icons/app-logo-800x800.png",
+      "sizes": "800x800",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
