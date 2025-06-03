@@ -1,0 +1,90 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.search .search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white; /* Серый фон */
+  border-radius: 40px; /* Круглые углы */
+  box-sizing: border-box;
+  width: 82%;
+  height: 40px; /* Высота */
+  border: 1px solid #C1C1C1;
+}
+.search .search-bar .search-icon {
+  background-color: white;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px 0 10px;
+}
+.search .search-bar input {
+  flex: 1; /* Занимает все доступное пространство */
+  background-color: #ffffff; /* Белый фон */
+  border: none; /* Убираем границу */
+  outline: none; /* Убираем выделение при фокусе */
+  font-size: 14px; /* Размер шрифта */
+  border-radius: 40px; /* Круглые углы */
+}
+.search .search-bar input.placeholder {
+  color: #C1C1C1;
+}
+.search .search-bar input.has-value {
+  color: #151515;
+}
+.search .search-bar input::-moz-placeholder {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: #C1C1C1;
+  background-color: white;
+}
+.search .search-bar input::placeholder {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: #C1C1C1;
+  background-color: white;
+}
+.search .filters-icon {
+  border-radius: 50%;
+  border: 1px solid #C1C1C1;
+  width: 40px !important;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px 0 14px;
+}
+
+.fullscreen-filters-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1000; /* Должен быть выше всех других элементов */
+  overflow-y: auto;
+}
+
+.fullscreen-filters-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+}
+
+.filters-icon {
+  cursor: pointer;
+}/*# sourceMappingURL=SearchBar.css.map */

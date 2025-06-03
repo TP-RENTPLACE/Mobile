@@ -1,0 +1,32 @@
+.settings-container {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.settings-container .section-item {
+  display: flex;
+  height: 54px;
+  padding: 0px 20px;
+  border-radius: 20px;
+  border: 1px solid #c1c1c1;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  width: 100% !important;
+  max-width: 700px;
+}
+.settings-container .section-item .delete-profile_icon {
+  color: red;
+}
+.settings-container .section-item span {
+  color: red;
+  text-align: right;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}/*# sourceMappingURL=SettingsPage.css.map */

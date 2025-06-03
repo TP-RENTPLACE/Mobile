@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+.announcement-page {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.announcement-page h1 {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  margin: 0;
+}
+.announcement-page .location {
+  display: flex;
+  flex-direction: column;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+.announcement-page .location h3 {
+  margin: 0;
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  margin-bottom: 20px;
+}
+.announcement-page .cont {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.announcement-page .address-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-right: 6px;
+}
+.announcement-page .address {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}
+.announcement-page .owner {
+  margin-bottom: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.announcement-page .owner h1 {
+  margin-bottom: 10px;
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+.announcement-page .owner .owner_data {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.announcement-page .owner .owner_data img {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}
+.announcement-page .owner .owner_data .owner_name_email .owner_name {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}
+.announcement-page .owner .owner_data .owner_name_email .owner_email {
+  color: var(--Secondary-Gray, #c1c1c1);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Small */
+  font-family: Raleway;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 140% */
+}
+.announcement-page .owner .from-date {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Medium */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}/*# sourceMappingURL=AnnouncementPage.css.map */

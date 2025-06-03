@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+.propertyDetails {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.propertyDetails span {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  height: 30px;
+  padding: 6px 10px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  color: var(--Main-Color-Dark, #151515);
+  text-wrap: nowrap;
+  /* Rentplace Mobile/Small */
+  font-family: Raleway;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 140% */
+}/*# sourceMappingURL=PropertyDetails.css.map */

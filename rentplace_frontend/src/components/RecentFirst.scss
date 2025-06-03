@@ -1,0 +1,20 @@
+.recent-first {
+  display: flex;
+  align-items: center;
+  .arrows {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  span {
+    color: var(--Main-Color-Dark, #151515);
+    font-variant-numeric: lining-nums proportional-nums;
+
+    /* Rentplace Mobile/Medium */
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 128.571% */
+  }
+}

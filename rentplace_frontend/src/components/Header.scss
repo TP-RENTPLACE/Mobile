@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+.upper_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    img {
+      width: 30px;
+      margin-right: 6px;
+    }
+  }
+  span {
+    color: var(--Main-Color-Dark, #151515);
+    text-align: right;
+    font-variant-numeric: lining-nums tabular-nums;
+
+    /* H2 */
+    font-family: Montserrat;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 30px; /* 115.385% */
+  }
+  .profile {
+    height: 55px;
+    margin: 0;
+    img {
+      width: 55px;
+      border-radius: 50%;
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.button-container .fixed {
+  position: fixed;
+}
+.button-container .inverted {
+  background: white !important;
+  border: 1px solid var(--Main-Color-Blue, #007AFF) !important;
+}
+.button-container .inverted span {
+  color: #007AFF !important;
+}
+.button-container .big-blue-button {
+  box-sizing: border-box;
+  width: 91%;
+  display: flex;
+  height: 54px;
+  padding: 14px 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: var(--Main-Color-Blue, #007aff);
+  bottom: 90px;
+  margin: 0 auto !important;
+  max-width: 100%;
+  border: 0px solid #000;
+}
+.button-container .big-blue-button.fullwidth {
+  width: 100% !important;
+}
+.button-container .big-blue-button.bottom {
+  bottom: 10px !important;
+}
+.button-container .big-blue-button span {
+  text-wrap: nowrap;
+  color: var(--White, #fff);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+.button-container .big-blue-button .big-blue-button-span {
+  text-wrap: nowrap;
+  color: var(--White, #fff);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}/*# sourceMappingURL=BigBlueButton.css.map */

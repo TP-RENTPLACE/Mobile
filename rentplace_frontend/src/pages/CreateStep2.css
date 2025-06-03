@@ -1,0 +1,83 @@
+.create-ad-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+.create-ad-container form label {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-right: 20px;
+}
+.create-ad-container form span {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  margin-bottom: 20px;
+}
+.create-ad-container form input {
+  box-sizing: border-box;
+  display: flex;
+  width: 362px;
+  height: 54px;
+  padding: 0px 20px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+.create-ad-container form input:focus {
+  outline: none;
+  border-color: #007AFF;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+.create-ad-container .last {
+  margin-bottom: 80px;
+}
+.create-ad-container .input-wrapper {
+  position: relative;
+  width: 100%;
+}
+.create-ad-container .input-wrapper span {
+  max-width: 80%;
+  text-wrap: wrap;
+  font-weight: 400;
+  font-size: 14px;
+}
+.create-ad-container .suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 999;
+  margin-top: 4px;
+  padding: 4px 0;
+}
+.create-ad-container .suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+.create-ad-container .suggestion-item:last-child {
+  border-bottom: none;
+}
+.create-ad-container .suggestion-item:hover {
+  background-color: #f9f9f9;
+}/*# sourceMappingURL=CreateStep2.css.map */

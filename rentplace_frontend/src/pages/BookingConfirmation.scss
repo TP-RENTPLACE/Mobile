@@ -1,0 +1,144 @@
+.booking-confirmation {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .living-date {
+    :first-child {
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
+    .living-date_date {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      span {
+        color: var(--Main-Color-Dark, #151515);
+        font-variant-numeric: lining-nums proportional-nums;
+
+        /* Rentplace Mobile/Medium */
+        font-family: Raleway;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 128.571% */
+      }
+      div {
+        color: var(--Main-Color-Blue, #007aff);
+        font-variant-numeric: lining-nums proportional-nums;
+
+        /* Rentplace Mobile/Medium */
+        font-family: Raleway;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 128.571% */
+      }
+    }
+  }
+  .your-data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    span {
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
+    input {
+      width: 100%;
+      display: flex;
+      height: 54px;
+      padding: 0px 20px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 20px;
+      border: 1px solid var(--Secondary-Gray, #c1c1c1);
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
+  }
+  .price-count {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .head {
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
+    .price-count_item {
+      display: flex;
+      justify-content: space-between;
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
+  }
+  .summarize {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 154px;
+    .summarize_item-sum {
+      display: flex;
+      justify-content: space-between;
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
+    .summarize_item {
+      display: flex;
+      justify-content: space-between;
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 128.571% */
+    }
+  }
+}

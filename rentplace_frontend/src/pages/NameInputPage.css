@@ -1,0 +1,19 @@
+.auth-page .auth-page_body {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.auth-page .auth-page_body h1 {
+  width: 100%;
+  text-align: center;
+}
+.auth-page .auth-page_body span {
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}/*# sourceMappingURL=NameInputPage.css.map */

@@ -1,0 +1,116 @@
+// BookingForm.module.scss
+
+.booking-form {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .real-date-input {
+    position: relative !important;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+  }
+  .real-date-input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    filter: invert(0.5);
+    z-index: 1;
+    opacity: 0;
+  }
+
+  .real-date-input::-webkit-inner-spin-button,
+  .real-date-input::-webkit-clear-button {
+    display: none;
+  }
+  .head {
+    width: 100%;
+  }
+  form {
+    margin-top: 20px;
+    width: 100%;
+  }
+  // Заголовок формы
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  // Группа ввода (дата, количество месяцев)
+  .input-group {
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+    .calendar-icon{
+      position: absolute;
+      right: 15px;
+      top: 55px;
+      width: 20px;
+      height: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    label {
+      margin-bottom: 20px;
+      color: var(--Main-Color-Dark, #151515);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Big Bold */
+      font-family: Raleway;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 125% */
+    }
+    // Поле ввода
+    input {
+      width: 100%;
+      display: flex;
+      height: 54px;
+      padding: 11px 20px;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 20px;
+      border: 1px solid var(--Secondary-Gray, #c1c1c1);
+
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    }
+  }
+
+  // Кнопка "Забронировать"
+  &__button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}

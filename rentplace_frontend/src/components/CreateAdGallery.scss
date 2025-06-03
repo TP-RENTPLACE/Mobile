@@ -1,0 +1,98 @@
+.image-gallery {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 144px;
+}
+
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between; /* Теперь центрируем элементы внутри grid */
+}
+
+.image-card,
+.add-image-button {
+  width: 176px;
+  height: 120px;
+  flex-shrink: 0;
+}
+@media (max-width: 452px) {
+  // .gallery-grid {
+  //   justify-content: center; /* Теперь центрируем элементы внутри grid */
+  // }
+  .image-card {
+    width: 136px !important;
+    height: 100px !important;
+  }
+  .add-image-button {
+    width: 136px !important;
+    height: 100px !important;
+  }
+}
+.image-card {
+  display: flex;
+  width: 176px;
+  height: 120px;
+  border-radius: 20px;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.1) 100%
+    ),
+    lightgray 50% / cover no-repeat;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.delete-button {
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  padding: 3px;
+}
+
+.delete-button:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.add-image-button {
+  display: flex;
+  flex-direction: column;
+  width: 176px;
+  height: 120px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  background: var(--Secondary-Gray, #c1c1c1);
+  cursor: pointer; /* Добавлено для лучшего UX */
+}
+
+.add-image-button:hover {
+  background-color: #aaa;
+}
+
+.fas {
+  font-size: 20px;
+  margin-right: 5px;
+}

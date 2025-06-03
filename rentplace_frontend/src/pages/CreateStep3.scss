@@ -1,0 +1,61 @@
+.create-ad-container {
+  .images-container {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .img-item {
+      display: flex;
+      width: 176px;
+      height: 120px;
+      justify-content: flex-end;
+      align-items: flex-end;
+      gap: 10px;
+      border-radius: 20px;
+
+      background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.1) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        ),
+        lightgray 50% / cover no-repeat;
+      img {
+        display: flex;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .addphoto {
+    border: 0 solid #000;
+    display: flex;
+    flex-direction: column;
+    width: 176px;
+    height: 120px;
+    padding: 36px 76px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    background: var(--Secondary-Gray, #c1c1c1);
+    .camicon {
+      width: 24px;
+      height: 24px;
+      color: white;
+      
+    }
+    span {
+      color: var(--White, #fff);
+      font-variant-numeric: lining-nums proportional-nums;
+
+      /* Rentplace Mobile/Medium Bold */
+      font-family: Raleway;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 18px; /* 128.571% */
+      text-wrap: nowrap;
+    }
+  }
+}

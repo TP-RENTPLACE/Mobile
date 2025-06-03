@@ -1,0 +1,18 @@
+.cards_container p {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 432px);
+  color: var(--Main-Color-Dark, #151515);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  height: calc(100vh - 375px);
+  /* Rentplace Mobile/Medium SemiBold */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px; /* 128.571% */
+}/*# sourceMappingURL=FavoritesPage.css.map */

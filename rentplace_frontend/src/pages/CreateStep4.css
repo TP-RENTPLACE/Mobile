@@ -1,0 +1,80 @@
+.create-ad-container label span {
+  display: inline-block;
+  color: var(--Main-Color-Dark, #151515);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Rentplace Mobile/Big Bold */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  margin-bottom: 20px;
+}
+.create-ad-container label textarea {
+  display: flex;
+  height: 160px;
+  padding: 14px 20px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  width: 100%;
+  color: var(--Secondary-Gray, #c1c1c1);
+  font-variant-numeric: lining-nums proportional-nums;
+  color: black;
+  /* Rentplace Mobile/Medium */
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+  transition: border-color 0.3s ease;
+}
+.create-ad-container label textarea:focus {
+  outline: none;
+  border-color: #007AFF;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+.create-ad-container .rent-price {
+  display: flex;
+}
+.create-ad-container .rent-price button {
+  display: flex;
+  padding: 12px 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 20px;
+  background: white;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  margin-right: 10px;
+}
+.create-ad-container .active {
+  border: 1px solid var(--Main-Color-Blue, #007aff) !important;
+  color: var(--Main-Color-Blue, #007aff);
+}
+.create-ad-container input {
+  display: flex;
+  width: 362px;
+  height: 54px;
+  padding: 0px 20px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid var(--Secondary-Gray, #c1c1c1);
+  margin-top: 10px;
+  transition: border-color 0.3s ease;
+}
+.create-ad-container input:focus {
+  outline: none;
+  border-color: #007AFF;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+.create-ad-container .center {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}/*# sourceMappingURL=CreateStep4.css.map */
