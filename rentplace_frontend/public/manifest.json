@@ -16,19 +16,10 @@
       "sizes": "96x96",
       "type": "image/png"
     },
-    {
-      "src": "icons/app-logo-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    },
+    
     {
       "src": "icons/app-logo-144x144.png",
       "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/app-logo-152x152.png",
-      "sizes": "152x152",
       "type": "image/png"
     },
     {
