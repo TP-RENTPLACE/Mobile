@@ -11,7 +11,16 @@
   cursor: pointer;
 }
 .booking-form .real-date-input::-webkit-calendar-picker-indicator {
-  display: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  filter: invert(0.5);
+  z-index: 1;
+  opacity: 0;
 }
 .booking-form .real-date-input::-webkit-inner-spin-button,
 .booking-form .real-date-input::-webkit-clear-button {
