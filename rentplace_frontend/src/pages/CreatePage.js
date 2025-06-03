@@ -38,7 +38,6 @@ const CreatePage = () => {
     if (!isLoggedIn) {
       return (
         <>
-          <Categories onCategoryChange={setFilterStatus} />
           <div className="cards_container empty">
             <p>Войдите или зарегистрируйтесь, чтобы получить возможность размещать свои объявления</p>
             <BigBlueButton
@@ -56,6 +55,7 @@ const CreatePage = () => {
 
     return (
       <>
+        <RecentFirst></RecentFirst>
         <Categories onCategoryChange={setFilterStatus} />
         <MyPropertyList filterStatus={filterStatus} />
         <BigBlueButton
@@ -71,7 +71,6 @@ const CreatePage = () => {
     <>
       <div className="booking">
         <Header></Header>
-        <RecentFirst></RecentFirst>
         {renderContent()}
         <div className="bott"></div>
       </div>

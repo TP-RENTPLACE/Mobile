@@ -1,7 +1,9 @@
 .booking {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   display: grid;
+  grid-template-columns: 1fr; /* Только одна колонка */
+  grid-auto-rows: auto; /* Автоматическая высота строк */
   gap: 20px;
+  margin: 20px;
   .bott{
   margin-bottom: 160px !important;
 }

@@ -1,7 +1,10 @@
+@charset "UTF-8";
 .booking {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr; /* Только одна колонка */
+  grid-auto-rows: auto; /* Автоматическая высота строк */
   gap: 20px;
+  margin: 20px;
 }
 .booking .bott {
   margin-bottom: 160px !important;

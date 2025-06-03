@@ -68,6 +68,8 @@ const BookingsPage = () => {
 
         return reservations.length > 0 ? (
             <>
+                <RecentFirst />
+                <Categories />
                 <div className="cards_container">
                     {reservations.map((reservation) => (
                         <BookingCard
@@ -79,12 +81,15 @@ const BookingsPage = () => {
                     ))}
                 </div>
                 <div className="bott"></div>
-
             </>
         ) : (
-            <div className="cards_container empty">
-                <p>У вас нет активных бронирований</p>
-            </div>
+            <>
+                <RecentFirst />
+                <Categories />
+                <div className="cards_container empty">
+                    <p>У вас нет активных бронирований</p>
+                </div>
+            </>
         );
     };
 
@@ -92,8 +97,6 @@ const BookingsPage = () => {
         <>
             <div className="booking">
                 <Header />
-                <RecentFirst />
-                <Categories />
                 {renderContent()}
                 <div className="bott"></div>
             </div>

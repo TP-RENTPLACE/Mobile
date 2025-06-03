@@ -45,9 +45,13 @@ const FavoritesPage = () => {
         }
 
         return (
-            <div className="cards_container">
-                <FavoritesList />
-            </div>
+            <>
+                <RecentFirst></RecentFirst>
+                <Categories></Categories>
+                <div className="cards_container">
+                    <FavoritesList />
+                </div>
+            </>
         );
     };
 
@@ -56,8 +60,6 @@ const FavoritesPage = () => {
         <>
             <div className="home-container">
                 <Header></Header>
-                <RecentFirst></RecentFirst>
-                <Categories></Categories>
                 {renderContent()}
             </div>
         </>

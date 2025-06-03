@@ -18,6 +18,7 @@
   align-items: center;
   justify-content: space-around;
   height: 100px;
+  max-width: 700px;
 }
 .profile-container .profile-section .profile-info {
   display: flex;
@@ -85,6 +86,7 @@
   align-items: center;
   gap: 10px;
   width: 100% !important;
+  max-width: 700px;
 }
 .additional-sections .section-item span {
   color: #151515;
@@ -110,6 +112,7 @@
   align-items: center;
   gap: 10px;
   width: 100% !important;
+  max-width: 700px;
 }
 .logout-section span {
   color: #ff7878;
