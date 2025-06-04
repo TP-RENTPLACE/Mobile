@@ -6,22 +6,25 @@ class UserService {
     }
 
     async getById(userId) {
-        return await apiClient.get(`/users/${userId}`, {authRequired: false});
+        return await apiClient.get(`/users/${userId}`, { authRequired: false });
     }
 
     async create(userData) {
-        return await apiClient.post('/users/', userData, {authRequired: true});
+        return await apiClient.post('/users/', userData, { authRequired: true });
     }
 
     async update(userId, userData) {
-        return await apiClient.patch(`/users/${userId}`, userData, {authRequired: true});
+        return await apiClient.patch(`/users/${userId}`, userData, { authRequired: true });
     }
 
     async delete(userId) {
-        return await apiClient.delete(`/users/${userId}`, {authRequired: true});
+        return await apiClient.delete(`/users/${userId}`, { authRequired: true });
     }
     async updateMe(userData) {
-        return await apiClient.patch(`/users/me`, userData, {authRequired: true});
+        return await apiClient.patch(`/users/me`, userData, { authRequired: true });
+    }
+    async deleteMe() {
+        return await apiClient.delete(`/users/me`, { authRequired: true });
     }
 }
 
