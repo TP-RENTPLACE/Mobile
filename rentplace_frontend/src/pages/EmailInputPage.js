@@ -4,6 +4,7 @@ import HeadWithText from "../components/HeadWithText";
 import "./EmailInputPage.css";
 import BigBlueButton from "../components/BigBlueButton";
 import authService from "../api/authService";
+import { Mail } from 'lucide-react';
 import toast from "react-hot-toast";
 
 const EmailInputPage = () => {
@@ -27,20 +28,25 @@ const EmailInputPage = () => {
 
 
   return (
-      <div className="auth-page">
-        <HeadWithText props="Вход/Регистрация" />
-        <div className="auth-page_body">
-          <h1>Введите почту. На нее будет отправлено письмо с кодом.</h1>
+    <div className="auth-page">
+      <HeadWithText props="Вход/Регистрация" />
+      <div className="auth-page_body">
+        <h1>Введите почту. На нее будет отправлено письмо с кодом.</h1>
+        <div className="input-span-wrap">
           <input
-              type="email"
-              placeholder="Введите вашу почту"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Введите вашу почту"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <BigBlueButton onClick={handleNext} props="Далее" fullwidth="fullwidth" />
+          <Mail className="mail-icon"/>
+          <span className="example-input-span">Например: rentplace@gmail.com</span>
+
         </div>
-        <span className="policy">Регистрируя аккаунт, вы соглашаетесь с условиями сервиса и политикой конфиденциальности.</span>
+        <BigBlueButton onClick={handleNext} props="Далее" fullwidth="fullwidth" />
       </div>
+      <span className="policy">Регистрируя аккаунт, вы соглашаетесь с условиями сервиса и политикой конфиденциальности.</span>
+    </div>
   );
 };
 
